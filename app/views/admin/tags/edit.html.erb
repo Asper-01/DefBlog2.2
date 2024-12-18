@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <!-- Carte pour modifier un tag -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Modifier le Tag</h5>
+
+          <!-- Affichage des erreurs de validation -->
+          <% if @tag.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@tag.errors.count, "erreur") %> ont empêché ce tag d'être sauvegardé :</h2>
+              <ul>
+                <% @tag.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <!-- Formulaire de modification de tag -->
+          <%= form_with(model: @tag, url: admin_tag_path(@tag), method: :patch, local: true) do |form| %>
+
+            <!-- Champ nom -->
+            <div class="form-group mb-3">
+              <%= form.label :name, "Nom du Tag", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Entrez le nom du tag" %>
+            </div>
+
+            <!-- Boutons -->
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour", admin_tags_path, class: "btn btn-secondary" %>
+              <%= form.submit "Enregistrer", class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

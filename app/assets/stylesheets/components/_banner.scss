@@ -1,0 +1,93 @@
+.banner-container {
+  margin: 20px auto;
+  max-width: 1200px;
+}
+.banner-container a {
+  text-decoration: none;
+  color: inherit;
+}
+.banner-container a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.banner-row {
+  display: flex;
+  align-items: stretch; /* Aligne les éléments sur toute la hauteur */
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 400px; /* Hauteur ajustée */
+}
+
+.banner-image-container {
+  flex: 4; /* Proportion pour l'image */
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-no-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: light-gray;
+  color: #999;
+  font-style: italic;
+}
+
+.banner-text-container {
+  flex: 2; /* Augmente la largeur du texte */
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Empile les éléments verticalement */
+  gap: 5px; /* Réduit l'espacement entre les éléments */
+  justify-content: flex-start; /* Aligne tout en haut */
+  background-color: #F8F8F8;
+}
+
+.banner-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.banner-tags {
+  font-size: 0.85rem;
+  color: #007bff; /* Conserve la couleur des liens */
+}
+
+.tag-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.tag-link:hover {
+  text-decoration: underline;
+}
+
+.banner-text {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .banner-row {
+    flex-direction: column;
+    height: auto; /* Ajuste la hauteur pour mobile */
+  }
+
+  .banner-text-container {
+    flex: unset;
+    padding: 15px;
+  }
+}
+

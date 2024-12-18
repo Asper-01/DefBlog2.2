@@ -1,0 +1,78 @@
+<div class="banner-container ">
+  <% if @articles.any? %>
+    <div class="banner-row ">
+      <!-- Div de l'image -->
+      <div class="banner-image-container " style="position: relative;">
+        <% if @articles.first.image.attached? %>
+          <%= link_to article_path(@articles.first) do %>
+            <%= image_tag @articles.first.image, class: 'banner-image' %>
+          <% end %>
+        <% else %>
+          <p class="banner-no-image">Aucune image disponible</p>
+        <% end %>
+
+        <!-- Badge compteur cliquable -->
+        <%= link_to article_path(@articles.first, anchor: 'comments') do %>
+          <div class="comment-count-badge">
+            <%= @articles.first.comments.size %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Div du texte -->
+      <div class="banner-text-container">
+        <!-- Titre -->
+        <h5 class="banner-title">
+          <%= link_to @articles.first.title, article_path(@articles.first) %>
+        </h5>
+
+        <!-- Tags -->
+        <div class="banner-tags">
+          <% @articles.first.tags.limit(2).each do |tag| %>
+            <%= link_to tag.name, tag_path(tag), class: 'tag-link' %>
+            <%= " " unless tag == @articles.first.tags.limit(2).last %>
+          <% end %>
+        </div>
+
+        <!-- Résumé du contenu -->
+        <div class="banner-text">
+          <%= link_to truncate(@articles.first.content, length: 200), article_path(@articles.first) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<style>
+
+.banner-container {
+  margin-top: 90px; /* application de la marge */
+}
+
+
+.banner-image-container {
+  position: relative;
+
+  .comment-count-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #ff4b4b;
+    }
+  }
+}
+
+</style>

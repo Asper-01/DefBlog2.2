@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <!-- Carte pour modifier une catégorie -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Modifier la Catégorie</h5>
+
+          <!-- Affichage des erreurs de validation -->
+          <% if @category.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@category.errors.count, "erreur") %> ont empêché cette catégorie d'être sauvegardée :</h2>
+              <ul>
+                <% @category.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <!-- Formulaire de modification de catégorie -->
+          <%= form_with(model: @category, url: admin_category_path(@category), method: :patch, local: true) do |form| %>
+
+            <!-- Champ nom -->
+            <div class="form-group mb-3">
+              <%= form.label :name, "Nom de la Catégorie", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control", placeholder: "Entrez le nom de la catégorie" %>
+            </div>
+
+            <!-- Boutons -->
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour", admin_categories_path, class: "btn btn-secondary" %>
+              <%= form.submit "Enregistrer", class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

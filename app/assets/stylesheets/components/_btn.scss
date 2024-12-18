@@ -1,0 +1,33 @@
+/* Boutons en Neumorphism */
+.neumorphic-btn {
+  width: 80px;
+  height: 60px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 18%;
+  background: #FFFFFF; /* Même fond que la carte */
+  box-shadow: -2px 2px 8px #ffffff,2px 2px 4px #bec3c9; /* Effet de relief */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Bouton enfoncé */
+.neumorphic-btn:active {
+  box-shadow: inset -2px -2px 4px #ededed, inset 2px 2px 4px #bec3c9;
+  transform: scale(0.95);
+}
+
+/* Icônes SVG des boutons */
+.svg {
+  width: 25px;
+  height: 25px;
+  fill: #7f8c8d; /* Couleur par défaut des icônes */
+  transition: fill 0.3s ease;
+}
+
+.rounded-custom {
+  border-radius: 9px !important;
+}
+

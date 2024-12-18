@@ -1,0 +1,23 @@
+  <!-- Formulaire de création d'une nouvelle catégorie -->
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-6 mb-4">
+      <%= link_to "Retour au dashboard", "/admin/dashboard", class: "btn btn-outline-secondary w-100 mb-3 mb-4 rounded-custom" %>
+      
+      <!-- Carte pour créer un tag -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Créer une nouvelle catégorie</h5>
+
+          <%= form_with(model: Category.new, url: admin_categories_path, method: :post, local: true) do |f| %>
+            <div class="form-group">
+              <%= f.label :name, "Nom de la catégorie", class: "form-label" %>
+              <%= f.text_field :name, class: "form-control", placeholder: "Nom de la catégorie" %>
+            </div>
+            <%= f.submit "Créer la catégorie", class: "btn btn-outline-success w-100 mb-3 mt-3 rounded-custom" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

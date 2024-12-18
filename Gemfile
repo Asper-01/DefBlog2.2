@@ -45,11 +45,22 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "bootstrap", "~> 5.2"
-gem "devise"
+gem 'devise', '~> 4.8'
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
+# pagination des articles:
+gem 'kaminari'
+# gestion miniatures img:
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+gem 'activerecord-session_store'
+gem 'omniauth', '~> 2.0'
+gem 'omniauth-google-oauth2', '~> 1.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'rack', '~> 2.2.8'
+
 
 group :development, :test do
   gem "dotenv-rails"

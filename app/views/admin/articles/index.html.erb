@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <!-- Titre de la carte -->
+          <h5 class="card-title">Gestion des Articles</h5>
+
+          <!-- Lien pour retourner au dashboard -->
+          <%= link_to "Retour au dashboard", "/admin/dashboard", class: "btn btn-outline-secondary w-100 mb-3 mt-3 rounded-custom" %>
+        </div>
+
+        <!-- Formulaire de recherche -->
+        <div class="card-body">
+          <%= form_with url: admin_articles_path, method: :get, local: true, class: "d-flex mb-4" do %>
+            <%= text_field_tag :search, params[:search], class: "form-control rounded-custom me-2", placeholder: "Rechercher un article..." %>
+            <%= submit_tag "Rechercher", class: "btn btn-primary rounded-custom" %>
+          <% end %>
+
+          <!-- Table des articles -->
+          <table class="table table-bordered">
+<thead>
+  <tr>
+    <th>Image</th> <!-- Nouvelle colonne -->
+    <th>
+      <%= link_to "ID", admin_articles_path(sort: "id", direction: toggle_direction("id")), class: "d-flex align-items-center" %>
+      <% if params[:sort] == "id" %>
+        <%= params[:direction] == "asc" ? "↑" : "↓" %>
+      <% end %>
+    </th>
+    <th>
+      <%= link_to "Titre", admin_articles_path(sort: "title", direction: toggle_direction("title")), class: "d-flex align-items-center" %>
+      <% if params[:sort] == "title" %>
+        <%= params[:direction] == "asc" ? "↑" : "↓" %>
+      <% end %>
+    </th>
+    <th>
+      <%= link_to "Date", admin_articles_path(sort: "created_at", direction: toggle_direction("created_at")), class: "d-flex align-items-center" %>
+      <% if params[:sort] == "created_at" %>
+        <%= params[:direction] == "asc" ? "↑" : "↓" %>
+      <% end %>
+    </th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  <% if @articles.present? %>
+    <% @articles.each do |article| %>
+      <tr>
+        <td>
+          <% if article.image.attached? %>
+            <%= image_tag article.image.variant(resize_to_fit: [100, 75]), class: "rounded" %>
+          <% else %>
+            <span>Aucune image</span>
+          <% end %>
+        </td>
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td><%= l(article.created_at, format: :short) %></td>
+        <td>
+          <!-- Groupement des boutons -->
+                    <div class="d-flex align-items-center gap-2">
+                      <%= link_to "Modifier", edit_admin_article_path(article), class: 'btn btn-primary btn-sm rounded-custom' %>
+                      <%= form_with(model: article, url: admin_article_path(article), method: :delete, local: true) do |form| %>
+                        <%= form.submit "Supprimer", class: 'btn btn-outline-secondary btn-sm rounded-custom', data: { confirm: "Êtes-vous sûr ?" } %>
+                      <% end %>
+                    </div>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="5">Aucun article trouvé.</td>
+    </tr>
+  <% end %>
+</tbody>
+
+          </table>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-content-center mt-3">
+            <%= render 'kaminari/articles_pagination', articles: @articles %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

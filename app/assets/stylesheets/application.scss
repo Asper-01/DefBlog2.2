@@ -8,5 +8,22 @@
 @import "font-awesome";
 
 // Your CSS partials
+@import "components/navbar";
+@import "components/btn";
+@import "components/card";
 @import "components/index";
+@import "components/banner";
+@import "components/last_articles";
+@import 'components/globals.scss';
 @import "pages/index";
+@import 'pages/articles';
+@import 'pages/articles_tags.scss';
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Cette propriété permet d'inclure la bordure et le padding dans la largeur et hauteur des éléments */
+}

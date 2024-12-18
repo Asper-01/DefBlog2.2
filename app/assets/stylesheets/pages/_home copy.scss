@@ -1,0 +1,48 @@
+// Specific CSS for your home-page
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Cette propriété permet d'inclure la bordure et le padding dans la largeur et hauteur des éléments */
+}
+/* Carte  */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  border: none;
+  margin-bottom: 30px;
+}
+
+.card-img-top {
+  height: 250px;  /* Ajuster la hauteur de l'image */
+  object-fit: cover; /* Adapter l'image à la carte sans déformation */
+}
+
+.card-body {
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.banner-logo {
+  height: 40px; /* Ajuster la taille du logo */
+  margin-right: 10px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #555;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Légère ombre pour le texte */
+}
+
+.first-article-image {
+  object-fit: contain; /* Evite que l'image soit recadrée, elle sera entière */
+  width: 100%; /* Assure que l'image prend toute la largeur */
+  height: auto; /* Maintient les proportions sans étirer l'image */
+  height: 550px;
+}

@@ -1,0 +1,11 @@
+<%= form_with model: [ @article, Comment.new(parent: parent_comment) ], local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :content, "Votre commentaire" %>
+    <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
+  </div>
+
+  <div class="form-group text-end">
+    <%= f.submit "Publier", class: "btn btn-primary" %>
+  </div>
+<% end %>
+

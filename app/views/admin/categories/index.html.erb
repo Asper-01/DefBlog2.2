@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title mb-4">Gestion des Catégories</h1>
+
+          <%= link_to "Retour au dashboard", "/admin/dashboard", class: "btn btn-outline-secondary w-100 mb-3 mb-4 rounded-custom" %>
+
+          <!-- Barre de recherche -->
+          <%= form_with url: admin_categories_path, method: :get, local: true, class: "d-flex mb-4" do %>
+            <%= text_field_tag :search, params[:search], class: "form-control rounded-custom me-2", placeholder: "Rechercher une catégorie..." %>
+            <%= submit_tag "Rechercher", class: "btn btn-primary rounded-custom" %>
+          <% end %>
+
+          <!-- Table pour afficher les catégories -->
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <%= link_to admin_categories_path(params.permit(:search).to_h.merge(sort: "id", direction: toggle_direction("id"))), class: "d-flex align-items-center" do %>
+                    ID
+                    <% if params[:sort] == "id" %>
+                      <%= params[:direction] == "asc" ? "↑" : "↓" %>
+                    <% end %>
+                  <% end %>
+                </th>
+                <th>
+                  <%= link_to admin_categories_path(params.permit(:search).to_h.merge(sort: "name", direction: toggle_direction("name"))), class: "d-flex align-items-center" do %>
+                    Nom
+                    <% if params[:sort] == "name" %>
+                      <%= params[:direction] == "asc" ? "↑" : "↓" %>
+                    <% end %>
+                  <% end %>
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @categories.present? %>
+                <% @categories.each do |category| %>
+                  <tr>
+                    <td><%= category.id %></td>
+                    <td><%= category.name %></td>
+                    <td>
+                      <!-- Groupement des boutons -->
+                      <div class="d-flex align-items-center gap-2">
+                        <%= link_to 'Editer', edit_admin_category_path(category), class: 'btn btn-primary btn-sm rounded-custom' %>
+
+                        <%= form_with(model: category, url: admin_category_path(category), method: :delete, local: true) do |form| %>
+                          <%= form.submit 'Supprimer', class: 'btn btn-outline-secondary btn-sm rounded-custom', data: { confirm: "Êtes-vous sûr de vouloir supprimer cette catégorie ?" } %>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="3">Aucune catégorie trouvée.</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-3">
+          <%= render 'kaminari/categories_pagination', categories: @categories %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Section pour le formulaire de création de tag -->
+    <div class="col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Créer un nouveau tag</h5>
+
+          <!-- Formulaire de création de tag -->
+          <%= form_with(model: @tag, local: true) do |form| %>
+            <div class="mb-3">
+              <%= form.label :name, "Nom du tag" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.submit "Créer le tag", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section pour l'affichage des tags existants -->
+      <div class="row">
+    <div class="col-12">
+      <h5 class="mb-3">Tags existants :</h5>
+
+      <% @tags.each do |tag| %>
+        <div class="card mb-2">
+          <div class="card-body">
+            <h6 class="card-title">Tag: <%= tag.name %></h6>
+            <p class="card-text">
+              Utilisé pour classer des articles relatifs à <%= tag.name %>.
+            </p>
+            <!-- Lien pour afficher les articles avec ce tag -->
+            <%= link_to 'Voir les articles', tag_path(tag), class: 'btn btn-secondary btn-sm' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

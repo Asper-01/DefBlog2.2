@@ -1,0 +1,80 @@
+.last-articles-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.last-articles-separator {
+  margin: 40px 0;
+  margin-bottom: 40px;
+  text-align: center;
+  background-color: #ccc; /* Fond gris pour le séparateur */
+  height: 2px; /* Hauteur du séparateur */
+  width: 100%; /* Prend toute la largeur de la section */
+  position: relative; /* Pour pouvoir positionner le texte par-dessus le séparateur */
+}
+
+.last-articles-title {
+  font-size: 1.5rem;
+  font-weight: bold; /* Texte en gras */
+  color: #333; /* Texte en noir */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: absolute; /* Position absolue pour placer le texte sur le séparateur */
+  top: 50%; /* Centrer verticalement */
+  left: 50%; /* Centrer horizontalement */
+  transform: translate(-50%, -50%); /* Centrage exact */
+  padding: 0 10px; /* Un peu d'espace à gauche et à droite du texte */
+  background-color: #F8F8F8; /* Fond blanc derrière le texte */
+}
+
+
+
+
+.last-article-card {
+  margin-bottom: 20px;
+}
+
+.last-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Permet d'étendre toutes les cartes à une même hauteur */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.last-article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.last-article-body {
+  padding: 10px;
+  flex-grow: 1; /* Prend tout l'espace disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.last-article-meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.last-article-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.last-article-text {
+  font-size: 1rem;
+  color: #333;
+  margin-top: auto;
+}

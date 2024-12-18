@@ -1,12 +1,151 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+.container {
+  background: #f9f9f9;
+  color: #f9f9f9;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/* Le logo est sticky mais ne se déplace pas avec la page */
+.logo-container {
+  position: sticky;
+  top: 0; /* Colle le logo en haut */
+  background-color: #f9f9f9; /* Pour un fond blanc derrière le logo */
+  z-index: 999; /* Le logo reste au-dessus de tout */
+  padding: 20px 0; /* Un peu de padding pour donner de l'espace autour du logo */
+  text-align: center;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+/* Le logo lui-même */
+.navbar-logo {
+  max-width: 200px; /* Ajuste la taille du logo */
+  height: auto;
+}
+
+/* La navbar est sticky, mais commence juste après le logo */
+.custom-navbar {
+  position: sticky;
+  top: 60px; /* Décalage en dessous du logo (ajuste cette valeur en fonction de la hauteur de ton logo) */
+  background-color: #f9f9f9; /* Fond de la navbar */
+  z-index: 998; /* Moins élevé que celui du logo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour la navbar */
+  padding: 10px 0; /* Un peu de padding pour la navbar */
+}
+
+/* Espacement sous la navbar */
+.navbar {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  width: 100%;
+  padding: 0 90px; /* Ajoute du padding à gauche et à droite */
+  margin-bottom: 20px;
+}
+
+/* Personnalisation de la navbar */
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px;
+}
+
+/* Styles pour les liens NAVLINKS similaires au dropdown */
+.custom-nav-link {
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Effet hover pour les liens personnalisés */
+.custom-nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #007bff;
+}
+
+
+.navbar-nav .dropdown-menu {
+  min-width: 100px; /* Ajuste la largeur du menu dropdown */
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Connexion/Déconnexion */
+.navbar-nav .nav-item .btn-link {
+  color: #007bff;
+}
+.nav-item{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Comportement du dropdown */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+.dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparence du fond */
+  backdrop-filter: blur(5px);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Style du dropdown */
+.dropdown-item {
+  color: #333;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #007bff;
+}
+
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icône verte d'état en ligne */
+.online-status {
+  width: 10px;
+  height: 10px;
+  background-color: #28a745; /* Vert Bootstrap */
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.navbar-nav .nav-item .btn-link {
+  color: #007bff;
+}
+
+/* Boutton LOG IN si utilisateur déconnecté */
+.custom-login-link {
+  background-color: rgb(36, 154, 70); /* Fond vert */
+  color: white; /* Texte blanc */
+  padding: 8px 12px; /* Espacement interne */
+  border-radius: 5px; /* Coins arrondis */
+  text-decoration: none; /* Supprime le soulignement */
+  transition: background-color 0.3s ease; /* Transition pour un effet hover fluide */
+}
+
+.custom-login-link:hover {
+  background-color: #1c8139; /* Fond vert foncé au survol */
 }

@@ -1,0 +1,122 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="col-8">
+    <!-- Carte pour créer un article -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center">Créer un nouvel article</h5>
+
+        <!-- Bouton retour au dashboard -->
+        <div class="card-body">
+          <%= link_to "Retour au dashboard", "/admin/dashboard", class: "btn btn-outline-secondary w-100 mb-3 mt-3 rounded-custom" %>
+        </div>
+
+        <!-- Affichage des erreurs de validation -->
+        <% if @article.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@article.errors.count, "erreur") %> ont empêché cet article d'être sauvegardé :</h2>
+            <ul>
+              <% @article.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Formulaire de création d'article -->
+        <%= form_with(model: @article, url: admin_articles_path, local: true) do |form| %>
+          <!-- Champ titre -->
+          <div class="form-group">
+            <%= form.label :title, "Titre", class: "form-label" %>
+            <%= form.text_field :title, required: true, class: "form-control" %>
+          </div>
+
+          <!-- Champ contenu -->
+          <div class="mb-3">
+            <%= form.label :content, "Contenu", class: "form-label" %>
+            <%= form.text_area :content, required: true, class: "form-control", rows: 9 %>
+          </div>
+
+          <!-- Champ image -->
+          <div class="form-group">
+            <%= form.label :image, "Ajouter une image", class: "form-label" %>
+            <%= form.file_field :image, required: true, class: "form-control" %>
+          </div>
+
+
+
+          <!-- Sélection de la catégorie -->
+          <div class="form-group">
+            <%= form.label :category_id, "Catégorie", class: "form-label" %>
+            <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, { prompt: "Choisir une catégorie" }),
+              class: "form-control", id: "category_select" %>
+          </div>
+
+          <!-- Conteneur pour les tags liés -->
+          <div class="form-group mt-3" id="tags_section">
+            <label class="form-label">Associer des tags</label>
+            <div id="tags_container">
+              <p class="text-muted">Veuillez d'abord sélectionner une catégorie.</p>
+            </div>
+          </div>
+
+
+
+          <!-- Bouton de création -->
+          <div class="card-body">
+          <%= form.submit "Créer l'article", class: "btn btn-primary w-100 mb-3 mt-3 rounded-custom" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const categorySelect = document.getElementById("category_select");
+  const tagsContainer = document.getElementById("tags_container");
+
+  const loadTags = async (categoryId) => {
+    if (categoryId) {
+      try {
+        const response = await fetch(`/admin/categories/${categoryId}/tags`);
+        const tags = await response.json();
+
+        if (tags.length > 0) {
+          tagsContainer.innerHTML = tags
+            .map(tag => `
+              <div class="form-check">
+                <input type="checkbox" name="article[tag_ids][]" value="${tag.id}" class="form-check-input" id="tag_${tag.id}">
+                <label for="tag_${tag.id}" class="form-check-label ms-2">${tag.name}</label>
+              </div>
+            `)
+            .join("");
+        } else {
+          tagsContainer.innerHTML = "<p class='text-muted'>Aucun tag disponible pour cette catégorie.</p>";
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement des tags :", error);
+        tagsContainer.innerHTML = "<p class='text-danger'>Impossible de charger les tags. Réessayez plus tard.</p>";
+      }
+    } else {
+      tagsContainer.innerHTML = "<p class='text-muted'>Veuillez sélectionner une catégorie pour voir les tags disponibles.</p>";
+    }
+  };
+
+  // Définir une catégorie par défaut
+  const defaultCategoryId = "1"; // Remplacez "1" par l'ID de la catégorie souhaitée par défaut
+  if (categorySelect) {
+    console.log("Sélection de la catégorie par défaut :", defaultCategoryId);
+    categorySelect.value = defaultCategoryId;
+    loadTags(defaultCategoryId);
+  }
+
+
+  // Charger les tags lors du changement de catégorie
+  categorySelect.addEventListener("change", (event) => {
+    const categoryId = event.target.value;
+    loadTags(categoryId);
+  });
+});
+
+</script>

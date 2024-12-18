@@ -1,0 +1,8 @@
+<h1>Détails de l'article</h1>
+
+<p><strong>Titre:</strong> <%= @article.title %></p>
+<p><strong>Contenu:</strong> <%= @article.content %></p>
+<p><strong>Date de création:</strong> <%= @article.created_at.strftime('%d/%m/%Y %H:%M') %></p>
+
+<%= link_to 'Retour', admin_articles_path, class: 'btn btn-secondary' %>
+

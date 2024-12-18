@@ -1,38 +1,59 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+<div class="sticky-top bg-light">
+  <!-- Logo qui reste en haut -->
+  <div class="logo-container mt-3">
+    <%= link_to articles_path do %>
+      <%= image_tag("logoNom.png", class: "navbar-logo") %>
     <% end %>
+  </div>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- Navbar -->
+  <div class="navbar navbar-expand-lg d-flex justify-content-between w-100">
+    <!-- Rubriques ou éléments de gauche -->
+    <div class="navbar-nav d-flex flex-row ms-3 py-2"> <!-- Ajout d'un padding vertical pour espacer les éléments -->
+      <div class="dropdown">
+        <button class="btn btn-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Rubriques
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% Tag.where(id: [59, 60, 61, 62, 43]).each do |tag| %>
+            <a class="dropdown-item" href="<%= tag_path(tag) %>">
+              <%= tag.name %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+    <!-- Profil utilisateur à droite -->
+    <div class="navbar-nav d-flex align-items-center ms-auto py-2"> <!-- Ajout d'un padding vertical pour espacer les éléments -->
+      <% if user_signed_in? %>
+        <!-- Dropdown pour Profil -->
+        <div class="dropdown">
+          <button class="btn btn-transparent dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="online-status me-2"></span>
+            <%= current_user.name %>
+          </button>
+          <div class="dropdown-menu dropdown-menu-center " aria-labelledby="profileDropdown">
+            <!-- Lien vers le profil -->
+            <%= link_to 'Gestion profil', edit_user_registration_path, class: 'dropdown-item' %>
+
+            <% if current_user&.admin? %>
+              <!-- Lien vers le Dashboard, visible uniquement pour les admins -->
+              <%= link_to 'Dashboard', admin_dashboard_path, class: 'dropdown-item' %>
+            <% end %>
+
+            <!-- Lien vers la déconnexion -->
+            <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false } do %>
+              <%= submit_tag "Déconnexion", class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <!-- Lien pour se connecter -->
+        <div class="nav-item">
+          <%= link_to 'Se connecter', new_user_session_path, class: 'custom-login-link' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

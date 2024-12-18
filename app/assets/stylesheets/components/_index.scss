@@ -3,3 +3,63 @@
 @import "avatar";
 @import "form_legend_clear";
 @import "navbar";
+
+
+
+
+.card-featured {
+  max-height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-featured img {
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card {
+  border-radius: 8px;
+  border: none;
+  box-shadow: none
+}
+
+.card-img-fixed {
+  height: 200px; /* Ajuste la hauteur comme souhaité */
+  width: 100%; /* Prend la largeur de la carte */
+  object-fit: cover; /* Recadre l'image pour remplir sans déformation */
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.separator-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0 1rem;
+  color: #555;
+  position: relative;
+  z-index: 1;
+}
+
+.separator::before {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ddd;
+  margin-right: 10px;
+}
+
+.separator::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ddd;
+  margin-left: 10px;
+}

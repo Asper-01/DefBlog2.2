@@ -1,0 +1,151 @@
+<div class="container mt-4">
+  <!-- Section Article -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card">
+        <% if @article.image.attached? %>
+          <%= image_tag @article.image, class: "card-img-top custom-rounded-top" %>
+        <% else %>
+          <p class="text-center text-muted mt-3">Aucune image disponible</p>
+        <% end %>
+        <div class="card-body">
+          <h1 class="card-title mb-3"><%= @article.title %></h1>
+          <p class="card-text text-dark"><%= simple_format(@article.content) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section des commentaires -->
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-8 col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3>Commentaires</h3>
+        </div>
+        <div class="card-body">
+          <!-- Formulaire de création de commentaire -->
+          <div class="mb-4">
+            <%= form_with model: [ @article, Comment.new ], local: true do |f| %>
+              <div class="mb-3">
+                <%= f.label :content, "Votre commentaire" %>
+                <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
+              </div>
+              <div class="form-group text-end">
+                <%= f.submit "Publier", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Affichage des commentaires -->
+          <% if @comments.any? %>
+            <% @comments.each do |comment| %>
+              <div class="comment-item mb-4 p-3">
+                <div class="justify-content-between">
+                  <strong><%= comment.user.name %> :</strong>
+                  <small class="text-muted">Posté le <%= comment.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(comment.created_at, locale: :fr) %></small>
+                </div>
+                <p class="mt-2"><%= comment.content %></p>
+
+                <% if comment.parent.nil? %>
+                  <button
+                    class="btn btn-sm btn-transparent reply-btn mt-2"
+                    data-controller="toggle-reply"
+                    data-action="click->toggle-reply#toggleForm"
+                    data-comment-id="<%= comment.id %>">
+                    Répondre
+                  </button>
+
+                  <!-- Formulaire de réponse -->
+                  <div class="reply-form d-none mt-3" id="reply-form-<%= comment.id %>">
+                    <%= form_with model: [@article, Comment.new(parent: comment)], local: true do |f| %>
+                      <%= f.hidden_field :parent_id, value: comment.id %>
+
+                      <div class="mb-3">
+                        <%= f.label :content, "Votre réponse" %>
+                        <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
+                      </div>
+                      <div class="form-group text-end">
+                        <%= f.submit "Publier", class: "btn btn-primary" %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <!-- Affichage des réponses -->
+                <% if comment.replies.any? %>
+                  <div class="replies mt-4 ps-3 ">
+                    <% comment.replies.each do |reply| %>
+                      <div class="reply-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <strong><%= reply.user.name %></strong>
+                          <small class="text-muted">Posté le <%= reply.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(reply.created_at, locale: :fr) %></small>
+                        </div>
+                        <p class="mt-2"><%= reply.content %></p>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted">Aucun commentaire pour cet article.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('[data-action="click->toggle-reply#toggleForm"]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        const commentId = this.getAttribute('data-comment-id');
+        const replyForm = document.getElementById('reply-form-' + commentId);
+        replyForm.classList.toggle('d-none');
+      });
+    });
+  });
+</script>
+
+
+
+<style>
+
+
+/* Fond et bordure des commentaires principaux */
+.comment-item {
+  background-color: #f8f9fa; /* Gris clair */
+  border-radius: 8px;
+  padding: 15px;
+}
+
+/* Fond et bordure des réponses */
+.reply-item {
+  background-color:rgba(238, 245, 255, 0.47); /* Bleu clair */
+  border-radius: 8px;
+}
+
+/* Bouton transparent */
+.reply-btn {
+
+  color: #0d6efd; /* Bleu Bootstrap */
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reply-btn:hover {
+  color: #084298; /* Bleu foncé */
+}
+
+/* Style des réponses */
+.replies {
+  margin-left: 20px;
+}
+
+
+</style>

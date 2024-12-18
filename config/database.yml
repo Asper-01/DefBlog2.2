@@ -21,13 +21,13 @@ default: &default
 
 development:
   <<: *default
-  database: def_blog2_0_development
+  database: def_blog_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: def_blog2_0
+  #username: def_blog
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -55,7 +55,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: def_blog2_0_test
+  database: def_blog_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: def_blog2_0_production
-  username: def_blog2_0
-  password: <%= ENV["DEF_BLOG2_0_DATABASE_PASSWORD"] %>
+  database: def_blog_production
+  username: def_blog
+  password: <%= ENV["DEF_BLOG_DATABASE_PASSWORD"] %>

@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 mb-4">
+      <!-- Carte pour modifier un article -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Modifier l'article</h5>
+
+          <!-- Affichage des erreurs de validation -->
+          <% if @article.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@article.errors.count, "erreur") %> ont empêché cet article d'être sauvegardé :</h2>
+              <ul>
+                <% @article.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <!-- Formulaire de modification d'article -->
+          <%= form_with(model: @article, url: admin_article_path(@article), method: :patch, local: true) do |form| %>
+
+            <!-- Champ titre -->
+            <div class="form-group mb-3">
+              <%= form.label :title, "Titre", class: "form-label" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <!-- Champ contenu -->
+            <div class="form-group mb-3">
+              <%= form.label :content, "Contenu", class: "form-label" %>
+              <%= form.text_area :content, class: "form-control", rows: 9 %>
+            </div>
+
+            <!-- Champ image -->
+            <div class="form-group mb-3">
+              <%= form.label :image, "Ajouter ou modifier une image", class: "form-label" %>
+              <%= form.file_field :image, class: "form-control" %>
+
+              <% if @article.image.attached? %>
+                <div class="mt-3">
+                  <p>Image actuelle :</p>
+                  <%= image_tag @article.image, class: "img-fluid" %>
+                </div>
+                <div class="form-check mt-3">
+                  <%= form.check_box :remove_image, { class: "form-check-input" }, true, false%>
+                  <%= form.label :remove_image, "Supprimer l'image actuelle", class: "form-check-label" %>
+                </div>
+              <% else %>
+                <p>Aucune image disponible</p>
+              <% end %>
+            </div>
+
+            <!-- Champ tags -->
+            <div class="form-group mb-3">
+              <%= form.label :tag_ids, "Associer des tags", class: "form-label" %>
+              <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag_checkbox| %>
+                <div class="form-check form-check-inline">
+                  <%= tag_checkbox.check_box(class: "form-check-input") %>
+                  <%= tag_checkbox.label(class: "form-check-label") %>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Boutons -->
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour", admin_articles_path, class: "btn btn-secondary" %>
+              <%= form.submit "Enregistrer", class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

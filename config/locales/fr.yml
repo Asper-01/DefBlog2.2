@@ -1,0 +1,33 @@
+fr:
+  datetime:
+    distance_in_words:
+      less_than_x_seconds:
+        one: "moins d’une seconde"
+        other: "moins de %{count} secondes"
+      x_seconds:
+        one: "une seconde"
+        other: "%{count} secondes"
+      x_minutes:
+        one: "une minute"
+        other: "%{count} minutes"
+      x_hours:
+        one: "environ une heure"
+        other: "environ %{count} heures"
+      x_days:
+        one: "un jour"
+        other: "%{count} jours"
+      x_months:
+        one: "un mois"
+        other: "%{count} mois"
+      x_years:
+        one: "un an"
+        other: "%{count} ans"
+      almost_x_years:
+        one: "presqu’un an"
+        other: "presque %{count} ans"
+      about_x_years:
+        one: "environ un an"
+        other: "environ %{count} ans"
+      about_x_hours:
+        one: "environ une heure"
+        other: "environ %{count} heures"
