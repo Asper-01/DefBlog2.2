@@ -17,22 +17,30 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>
-                  <%= link_to admin_tags_path(params.permit(:search).to_h.merge(sort: "id", direction: toggle_direction("id"))), class: "d-flex align-items-center" do %>
-                    ID
-                    <% if params[:sort] == "id" %>
-                      <%= params[:direction] == "asc" ? "↑" : "↓" %>
-                    <% end %>
-                  <% end %>
-                </th>
-                <th>
-                  <%= link_to admin_tags_path(params.permit(:search).to_h.merge(sort: "name", direction: toggle_direction("name"))), class: "d-flex align-items-center" do %>
-                    Nom
-                    <% if params[:sort] == "name" %>
-                      <%= params[:direction] == "asc" ? "↑" : "↓" %>
-                    <% end %>
-                  <% end %>
-                </th>
+<th>
+  <%= link_to admin_tags_path(params.permit(:search, :sort, :direction).merge(sort: "id", direction: toggle_direction("id"))), class: "d-flex align-items-center" do %>
+    ID
+    <% if params[:sort] == "id" %>
+      <%= params[:direction] == "asc" ? "↑" : "↓" %>
+    <% end %>
+  <% end %>
+</th>
+<th>
+  <%= link_to admin_tags_path(params.permit(:search, :sort, :direction).merge(sort: "name", direction: toggle_direction("name"))), class: "d-flex align-items-center" do %>
+    Nom
+    <% if params[:sort] == "name" %>
+      <%= params[:direction] == "asc" ? "↑" : "↓" %>
+    <% end %>
+  <% end %>
+</th>
+<th>
+  <%= link_to admin_tags_path(params.permit(:search, :sort, :direction).merge(sort: "category_id", direction: toggle_direction("category_id"))), class: "d-flex align-items-center" do %>
+    Catégorie
+    <% if params[:sort] == "category_id" %>
+      <%= params[:direction] == "asc" ? "↑" : "↓" %>
+    <% end %>
+  <% end %>
+</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -42,22 +50,22 @@
                   <tr>
                     <td><%= tag.id %></td>
                     <td><%= tag.name %></td>
+                    <td><%= tag.category ? tag.category.name : 'Aucune catégorie' %></td> <!-- Affiche le nom de la catégorie -->
                     <td>
                       <!-- Groupement des boutons -->
-                    <div class="d-flex align-items-center gap-2">
-                      <%= link_to 'Editer', edit_admin_tag_path(tag), class: 'btn btn-primary btn-sm rounded-custom' %>
+                      <div class="d-flex align-items-center gap-2">
+                        <%= link_to 'Editer', edit_admin_tag_path(tag), class: 'btn btn-primary btn-sm rounded-custom' %>
 
                         <%= form_with(model: tag, url: admin_tag_path(tag), method: :delete, local: true) do |form| %>
-                        <%= form.submit 'Supprimer', class: 'btn btn-outline-secondary btn-sm rounded-custom', data: { confirm: "Êtes-vous sûr de vouloir supprimer ce tag ?" } %>
-                      <% end %>
+                          <%= form.submit 'Supprimer', class: 'btn btn-outline-secondary btn-sm rounded-custom', data: { confirm: "Êtes-vous sûr de vouloir supprimer ce tag ?" } %>
+                        <% end %>
                       </div>
-                    </div>
-                  </td>
+                    </td>
                   </tr>
                 <% end %>
               <% else %>
                 <tr>
-                  <td colspan="3">Aucun tag trouvé.</td>
+                  <td colspan="4">Aucun tag trouvé.</td>
                 </tr>
               <% end %>
             </tbody>

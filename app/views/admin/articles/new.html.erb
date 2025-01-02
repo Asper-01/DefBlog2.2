@@ -43,21 +43,28 @@
           </div>
 
 
-
-          <!-- Sélection de la catégorie -->
-          <div class="form-group">
-            <%= form.label :category_id, "Catégorie", class: "form-label" %>
-            <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, { prompt: "Choisir une catégorie" }),
-              class: "form-control", id: "category_select" %>
+        <!-- Conteneur pour les tags sélectionnés dans la card -->
+        <div class="form-group mt-3">
+          <%= form.label :selected_tags, "Tags sélectionnés", class: "form-label" %>
+          <div id="selected_tags_container" class="border p-2 rounded bg-light">
+            <p class="text-muted">Aucun tag sélectionné pour le moment.</p>
           </div>
+        </div>
 
-          <!-- Conteneur pour les tags liés -->
-          <div class="form-group mt-3" id="tags_section">
-            <label class="form-label">Associer des tags</label>
-            <div id="tags_container">
-              <p class="text-muted">Veuillez d'abord sélectionner une catégorie.</p>
-            </div>
+        <!-- Sélection de la catégorie -->
+        <div class="form-group">
+          <%= form.label :category_id, "Catégorie", class: "form-label" %>
+          <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, { prompt: "Choisir une catégorie" }),
+            class: "form-control", id: "category_select" %>
+        </div>
+
+        <!-- Conteneur pour les tags liés -->
+        <div class="form-group mt-3" id="tags_section">
+          <label class="form-label">Associer des tags</label>
+          <div id="tags_container">
+            <p class="text-muted">Veuillez d'abord sélectionner une catégorie.</p>
           </div>
+        </div>
 
 
 
@@ -75,6 +82,35 @@
 document.addEventListener("DOMContentLoaded", () => {
   const categorySelect = document.getElementById("category_select");
   const tagsContainer = document.getElementById("tags_container");
+  const selectedTagsContainer = document.getElementById("selected_tags_container");
+
+  const selectedTags = new Map(); // ID et nom des tags sélectionnés
+
+  const updateSelectedTagsDisplay = () => {
+    if (selectedTags.size > 0) {
+      selectedTagsContainer.innerHTML = Array.from(selectedTags.entries())
+        .map(([id, name]) => `
+            <span class="badge bg-primary">
+            ${name}
+            <button type="button" class="btn-close btn-close-white ms-2" aria-label="Supprimer" data-tag-id="${id}"></button>
+          </span>
+        `)
+        .join("");
+
+      selectedTagsContainer.querySelectorAll(".btn-close").forEach(button => {
+        button.addEventListener("click", () => {
+          const tagId = button.getAttribute("data-tag-id");
+          selectedTags.delete(tagId);
+          updateSelectedTagsDisplay();
+
+          const checkbox = document.getElementById(`tag_${tagId}`);
+          if (checkbox) checkbox.checked = false;
+        });
+      });
+    } else {
+      selectedTagsContainer.innerHTML = "<p class='text-muted'>Aucun tag sélectionné pour le moment.</p>";
+    }
+  };
 
   const loadTags = async (categoryId) => {
     if (categoryId) {
@@ -83,14 +119,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const tags = await response.json();
 
         if (tags.length > 0) {
-          tagsContainer.innerHTML = tags
-            .map(tag => `
-              <div class="form-check">
-                <input type="checkbox" name="article[tag_ids][]" value="${tag.id}" class="form-check-input" id="tag_${tag.id}">
-                <label for="tag_${tag.id}" class="form-check-label ms-2">${tag.name}</label>
-              </div>
-            `)
-            .join("");
+          tagsContainer.innerHTML = tags.map(tag => `
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="article[tag_ids][]"
+                value="${tag.id}"
+                class="form-check-input"
+                id="tag_${tag.id}"
+                ${selectedTags.has(String(tag.id)) ? "checked" : ""}>
+              <label for="tag_${tag.id}" class="form-check-label ms-2">${tag.name}</label>
+            </div>
+          `).join("");
+
+          tagsContainer.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
+            checkbox.addEventListener("change", () => {
+              const tagId = checkbox.value;
+              const tagName = checkbox.nextElementSibling.textContent.trim();
+
+              if (checkbox.checked) {
+                selectedTags.set(tagId, tagName);
+              } else {
+                selectedTags.delete(tagId);
+              }
+              updateSelectedTagsDisplay();
+            });
+          });
         } else {
           tagsContainer.innerHTML = "<p class='text-muted'>Aucun tag disponible pour cette catégorie.</p>";
         }
@@ -103,20 +157,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Définir une catégorie par défaut
-  const defaultCategoryId = "1"; // Remplacez "1" par l'ID de la catégorie souhaitée par défaut
+  const defaultCategoryId = "1"; // ID de la catégorie par défaut
   if (categorySelect) {
-    console.log("Sélection de la catégorie par défaut :", defaultCategoryId);
     categorySelect.value = defaultCategoryId;
     loadTags(defaultCategoryId);
   }
 
-
-  // Charger les tags lors du changement de catégorie
   categorySelect.addEventListener("change", (event) => {
     const categoryId = event.target.value;
     loadTags(categoryId);
   });
 });
 
+
+
 </script>
+
+
+
+<style>
+  
+#selected_tags_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 50px; /* Pour éviter les sauts */
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+#selected_tags_container .badge {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+#selected_tags_container .btn-close {
+  margin-left: 8px;
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+
+
+</style>

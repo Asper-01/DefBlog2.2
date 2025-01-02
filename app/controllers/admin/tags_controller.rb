@@ -5,13 +5,16 @@ module Admin
     before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
     def index
+      # Autoriser les paramètres sort et direction dans les paramètres de la requête
+      permitted_params = params.permit(:search, :sort, :direction)
+
       # Gestion des paramètres de tri
-      sort_column = %w[id name].include?(params[:sort]) ? params[:sort] : "id" # Par défaut, tri par ID
-      sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc" # Par défaut, tri ascendant
+      sort_column = %w[id name category_id].include?(permitted_params[:sort]) ? permitted_params[:sort] : "category_id" # Tri par défaut par catégorie
+      sort_direction = %w[asc desc].include?(permitted_params[:direction]) ? permitted_params[:direction] : "asc" # Par défaut, tri ascendant
 
       # Recherche et tri des tags
-      @tags = Tag.all
-      @tags = @tags.where("name ILIKE ?", "%#{params[:search]}%") if params[:search].present?
+      @tags = Tag.all.includes(:category) # Inclure les catégories pour éviter N+1 queries
+      @tags = @tags.where("name ILIKE ?", "%#{permitted_params[:search]}%") if permitted_params[:search].present?
       @tags = @tags.order("#{sort_column} #{sort_direction}")
 
       # Pagination

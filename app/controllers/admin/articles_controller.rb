@@ -14,9 +14,9 @@ module Admin
 
       # Tri par colonne et direction
       sort_column = params[:sort] || "created_at" # Par défaut trié par date
-      sort_direction = params[:direction] || "asc" # Par défaut tri croissant
+      sort_direction = params[:direction] || "desc" # Par défaut tri croissant
 
-      @articles = @articles.order("#{sort_column} #{sort_direction}").page(params[:page]).per(5)
+      @articles = @articles.order("#{sort_column} #{sort_direction}").page(params[:page]).per(10)
     end
 
     def show
