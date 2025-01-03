@@ -16,6 +16,7 @@ class Admin::CategoriesController < ApplicationController
     @categories = @categories.order("#{sort_column} #{sort_direction}").page(params[:page]).per(5)
   end
 
+
   def new
     @category = Category.new
   end
@@ -50,7 +51,7 @@ class Admin::CategoriesController < ApplicationController
     category = Category.find(params[:id])
     render json: category.tags.select(:id, :name) # Renvoie l'id et le nom des tags
   end
-  
+
   private
 
   def set_category

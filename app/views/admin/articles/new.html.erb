@@ -157,10 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const defaultCategoryId = "1"; // ID de la catégorie par défaut
-  if (categorySelect) {
-    categorySelect.value = defaultCategoryId;
-    loadTags(defaultCategoryId);
+ // Chercher la première catégorie disponible dans la liste
+  const firstCategoryId = categorySelect?.options[0]?.value;
+
+  // Si la première catégorie existe, la charger
+  if (firstCategoryId) {
+    categorySelect.value = firstCategoryId;
+    loadTags(firstCategoryId);
   }
 
   categorySelect.addEventListener("change", (event) => {
@@ -172,8 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </script>
-
-
 
 <style>
 

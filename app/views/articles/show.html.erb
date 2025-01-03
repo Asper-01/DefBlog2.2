@@ -13,15 +13,22 @@
           <p class="text-muted mb-2">
  Publié par <strong><%= @article.author.name %></strong> le <%= @article.created_at.strftime('%d/%m/%Y') %>
           </p>
-          <% if @article.tags.any? %>
-            <div class="mb-3">
-              <strong>Tags : </strong>
-              <% @article.tags.each do |tag| %>
-                <%= link_to tag.name, tag_path(tag), class: "badge bg-primary text-decoration-none" %>
 
-              <% end %>
-            </div>
-          <% end %>
+
+<% # Trier les tags par catégorie (par exemple, "forces" avant "nations") %>
+<% sorted_tags = @article.tags.sort_by { |tag| tag.category.name == 'forces' ? 0 : 1 } %>
+
+<% if sorted_tags.any? %>
+  <div class="mb-3">
+    <strong>Tags : </strong>
+    <% sorted_tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag), class: "badge bg-primary text-decoration-none" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
           <p class="card-text text-dark"><%= simple_format(@article.content) %></p>
         </div>
       </div>

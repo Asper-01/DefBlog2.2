@@ -31,6 +31,7 @@ module Admin
     def create
       @article = Article.new(article_params)
       @article.author = current_user
+      @article.tag_ids = params[:article][:tag_ids] if params[:article][:tag_ids].present?
       if @article.save
         redirect_to admin_articles_path, notice: 'Article créé avec succès.'
       else
@@ -62,7 +63,7 @@ module Admin
     private
 
     def article_params
-      params.require(:article).permit(:title, :content, :image, :remove_image, tag_ids: [])
+      params.require(:article).permit(:title, :content, :image, :remove_image, :category_id, tag_ids: [])
     end
 
     def set_article

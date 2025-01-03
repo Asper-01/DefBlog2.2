@@ -1,0 +1,55 @@
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.article-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-card-content {
+  padding: 15px;
+}
+
+.article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.article-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.article-excerpt {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+.article-tags {
+  margin-top: 15px;
+}
+
+.tag-link {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.tag-link:hover {
+  text-decoration: underline;
+}
+
+.tag-show h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
