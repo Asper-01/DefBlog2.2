@@ -19,28 +19,60 @@
         <% end %>
       </div>
 
-      <!-- Div du texte -->
-      <div class="banner-text-container">
-        <!-- Titre -->
-        <h5 class="banner-title">
-          <%= link_to @articles.first.title, article_path(@articles.first) %>
-        </h5>
 
-        <!-- Tags -->
-        <div class="banner-tags">
-          <% @articles.first.tags.limit(2).each do |tag| %>
-            <%= link_to tag.name, tag_path(tag), class: 'tag-link' %>
-            <%= " " unless tag == @articles.first.tags.limit(2).last %>
-          <% end %>
-        </div>
 
-        <!-- Résumé du contenu -->
-        <div class="banner-text">
-          <%= link_to truncate(@articles.first.content, length: 200), article_path(@articles.first) %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+
+<div class="banner-text-container">
+  <!-- Tags -->
+<div class="banner-tags">
+<% # Initialisation des tags prioritaires %>
+<% prioritized_tags = [] %>
+
+<% # Ajout des tags prioritaires s'ils existent %>
+<% prioritized_tags << @articles.first.tags.find { |tag| tag.category.name == "forces" } if @articles.first.tags.any? { |tag| tag.category.name == "forces" } %>
+<% prioritized_tags << @articles.first.tags.find { |tag| tag.category.name == "nation" } if @articles.first.tags.any? { |tag| tag.category.name == "nation" } %>
+
+<% # Suppression des tags ajoutés pour éviter les doublons et ajout d'autres tags si nécessaire %>
+<% additional_tags = @articles.first.tags - prioritized_tags %>
+<% prioritized_tags.concat(additional_tags.first(2 - prioritized_tags.size)) %>
+
+<% # Affichage des tags prioritaires %>
+<% prioritized_tags.each do |tag| %>
+  <%= link_to tag.name, tag_path(tag), class: 'tag-link' %>
+<% end %>
+
+
+
+  <% # Ajout des autres tags restants sans doublons %>
+  <% remaining_tags = @articles.first.tags.reject { |tag| prioritized_tags.include?(tag) } %>
+  <% prioritized_tags += remaining_tags %>
+
 </div>
 
 
+
+  <!-- Date de publication -->
+  <span class="banner-date">
+    <%= @articles.first.created_at.strftime("Publié le %d/%m/%Y") %>
+  </span>
+
+  <!-- Titre -->
+  <h5 class="banner-title">
+    <%= link_to @articles.first.title, article_path(@articles.first) %>
+  </h5>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+  <% end %>
+</div>

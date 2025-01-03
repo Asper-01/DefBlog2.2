@@ -121,6 +121,14 @@
     padding: 15px;
   }
 }
+.banner-date,
+.banner-author {
+  color: #333; /* Utilise une couleur sombre pour contraster avec l'arrière-plan */
+  font-size: 14px;
+  margin: 5px 0;
+  display: block; /* Pour s'assurer qu'ils occupent une ligne chacun */
+}
+
 
 /* Last articles */
 

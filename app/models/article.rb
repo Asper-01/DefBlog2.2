@@ -4,12 +4,13 @@ class Article < ApplicationRecord
   has_one_attached :image
   has_and_belongs_to_many :tags, join_table: :articletags
   has_many :comments, dependent: :destroy
-  
+  has_many :categories, through: :tags
+
   # Attribut virtuel pour la suppression d'image
   attr_accessor :remove_image
 
   # Validations
-  validates :title, presence: true, length: { maximum: 80 }
+  validates :title, presence: true, length: { maximum: 500 }
   validates :content, presence: true
 
   # Callbacks
