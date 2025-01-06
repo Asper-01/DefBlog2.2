@@ -60,7 +60,7 @@
         <td>
           <!-- Groupement des boutons -->
                     <div class="d-flex align-items-center gap-2">
-                      <%= link_to "Modifier", edit_admin_article_path(article), class: 'btn btn-primary btn-sm rounded-custom' %>
+                      <%= link_to "Modifier", edit_admin_article_path(article.slug), class: 'btn btn-primary btn-sm rounded-custom' %>
                       <%= form_with(model: article, url: admin_article_path(article), method: :delete, local: true) do |form| %>
                         <%= form.submit "Supprimer", class: 'btn btn-outline-secondary btn-sm rounded-custom', data: { confirm: "Êtes-vous sûr ?" } %>
                       <% end %>

@@ -1,4 +1,10 @@
 class Article < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+  def should_generate_new_friendly_id?
+    true
+  end
+
   # Associations
   belongs_to :author, class_name: 'User', foreign_key: "author_id"
   has_one_attached :image

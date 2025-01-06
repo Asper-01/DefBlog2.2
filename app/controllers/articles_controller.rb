@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Article.friendly.find(params[:slug])
     @comment = Comment.new # Création d'un nouvel objet Comment pour le formulaire
     @tags = @article.tags.includes(:category).order('categories.name DESC') # ou 'ASC' selon ton ordre préféré
     @comments = @article.comments.where(parent_id: nil) # Récupérer uniquement les commentaires principaux
@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
   end
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = Article.friendly.find(params[:slug])
   end
 
   def require_admin

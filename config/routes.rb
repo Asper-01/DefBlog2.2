@@ -7,10 +7,10 @@ Rails.application.routes.draw do
 
   # Pages publiques
   root 'articles#index'
-  resources :articles, only: [:index, :show,] do
+  resources :articles, only: [:index, :show], param: :slug do
     resources :comments, only: [:create]
   end
-  resources :tags, only: [:index, :show, :create]
+  resources :tags, only: [:index, :show, :create], param: :slug
 
   # Vérification de santé
   get "up" => "rails/health#show", as: :rails_health_check
@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   # Administration
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :articles, only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :articles, only: [:index, :new, :edit, :create, :update, :destroy], param: :slug
     resources :comments, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :tags, only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :tags, only: [:index, :new, :edit, :create, :update, :destroy], param: :slug
     resources :categories, only: [] do
       member do
         get :tags

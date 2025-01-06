@@ -31,3 +31,9 @@ fr:
       about_x_hours:
         one: "environ une heure"
         other: "environ %{count} heures"
+
+fr:
+  time:
+    formats:
+      short: "%d/%m/%Y" # Format court : Jour/Mois/Année
+      long: "%d %B %Y à %H:%M" # Format long avec heure

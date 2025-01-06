@@ -20,7 +20,7 @@ module Admin
     end
 
     def show
-      @article = Article.includes(:tags).find(params[:id])
+      @article = Article.includes(:tags).find(params[:slug])
     end
 
     def new
@@ -40,7 +40,7 @@ module Admin
     end
 
     def edit
-      @article = Article.find(params[:id])
+      Article.friendly.find(params[:slug])
     end
 
     def update
@@ -55,7 +55,7 @@ module Admin
     end
 
     def destroy
-      @article = Article.find(params[:id])
+      @article = Article.friendly.find(params[:slug])
       @article.destroy
       redirect_to admin_articles_path, notice: 'Article supprimé avec succès.'
     end
@@ -67,7 +67,7 @@ module Admin
     end
 
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.friendly.find(params[:slug])
     rescue ActiveRecord::RecordNotFound
       redirect_to admin_articles_path, alert: "Article introuvable."
     end
