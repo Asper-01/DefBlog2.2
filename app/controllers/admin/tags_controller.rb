@@ -58,10 +58,11 @@ module Admin
     private
 
     def set_tag
-      @tag = Tag.find(params[:id])
+      @tag = Tag.friendly.find(params[:slug])
     rescue ActiveRecord::RecordNotFound
       redirect_to admin_tags_path, alert: "Tag non trouvé."
     end
+
 
     def tag_params
       params.require(:tag).permit(:name, :category_id)

@@ -7,7 +7,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tag = Tag.find(params[:id])
+    @tag = Tag.friendly.find(params[:slug])
     @articles = @tag.articles.order(created_at: :desc)
   end
 
@@ -30,7 +30,7 @@ class TagsController < ApplicationController
 
   # Action de mise à jour
   def update
-    @tag = Tag.find(params[:id])
+    @tag = Tag.friendly.find(params[:slug])
     if @tag.update(tag_params)
       redirect_to admin_tag_path, notice: 'Le tag a été mis à jour avec succès.'
     else
@@ -51,9 +51,9 @@ class TagsController < ApplicationController
   private
 
   def set_tag
-    @tag = Tag.find(params[:id])  # Vérifie que params[:id] correspond bien à un ID valide
+    @tag = Tag.friendly.find(params[:slug])
   rescue ActiveRecord::RecordNotFound
-    redirect_to tags_path, alert: "Tag non trouvé"
+    redirect_to admin_tags_path, alert: "Tag non trouvé."
   end
 
   def tag_params

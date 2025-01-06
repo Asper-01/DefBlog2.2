@@ -3,5 +3,6 @@ class Tag < ApplicationRecord
   belongs_to :category, foreign_key: :category_id
   validates :name, presence: true
   validates :category_id, presence: true
-
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 end
