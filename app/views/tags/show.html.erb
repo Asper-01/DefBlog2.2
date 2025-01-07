@@ -11,19 +11,21 @@
         <div class="col-lg-4 col-md-6 col-12 last-article-card">
           <div class="card last-article">
 
-            <!-- Affichage de l'image de l'article, ou image par défaut -->
+            <!-- Affichage de l'image de l'article, ou message par défaut si aucune image n'est disponible -->
             <% if article.image.attached? %>
+              <!-- Lien vers l'article avec image -->
               <%= link_to article_path(article), class: 'text-decoration-none' do %>
                 <%= image_tag article.image, class: 'last-article-image mb-2' %>
               <% end %>
             <% else %>
+              <!-- Message si aucune image n'est attachée -->
               <p class="last-article-no-image">Aucune image disponible</p>
             <% end %>
 
-            <!-- Tags et date de publication -->
+            <!-- Affichage des tags et de la date de publication -->
             <%= render 'articles/tags', article: article %>
 
-            <!-- Titre et extrait de l'article avec lien vers la page de l'article -->
+            <!-- Titre de l'article avec lien vers la page de l'article -->
             <div class="last-article-body">
               <h5 class="last-article-title">
                 <%= link_to article.title, article_path(article), class: 'text-decoration-none' %>
@@ -35,5 +37,3 @@
     </div>
   </div>
 </div>
-
-

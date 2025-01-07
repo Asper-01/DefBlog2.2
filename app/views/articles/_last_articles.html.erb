@@ -1,39 +1,41 @@
 <div class="banner-container">
+  <!-- Section du titre des derniers articles -->
   <div class="last-articles-separator">
     <span class="last-articles-title">Derniers articles</span>
   </div>
 
+  <!-- Grille des derniers articles -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-<% @articles.drop(1).each do |article| %>
-  <div class="col-lg-4 col-md-6 col-12 last-article-card">
-    <div class="card-2 last-article">
-      <% if article.image.attached? %>
-        <div class="last-article-image-container" style="position: relative;">
-          <%= link_to article_path(article) do %>
-            <%= image_tag article.image, class: 'last-article-image' %>
-          <% end %>
-          <%= link_to article_path(article) + "#comments-section" do %>
-            <div class="comment-count-badge">
-              <%= article.comments.size %>
+    <% @articles.drop(1).each do |article| %>
+      <div class="col-lg-4 col-md-6 col-12 last-article-card">
+        <div class="card-2 last-article">
+          <% if article.image.attached? %>
+            <!-- Conteneur de l'image de l'article -->
+            <div class="last-article-image-container" style="position: relative;">
+              <%= link_to article_path(article) do %>
+                <%= image_tag article.image, class: 'last-article-image' %>
+              <% end %>
+
+              <!-- Badge compteur de commentaires -->
+              <%= render 'articles/comment_count_badge', article: article %>
             </div>
+          <% else %>
+            <!-- Texte alternatif si aucune image n'est disponible -->
+            <p class="last-article-no-image">Aucune image disponible</p>
           <% end %>
+
+          <!-- Corps de l'article -->
+          <div class="last-article-body">
+            <!-- Inclusion des tags et de la date de publication -->
+            <%= render 'articles/tags', article: article %>
+
+            <!-- Titre de l'article -->
+            <h5 class="last-article-title">
+              <%= link_to article.title, article_path(article) %>
+            </h5>
+          </div>
         </div>
-      <% else %>
-        <p class="last-article-no-image">Aucune image disponible</p>
-      <% end %>
-
-      <div class="last-article-body">
-        <!-- Tags et date de publication-->
-        <%= render 'articles/tags', article: article %>
-
-        <!-- Titre -->
-        <h5 class="last-article-title">
-          <%= link_to article.title, article_path(article) %>
-        </h5>
       </div>
-    </div>
-  </div>
-<% end %>
-
+    <% end %>
   </div>
 </div>

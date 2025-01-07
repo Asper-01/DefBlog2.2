@@ -1,0 +1,6 @@
+<!-- app/views/articles/_comment_count_badge.html.erb -->
+<%= link_to article_path(article) + "#comments-section" do %>
+  <div class="comment-count-badge">
+    <%= article.comments.size %>
+  </div>
+<% end %>

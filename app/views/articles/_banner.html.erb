@@ -1,32 +1,32 @@
-<div class="banner-container ">
+<div class="banner-container">
   <% if @articles.any? %>
-  <div class="banner-row">
-    <div class="banner-image-container" style="position: relative;">
-      <% if @articles.first.image.attached? %>
-        <%= link_to article_path(@articles.first) do %>
-          <%= image_tag @articles.first.image, class: 'banner-image' %>
+    <div class="banner-row">
+      <!-- Conteneur de l'image de l'article principal -->
+      <div class="banner-image-container" style="position: relative;">
+        <% if @articles.first.image.attached? %>
+          <!-- Lien vers l'article principal avec image -->
+          <%= link_to article_path(@articles.first) do %>
+            <%= image_tag @articles.first.image, class: 'banner-image' %>
+          <% end %>
+        <% else %>
+          <!-- Message si aucune image n'est attachée -->
+          <p class="banner-no-image">Aucune image disponible</p>
         <% end %>
-      <% else %>
-        <p class="banner-no-image">Aucune image disponible</p>
-      <% end %>
 
-      <%= link_to article_path(@articles.first) + "#comments-section" do %>
-        <div class="comment-count-badge">
-          <%= @articles.first.comments.size %>
-        </div>
-      <% end %>
+        <!-- Badge du compteur de commentaires -->
+        <%= render 'articles/comment_count_badge', article: @articles.first %>
+      </div>
+
+      <!-- Conteneur pour le texte et les métadonnées de l'article -->
+      <div class="banner-text-container">
+        <!-- Rendu des tags et de la date de publication -->
+        <%= render 'articles/tags', article: @articles.first %>
+
+        <!-- Titre de l'article principal -->
+        <h5 class="banner-title">
+          <%= link_to @articles.first.title, article_path(@articles.first) %>
+        </h5>
+      </div>
     </div>
-
-    <div class="banner-text-container">
-      <!-- Tags et date de publication-->
-      <%= render 'articles/tags', article: @articles.first %>
-
-      <!-- Titre -->
-      <h5 class="banner-title">
-        <%= link_to @articles.first.title, article_path(@articles.first) %>
-      </h5>
-    </div>
-  </div>
-<% end %>
-
+  <% end %>
 </div>
