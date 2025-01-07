@@ -1,37 +1,37 @@
 <% content_for :title, @article.title %>
 
-
 <div class="container mt-4">
   <!-- Section Article -->
   <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10">
       <div class="card">
+        <!-- Affichage de l'image de l'article -->
         <% if @article.image.attached? %>
           <%= image_tag @article.image, class: "card-img-top custom-rounded-top" %>
         <% else %>
           <p class="text-center text-muted mt-3">Aucune image disponible</p>
         <% end %>
+
         <div class="card-body">
+          <!-- Titre de l'article -->
           <h1 class="card-title mb-3"><%= @article.title %></h1>
           <p class="text-muted mb-2">
- Publié par <strong><%= @article.author.name %></strong> le <%= @article.created_at.strftime('%d/%m/%Y') %>
+            <!-- Affichage de l'auteur et de la date de publication -->
+            Publié par <strong><%= @article.author.name %></strong> le <%= @article.created_at.strftime('%d/%m/%Y') %>
           </p>
 
+          <!-- Affichage des tags -->
+          <% sorted_tags = @article.tags.sort_by { |tag| tag.category.name == 'forces' ? 0 : 1 } %>
+          <% if sorted_tags.any? %>
+            <div class="mb-3">
+              <strong>Tags : </strong>
+              <% sorted_tags.each do |tag| %>
+                <%= link_to tag.name, tag_path(tag), class: "badge bg-primary text-decoration-none" %>
+              <% end %>
+            </div>
+          <% end %>
 
-<% # Trier les tags par catégorie (par exemple, "forces" avant "nations") %>
-<% sorted_tags = @article.tags.sort_by { |tag| tag.category.name == 'forces' ? 0 : 1 } %>
-
-<% if sorted_tags.any? %>
-  <div class="mb-3">
-    <strong>Tags : </strong>
-    <% sorted_tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag), class: "badge bg-primary text-decoration-none" %>
-    <% end %>
-  </div>
-<% end %>
-
-
-
+          <!-- Contenu de l'article -->
           <p class="card-text text-dark"><%= simple_format(@article.content) %></p>
         </div>
       </div>
@@ -64,11 +64,15 @@
             <% @comments.each do |comment| %>
               <div class="comment-item mb-4 p-3">
                 <div class="justify-content-between">
+                  <!-- Informations sur le commentaire -->
                   <strong><%= comment.user.name %> :</strong>
-                  <small class="text-muted">Posté le <%= comment.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(comment.created_at, locale: :fr) %></small>
+                  <small class="text-muted">
+                    Posté le <%= comment.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(comment.created_at, locale: :fr) %>
+                  </small>
                 </div>
                 <p class="mt-2"><%= comment.content %></p>
 
+                <!-- Bouton pour répondre à un commentaire -->
                 <% if comment.parent.nil? %>
                   <button
                     class="btn btn-sm btn-transparent reply-btn mt-2"
@@ -78,7 +82,7 @@
                     Répondre
                   </button>
 
-                  <!-- Formulaire de réponse -->
+                  <!-- Formulaire pour répondre à un commentaire -->
                   <div class="reply-form d-none mt-3" id="reply-form-<%= comment.id %>">
                     <%= form_with model: [@article, Comment.new(parent: comment)], local: true do |f| %>
                       <%= f.hidden_field :parent_id, value: comment.id %>
@@ -101,7 +105,9 @@
                       <div class="reply-item">
                         <div class="d-flex justify-content-between align-items-center">
                           <strong><%= reply.user.name %></strong>
-                          <small class="text-muted">Posté le <%= reply.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(reply.created_at, locale: :fr) %></small>
+                          <small class="text-muted">
+                            Posté le <%= reply.created_at.strftime('%d/%m/%Y') %> il y a <%= time_ago_in_words(reply.created_at, locale: :fr) %>
+                          </small>
                         </div>
                         <p class="mt-2"><%= reply.content %></p>
                       </div>
