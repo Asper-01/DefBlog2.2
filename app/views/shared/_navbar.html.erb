@@ -7,53 +7,61 @@
   </div>
 
   <!-- Navbar -->
-  <div class="navbar navbar-expand-lg d-flex justify-content-between w-100">
-    <!-- Rubriques ou éléments de gauche -->
-    <div class="navbar-nav d-flex flex-row ms-3 py-2"> <!-- Ajout d'un padding vertical pour espacer les éléments -->
-      <div class="dropdown">
-        <button class="btn btn-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Rubriques
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <% Tag.where(id: [59, 60, 61, 62, 43]).each do |tag| %>
-            <a class="dropdown-item" href="<%= tag_path(tag) %>">
-              <%= tag.name %>
-            </a>
-          <% end %>
-        </div>
-      </div>
-    </div>
+  <div class="navbar navbar-expand-sm d-flex justify-content-between w-100 pt-2 pb-2">
+    <!-- Bouton Hamburger pour mobile (s'affiche quand la largeur est inférieure à 450px) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Profil utilisateur à droite -->
-    <div class="navbar-nav d-flex align-items-center ms-auto py-2"> <!-- Ajout d'un padding vertical pour espacer les éléments -->
-      <% if user_signed_in? %>
-        <!-- Dropdown pour Profil -->
+    <!-- Menu complet avec Rubriques et Profil à droite -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Menu Rubriques -->
+      <div class="navbar-nav d-flex flex-row ms-3 py-2"> <!-- Flex direction row pour les éléments sur desktop -->
         <div class="dropdown">
-          <button class="btn btn-transparent dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="online-status me-2"></span>
-            <%= current_user.name %>
+          <button class="btn btn-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Rubriques
           </button>
-          <div class="dropdown-menu dropdown-menu-center " aria-labelledby="profileDropdown">
-            <!-- Lien vers le profil -->
-            <%= link_to 'Gestion profil', edit_user_registration_path, class: 'dropdown-item' %>
-
-            <% if current_user&.admin? %>
-              <!-- Lien vers le Dashboard, visible uniquement pour les admins -->
-              <%= link_to 'Dashboard', admin_dashboard_path, class: 'dropdown-item' %>
-            <% end %>
-
-            <!-- Lien vers la déconnexion -->
-            <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false } do %>
-              <%= submit_tag "Déconnexion", class: "dropdown-item" %>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% Tag.where(id: [59, 60, 61, 62, 43]).each do |tag| %>
+              <a class="dropdown-item" href="<%= tag_path(tag) %>">
+                <%= tag.name %>
+              </a>
             <% end %>
           </div>
         </div>
-      <% else %>
-        <!-- Lien pour se connecter -->
-        <div class="nav-item">
-          <%= link_to 'Se connecter', new_user_session_path, class: 'custom-login-link' %>
-        </div>
-      <% end %>
+      </div>
+
+      <!-- Profil utilisateur à droite -->
+      <div class="navbar-nav d-flex flex-row ms-auto py-2"> <!-- Flex direction row pour les éléments sur desktop -->
+        <% if user_signed_in? %>
+          <!-- Dropdown pour Profil -->
+          <div class="dropdown">
+            <button class="btn btn-transparent dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="online-status me-2"></span>
+              <%= current_user.name %>
+            </button>
+            <div class="dropdown-menu dropdown-menu-center " aria-labelledby="profileDropdown">
+              <!-- Lien vers le profil -->
+              <%= link_to 'Gestion profil', edit_user_registration_path, class: 'dropdown-item' %>
+
+              <% if current_user&.admin? %>
+                <!-- Lien vers le Dashboard, visible uniquement pour les admins -->
+                <%= link_to 'Dashboard', admin_dashboard_path, class: 'dropdown-item' %>
+              <% end %>
+
+              <!-- Lien vers la déconnexion -->
+              <%= form_with url: destroy_user_session_path, method: :delete, data: { turbo: false } do %>
+                <%= submit_tag "Déconnexion", class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <!-- Lien pour se connecter -->
+          <div class="nav-item">
+            <%= link_to 'Se connecter', new_user_session_path, class: 'custom-login-link' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
