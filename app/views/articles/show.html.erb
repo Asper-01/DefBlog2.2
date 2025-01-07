@@ -72,31 +72,33 @@
                 </div>
                 <p class="mt-2"><%= comment.content %></p>
 
+
                 <!-- Bouton pour répondre à un commentaire -->
                 <% if comment.parent.nil? %>
-                  <button
-                    class="btn btn-sm btn-transparent reply-btn mt-2"
-                    data-controller="toggle-reply"
-                    data-action="click->toggle-reply#toggleForm"
-                    data-comment-id="<%= comment.id %>">
-                    Répondre
-                  </button>
+            <button
+              class="btn btn-sm btn-transparent reply-btn mt-2"
+              data-controller="toggle-reply"
+              data-action="click->toggle-reply#toggleForm"
+              data-comment-id="<%= comment.id %>">
+              Répondre
+            </button>
 
-                  <!-- Formulaire pour répondre à un commentaire -->
-                  <div class="reply-form d-none mt-3" id="reply-form-<%= comment.id %>">
-                    <%= form_with model: [@article, Comment.new(parent: comment)], local: true do |f| %>
-                      <%= f.hidden_field :parent_id, value: comment.id %>
+          <!-- Formulaire pour répondre à un commentaire -->
+          <div class="reply-form d-none mt-3" id="reply-form-<%= comment.id %>" data-toggle-reply-target="form">
+            <%= form_with model: [@article, Comment.new(parent: comment)], local: true do |f| %>
+              <%= f.hidden_field :parent_id, value: comment.id %>
 
-                      <div class="mb-3">
-                        <%= f.label :content, "Votre réponse" %>
-                        <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
-                      </div>
-                      <div class="form-group text-end">
-                        <%= f.submit "Publier", class: "btn btn-primary" %>
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
+              <div class="mb-3">
+                <%= f.label :content, "Votre réponse" %>
+                <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
+              </div>
+              <div class="form-group text-end">
+                <%= f.submit "Publier", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
 
                 <!-- Affichage des réponses -->
                 <% if comment.replies.any? %>
@@ -124,3 +126,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('[data-action="click->toggle-reply#toggleForm"]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        const commentId = this.getAttribute('data-comment-id');
+        const replyForm = document.getElementById('reply-form-' + commentId);
+        replyForm.classList.toggle('d-none');
+      });
+    });
+  });
+</script>

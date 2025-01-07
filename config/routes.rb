@@ -23,8 +23,9 @@ Rails.application.routes.draw do
   # Administration
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :articles, only: [:index, :new, :edit, :create, :update, :destroy], param: :slug
-    resources :comments, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :articles, only: [:index, :new, :edit, :create, :update, :destroy], param: :slug do
+      resources :comments, only: [:index, :new, :create, :edit, :update, :destroy]
+    end
     resources :tags, only: [:index, :new, :edit, :create, :update, :destroy], param: :slug
     resources :categories, only: [] do
       member do

@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :set_article
 
   def create
-    @article = Article.find(params[:article_id])
     @comment = @article.comments.new(comment_params)
     @comment.user = current_user
 
@@ -17,19 +16,17 @@ class CommentsController < ApplicationController
     end
   end
 
-    def new
-      @article = Article.find(params[:article_id])
-      @comment = @article.comments.build(parent_id: params[:parent_id])
-    end
+  def new
+    @comment = @article.comments.build(parent_id: params[:parent_id])
+  end
 
   private
 
   def set_article
-    @article = Article.find(params[:article_id])
+    @article = Article.find_by!(slug: params[:article_slug])
   end
 
   def comment_params
-    Rails.logger.debug "Params reçus : #{params.inspect}"
-    params.require(:comment).permit(:content, :article_id, :parent_id, :user_id, :created_at, :updated_at, :user, :article, :id)
+    params.require(:comment).permit(:content, :parent_id)
   end
 end
