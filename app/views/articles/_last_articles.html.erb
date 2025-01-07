@@ -1,4 +1,4 @@
-<div class="last-articles-container">
+<div class="banner-container">
   <div class="last-articles-separator">
     <span class="last-articles-title">Derniers articles</span>
   </div>
@@ -25,36 +25,9 @@
           <% end %>
 
           <div class="last-article-body">
-            <!-- Tags -->
-            <!-- Tags -->
-            <div class="last-article-tags">
-              <% # Initialisation des tags prioritaires %>
-              <% prioritized_tags = [] %>
 
-              <% # Ajout des tags prioritaires s'ils existent %>
-              <% prioritized_tags << article.tags.find { |tag| tag.category.name == "forces" } if article.tags.any? { |tag| tag.category.name == "forces" } %>
-              <% prioritized_tags << article.tags.find { |tag| tag.category.name == "nation" } if article.tags.any? { |tag| tag.category.name == "nation" } %>
-
-              <% # Suppression des doublons %>
-              <% additional_tags = article.tags - prioritized_tags %>
-              <% prioritized_tags.concat(additional_tags.first(2 - prioritized_tags.size)) %>
-
-              <% # Affichage des tags prioritaires (limités à 2) %>
-              <% prioritized_tags.first(2).each do |tag| %>
-                <%= link_to tag.name, tag_path(tag), class: 'tag-link' %>
-              <% end %>
-
-              <% # Affichage des autres tags si besoin, en limité à 2 tags max %>
-              <% remaining_tags = article.tags.reject { |tag| prioritized_tags.include?(tag) } %>
-              <% remaining_tags.first(2 - prioritized_tags.size).each do |tag| %>
-                <%= link_to tag.name, tag_path(tag), class: 'tag-link' %>
-              <% end %>
-            </div>
-
-            <!-- Date de publication -->
-            <span class="last-article-date">
-              <%= article.created_at.strftime("Publié le %d/%m/%Y") %>
-            </span>
+        <!-- Tags et date de publication-->
+          <%= render 'articles/tags' %>
 
             <!-- Titre -->
             <h5 class="last-article-title">

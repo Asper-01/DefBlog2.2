@@ -1,38 +1,55 @@
-<div class="container mt-4">
-<div class="last-articles-container">
-  <!-- Section de titre du tag -->
-  <div class="last-articles-separator">
-    <span class="last-articles-title"><%= @tag.name %></span>
-  </div>
+<div class="banner-container mt-4">
+  <div class="last-articles-container">
+    <!-- Section de titre du tag -->
+    <div class="last-articles-separator">
+      <span class="last-articles-title"><%= @tag.name %></span>
+    </div>
 
-  <!-- Liste des articles associés au tag -->
-  <div class="row">
-    <% @articles.each do |article| %>
-      <div class="col-lg-4 col-md-6 col-12 last-article-card">
-        <%= link_to article_path(article), class: 'text-decoration-none' do %>
+    <!-- Liste des articles associés au tag -->
+    <div class="row">
+      <% @articles.each do |article| %>
+        <div class="col-lg-4 col-md-6 col-12 last-article-card">
           <div class="card last-article">
+
             <!-- Affichage de l'image de l'article, ou image par défaut -->
             <% if article.image.attached? %>
-              <%= image_tag article.image, class: 'last-article-image' %>
+              <%= link_to article_path(article), class: 'text-decoration-none' do %>
+                <%= image_tag article.image, class: 'last-article-image mb-2' %>
+              <% end %>
             <% else %>
               <p class="last-article-no-image">Aucune image disponible</p>
             <% end %>
 
-            <div class="last-article-body">
-              <!-- Affichage des tags associés et de la date -->
-              <div class="last-article-meta">
-                <% tags = article.tags.limit(2).map(&:name).join(", ") %>
-                <span><%= tags %> • <%= article.created_at.strftime("%d/%m/%Y") %></span>
-              </div>
 
-              <!-- Titre de l'article et extrait -->
-              <h5 class="last-article-title"><%= article.title %></h5>
-              <p class="last-article-text"><%= truncate(article.content, length: 100) %></p>
+        <!-- Tags et date de publication-->
+          <%= render 'articles/tags' %>
+
+
+            <!-- Titre et extrait de l'article avec lien vers la page de l'article -->
+            <div class="last-article-body">
+              <h5 class="last-article-title">
+                <%= link_to article.title, article_path(article), class: 'text-decoration-none' %>
+              </h5>
+              <p class="last-article-text">
+                <%= link_to truncate(article.content, length: 100), article_path(article), class: 'text-decoration-none' %>
+              </p>
             </div>
           </div>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-</div>
+
+
+<style>
+.banner-tags{
+  text decoration: none;
+}
+.banner-tags a:hover {
+  text-decoration: none;
+}
+
+
+
+</style>
