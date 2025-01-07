@@ -1,34 +1,32 @@
 <div class="banner-container ">
   <% if @articles.any? %>
-    <div class="banner-row ">
-      <!-- Div de l'image -->
-      <div class="banner-image-container " style="position: relative;">
-        <% if @articles.first.image.attached? %>
-          <%= link_to article_path(@articles.first) do %>
-            <%= image_tag @articles.first.image, class: 'banner-image' %>
-          <% end %>
-        <% else %>
-          <p class="banner-no-image">Aucune image disponible</p>
+  <div class="banner-row">
+    <div class="banner-image-container" style="position: relative;">
+      <% if @articles.first.image.attached? %>
+        <%= link_to article_path(@articles.first) do %>
+          <%= image_tag @articles.first.image, class: 'banner-image' %>
         <% end %>
+      <% else %>
+        <p class="banner-no-image">Aucune image disponible</p>
+      <% end %>
 
-        <!-- Badge compteur cliquable -->
-        <%= link_to article_path(@articles.first) + "#comments-section" do %>
-          <div class="comment-count-badge">
-            <%= @articles.first.comments.size %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="banner-text-container">
-
-        <!-- Tags et date de publication-->
-          <%= render 'articles/tags' %>
-
-        <!-- Titre -->
-        <h5 class="banner-title">
-          <%= link_to @articles.first.title, article_path(@articles.first) %>
-        </h5>
-      </div>
+      <%= link_to article_path(@articles.first) + "#comments-section" do %>
+        <div class="comment-count-badge">
+          <%= @articles.first.comments.size %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+
+    <div class="banner-text-container">
+      <!-- Tags et date de publication-->
+      <%= render 'articles/tags', article: @articles.first %>
+
+      <!-- Titre -->
+      <h5 class="banner-title">
+        <%= link_to @articles.first.title, article_path(@articles.first) %>
+      </h5>
+    </div>
+  </div>
+<% end %>
+
 </div>

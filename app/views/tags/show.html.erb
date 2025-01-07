@@ -20,10 +20,8 @@
               <p class="last-article-no-image">Aucune image disponible</p>
             <% end %>
 
-
-        <!-- Tags et date de publication-->
-          <%= render 'articles/tags' %>
-
+            <!-- Tags et date de publication -->
+            <%= render 'articles/tags', article: article %>
 
             <!-- Titre et extrait de l'article avec lien vers la page de l'article -->
             <div class="last-article-body">
@@ -39,14 +37,3 @@
 </div>
 
 
-<style>
-.banner-tags{
-  text decoration: none;
-}
-.banner-tags a:hover {
-  text-decoration: none;
-}
-
-
-
-</style>

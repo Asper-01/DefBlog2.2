@@ -4,38 +4,36 @@
   </div>
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-    <% @articles.drop(1).each do |article| %>
-      <div class="col-lg-4 col-md-6 col-12 last-article-card">
-        <div class="card-2 last-article">
-          <% if article.image.attached? %>
-            <!-- Image de l'article -->
-            <div class="last-article-image-container" style="position: relative;">
-              <%= link_to article_path(article) do %>
-                <%= image_tag article.image, class: 'last-article-image' %>
-              <% end %>
-              <!-- Badge compteur cliquable -->
-              <%= link_to article_path(article) + "#comments-section" do %>
-                <div class="comment-count-badge">
-                  <%= article.comments.size %>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <p class="last-article-no-image">Aucune image disponible</p>
+<% @articles.drop(1).each do |article| %>
+  <div class="col-lg-4 col-md-6 col-12 last-article-card">
+    <div class="card-2 last-article">
+      <% if article.image.attached? %>
+        <div class="last-article-image-container" style="position: relative;">
+          <%= link_to article_path(article) do %>
+            <%= image_tag article.image, class: 'last-article-image' %>
           <% end %>
-
-          <div class="last-article-body">
-
-        <!-- Tags et date de publication-->
-          <%= render 'articles/tags' %>
-
-            <!-- Titre -->
-            <h5 class="last-article-title">
-              <%= link_to article.title, article_path(article) %>
-            </h5>
-          </div>
+          <%= link_to article_path(article) + "#comments-section" do %>
+            <div class="comment-count-badge">
+              <%= article.comments.size %>
+            </div>
+          <% end %>
         </div>
+      <% else %>
+        <p class="last-article-no-image">Aucune image disponible</p>
+      <% end %>
+
+      <div class="last-article-body">
+        <!-- Tags et date de publication-->
+        <%= render 'articles/tags', article: article %>
+
+        <!-- Titre -->
+        <h5 class="last-article-title">
+          <%= link_to article.title, article_path(article) %>
+        </h5>
       </div>
-    <% end %>
+    </div>
+  </div>
+<% end %>
+
   </div>
 </div>
