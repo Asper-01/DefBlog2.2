@@ -12,7 +12,7 @@
         <% end %>
 
         <!-- Badge compteur cliquable -->
-        <%= link_to article_path(@articles.first, anchor: 'comments') do %>
+        <%= link_to article_path(@articles.first) + "#comments-section" do %>
           <div class="comment-count-badge">
             <%= @articles.first.comments.size %>
           </div>

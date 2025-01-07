@@ -14,7 +14,7 @@
                 <%= image_tag article.image, class: 'last-article-image' %>
               <% end %>
               <!-- Badge compteur cliquable -->
-              <%= link_to article_path(article, anchor: 'comments') do %>
+              <%= link_to article_path(article) + "#comments-section" do %>
                 <div class="comment-count-badge">
                   <%= article.comments.size %>
                 </div>
