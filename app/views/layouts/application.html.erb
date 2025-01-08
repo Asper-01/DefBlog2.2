@@ -9,9 +9,10 @@
     <%= csp_meta_tag %>
 
     <!-- Lien vers les styles -->
+    <%= stylesheet_link_tag "application", media: 'all',"data-turbo-track": "reload" %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    <%= stylesheet_link_tag "application", media: 'all',"data-turbo-track": "reload" %>
+
     <!-- Importation de l'importmap et des scripts -->
     <!--  <%= javascript_importmap_tags %> -->
       <!-- Lien vers le fichier JS de Bootstrap -->
@@ -37,5 +38,11 @@
 
     <!-- Contenu principal de la page -->
     <%= yield %>
+
+    <!-- Contenu du footer -->
+    <%= render 'shared/footer' %>
+
   </body>
+
 </html>
+

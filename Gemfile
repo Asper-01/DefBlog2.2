@@ -61,6 +61,7 @@ gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 1.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rack', '~> 2.2.8'
+# Gestion des URL pour le SEO:
 gem 'friendly_id', '~> 5.4.0'
 
 
