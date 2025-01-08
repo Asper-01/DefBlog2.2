@@ -1,39 +1,108 @@
 <footer>
   <div class="footer-container">
-    <!-- Liens de navigation -->
-    <div class="footer-navigation">
-      <h4>Navigation</h4>
-      <ul>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/articles">Articles</a></li>
-        <li><a href="/categories">Sitemap</a></li>
-        <li><a href="/legal">Mentions légales</a></li>
-        <li><a href="/privacy-policy">Politique de confidentialité</a></li>
-        <li><a href="/terms">Conditions d'utilisation</a></li>
-      </ul>
-    </div>
 
     <!-- Informations légales -->
     <div class="footer-legal">
-      <h4>Informations légales</h4>
-      <p>Hébergeur : [Information à venir]</p>
-      <a href="/cookies-policy">Gestion des cookies</a>
+
+      <h4>Informations</h4>
+        <ul>
+          <li><a href="/legal">Mentions légales</a></li>
+          <li><a href="/privacy-policy">Politique de confidentialité</a></li>
+          <li><a href="/categories">Sitemap</a></li>
+          <li><a href="/categories">contact</a></li>
+        </ul>
     </div>
 
-    <!-- Coordonnées -->
-    <div class="footer-contact">
-      <h4>Contact</h4>
-      <p>Email : <a href="mailto:contact@defblog.com">contact@defblog.com</a></p>
-      <ul class="social-links">
-        <li><a href="https://facebook.com/defblog" target="_blank">Facebook</a></li>
-        <li><a href="https://twitter.com/defblog" target="_blank">Twitter</a></li>
-        <li><a href="https://linkedin.com/company/defblog" target="_blank">LinkedIn</a></li>
-      </ul>
-    </div>
-  </div>
 
   <!-- Crédits -->
   <div class="footer-credits">
     <p>© 2025 DefBlog. Tous droits réservés.</p>
   </div>
 </footer>
+
+
+<style>
+footer {
+  background-color: #F9F9F9; /* Couleur de fond */
+  color: #000000; /* Texte clair */
+  padding: 20px 0;
+  margin-top: 20px;
+  border-top: 1px solid rgb(230, 230, 230);
+
+  .footer-container {
+    display: flex;
+    flex-direction: column; /* Les éléments s'empilent */
+    align-items: center; /* Centre horizontalement */
+    text-align: center; /* Centre le texte */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    > div {
+      flex: 1 1 auto; /* Ajuste la largeur des blocs pour s'adapter */
+      margin: 10px;
+      max-width: 300px; /* Limite la largeur pour rester lisible */
+
+      h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #f39c12;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin: 5px 0;
+
+          a {
+            color: #000000;
+            text-decoration: none;
+
+            &:hover {
+              color: #f39c12;
+            }
+          }
+        }
+      }
+
+      p, a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .footer-contact {
+    .social-links {
+      display: flex;
+      justify-content: center; /* Centre horizontalement */
+      gap: 10px;
+      margin-top: 10px;
+
+      li {
+        a {
+          color: #040404;
+          text-decoration: none;
+
+          &:hover {
+            color: #f39c12;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-credits {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid rgb(230, 230, 230);
+    padding-top: 10px;
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+</style>
