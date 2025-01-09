@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  # Pages statiques pour le footer
+  get 'legal', to: 'pages#legal', as: :legal
+  get 'sitemap', to: 'pages#sitemap', as: :sitemap
+  get 'contact', to: 'pages#contact', as: :contact
+
   # Pages publiques
   root 'articles#index'
   resources :articles, only: [:index, :show], param: :slug do
