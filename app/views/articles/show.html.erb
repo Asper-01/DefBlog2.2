@@ -49,6 +49,7 @@
           <!-- Formulaire de création de commentaire -->
           <div class="mb-4">
             <%= form_with model: [ @article, Comment.new ], local: true do |f| %>
+            
               <div class="mb-3">
                 <%= f.label :content, "Votre commentaire" %>
                 <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
