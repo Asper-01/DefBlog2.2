@@ -14,6 +14,7 @@ class Article < ApplicationRecord
 
   # Attribut virtuel pour la suppression d'image
   attr_accessor :remove_image
+  has_one_attached :image
 
   # Validations
   validates :title, presence: true, length: { maximum: 500 }
@@ -35,6 +36,10 @@ class Article < ApplicationRecord
           .group("articles.id")
           .order("shared_tags_count DESC, created_at DESC") # Trier par nombre de tags communs, puis par date
           .limit(limit) # Limiter à 3 articles
+  end
+  # Réseaux sociaux et partages des articles
+  def excerpt
+    ActionController::Base.helpers.strip_tags(content.truncate(150))
   end
 
   private

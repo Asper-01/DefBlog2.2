@@ -12,7 +12,47 @@
           <p class="text-center text-muted mt-3">Aucune image disponible</p>
         <% end %>
 
-        <div class="card-body">
+
+
+
+<div class="card-body d-flex justify-content-start gap-3">
+  <!-- Icône de partage sur X -->
+  <%= link_to "https://x.com/intent/tweet?text=#{@article.title}%0A#{article_url(@article)}", target: "_blank", class: "social-share-button" do %>
+    <i class="fab fa-x-twitter" style="font-size: 24px; color: black;"></i>
+  <% end %>
+
+<!-- Icône de partage sur Facebook -->
+<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{article_url(@article)}", target: "_blank", class: "social-share-button" do %>
+  <i class="fab fa-facebook" style="font-size: 30px; color: #4267B2;"></i>
+<% end %>
+
+
+
+  <!-- Icône de partage sur WhatsApp -->
+  <%= link_to "https://wa.me/?text=#{@article.title}%0A#{article_url(@article)}", target: "_blank", class: "social-share-button" do %>
+    <i class="fab fa-whatsapp" style="font-size: 30px; color: #25D366;"></i>
+  <% end %>
+
+  <!-- Icône de partage sur Telegram -->
+  <%= link_to "https://t.me/share/url?url=#{article_url(@article)}&text=#{@article.title}%0A#{article_url(@article)}", target: "_blank", class: "social-share-button" do %>
+    <i class="fab fa-telegram-plane" style="font-size: 30px; color: #0088cc;"></i>
+  <% end %>
+
+  <!-- Icône de partage sur LinkedIn -->
+<%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{article_url(@article)}&title=#{@article.title}&summary=#{@article.content[0..200]}&source=#{article_url(@article)}", target: "_blank", class: "social-share-button" do %>
+  <i class="fab fa-linkedin" style="font-size: 30px; color: #0077b5;"></i>
+<% end %>
+
+</div>
+
+
+
+
+
+
+
+
+
           <!-- Titre de l'article -->
           <h1 class="card-title mb-3"><%= @article.title %></h1>
           <p class="text-muted mb-2">
@@ -49,7 +89,7 @@
           <!-- Formulaire de création de commentaire -->
           <div class="mb-4">
             <%= form_with model: [ @article, Comment.new ], local: true do |f| %>
-            
+
               <div class="mb-3">
                 <%= f.label :content, "Votre commentaire" %>
                 <%= f.text_area :content, rows: 3, class: "form-control", required: true %>
