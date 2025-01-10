@@ -31,6 +31,16 @@
         </div>
       </div>
 
+        <!-- Barre de recherche -->
+      <div class="navbar-nav d-flex flex-row ms-auto py-2">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <form class="d-flex" action="<%= search_articles_path %>" method="get">
+            <input class="form-control me-2" type="search" name="q" placeholder="Rechercher" aria-label="Rechercher">
+            <button class="btn btn-outline-success" type="submit">Recherche</button>
+          </form>
+        </div>
+      </div>
+
       <!-- Profil utilisateur à droite -->
       <div class="navbar-nav d-flex flex-row ms-auto py-2"> <!-- Flex direction row pour les éléments sur desktop -->
         <% if user_signed_in? %>
@@ -61,8 +71,15 @@
             <%= link_to 'Se connecter', new_user_session_path, class: 'custom-login-link' %>
           </div>
         <% end %>
-        
+
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .navbar-nav .form-control,
+.navbar-nav .btn {
+  border-radius: 8px; /* Vous pouvez ajuster cette valeur pour obtenir l'effet désiré */
+}
+</style>

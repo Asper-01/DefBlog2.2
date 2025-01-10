@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'legal', to: 'pages#legal', as: :legal
   get 'sitemap', to: 'pages#sitemap', as: :sitemap
   get 'contact', to: 'pages#contact', as: :contact
+  # SearchBar
+  get 'search', to: 'articles#search', as: :search_articles
 
   # Pages publiques
   root 'articles#index'
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
   resources :tags, only: [:index, :show, :create], param: :slug
+
+
 
   # Vérification de santé
   get "up" => "rails/health#show", as: :rails_health_check

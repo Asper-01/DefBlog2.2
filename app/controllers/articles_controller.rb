@@ -3,6 +3,17 @@ class ArticlesController < ApplicationController
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_article, only: %i[show edit update destroy]
 
+  def search
+    query = params[:q]
+
+    # Recherche dans le titre, contenu, et tags associés
+    @results = Article.joins(:tags)  # Jointure avec la table tags
+                      .where("articles.title ILIKE :query OR articles.content ILIKE :query OR tags.name ILIKE :query", query: "%#{query}%")
+                      .distinct  # Assure qu'un article n'apparaisse qu'une seule fois dans les résultats
+
+    render :search_results
+  end
+
   def index
     @articles = Article.includes(:comments, :tags, image_attachment: :blob).order(created_at: :desc)
   end
