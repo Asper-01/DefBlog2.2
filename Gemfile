@@ -42,7 +42,7 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 gem "bootstrap", "~> 5.2"
 gem 'devise', '~> 4.8'
@@ -57,7 +57,6 @@ gem 'kaminari'
 gem 'rubocop'
 # gestion miniatures img:
 gem 'mini_magick'
-gem 'image_processing', '~> 1.2'
 gem 'activerecord-session_store'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 1.0'
@@ -65,7 +64,8 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rack', '~> 2.2.8'
 # Gestion des URL pour le SEO:
 gem 'friendly_id', '~> 5.4.0'
-
+# Mise en page des articles:
+gem 'tinymce-rails'
 
 group :development, :test do
   gem "dotenv-rails"
