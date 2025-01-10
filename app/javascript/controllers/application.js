@@ -1,6 +1,6 @@
 import { Application } from "@hotwired/stimulus"
-import ToggleController from "./controllers/toggle_controller";
-import Rails from "@rails/ujs";
+import ToggleController from "./toggle_controller"
+import Rails from "@rails/ujs"
 
 Rails.start();
 
@@ -10,7 +10,7 @@ const application = Application.start()
 application.debug = false
 window.Stimulus   = application
 
-// Chargement des contrôleur
-application.register("toggle-reply", ToggleReplyController)
+// Enregistrement des contrôleurs
+application.register("toggle-reply", ToggleController)
 
 export { application }

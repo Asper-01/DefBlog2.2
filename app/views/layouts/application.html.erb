@@ -2,6 +2,8 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
+      <meta name="turbo-cache-control" content="no-cache">
+  <meta name="turbo-visit-control" content="reload">
      <title><%= content_for?(:title) ? yield(:title) : "DefBlog défense" %></title>
     <title>DefBlog blog défense </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,20 +16,16 @@
 
 
     <!-- Importation de l'importmap et des scripts -->
-    <!--  <%= javascript_importmap_tags %> -->
+     <%= javascript_importmap_tags %>
       <!-- Lien vers le fichier JS de Bootstrap -->
   <script type="module" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
-</head>
-    <!-- Ajout d'un script externe pour la gestion des modules JavaScript -->
-    <script type="module" src="https://unpkg.com/es-module-shims@1.4.1/dist/es-module-shims.js" async></script>
+
 
    <link rel="icon" href="<%= asset_path 'logo.png' %>" type="image/x-icon">
-
-
+    <%= yield :page_header %>
 </head>
 
-  </head>
 
   <body>
     <!-- Navigation -->
@@ -45,4 +43,3 @@
   </body>
 
 </html>
-
