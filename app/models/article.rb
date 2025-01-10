@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
+  before_save :store_previous_slug, if: :slug_changed?
   def should_generate_new_friendly_id?
     true
   end
@@ -44,6 +45,9 @@ class Article < ApplicationRecord
 
   private
 
+  def store_previous_slug
+    self.previous_slug = slug_was
+  end
   # Supprime l'image si l'utilisateur demande sa suppression
   def purge_image_if_requested
     image.purge if ActiveModel::Type::Boolean.new.cast(remove_image)
