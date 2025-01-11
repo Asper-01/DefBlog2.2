@@ -1,13 +1,13 @@
 <div class="sticky-top bg-light">
   <!-- Logo qui reste en haut -->
-  <div class="logo-container mt-3">
+  <div class="logo-container">
     <%= link_to articles_path do %>
       <%= image_tag("logoNom.png", class: "navbar-logo") %>
     <% end %>
   </div>
 
   <!-- Navbar -->
-  <div class="navbar navbar-expand-sm d-flex justify-content-between w-100 pt-2 pb-2">
+  <div class="navbar navbar-expand-sm d-flex justify-content-between w-100">
     <!-- Bouton Hamburger pour mobile (s'affiche quand la largeur est inférieure à 450px) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -76,10 +76,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .navbar-nav .form-control,
-.navbar-nav .btn {
-  border-radius: 8px; /* Vous pouvez ajuster cette valeur pour obtenir l'effet désiré */
-}
-</style>

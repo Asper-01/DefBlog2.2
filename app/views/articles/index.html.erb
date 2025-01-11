@@ -1,7 +1,7 @@
 <div class="container mt-4">
 
   <!-- Bannière = Dernier article publié -->
-  <%= render 'articles/banner' %>
+  <%= render partial: 'articles/banner', locals: { article: @articles.first } %>
 
   <!-- Autres articles  -->
   <%= render 'articles/last_articles' %>

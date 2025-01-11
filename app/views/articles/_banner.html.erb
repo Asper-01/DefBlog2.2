@@ -19,57 +19,16 @@
 
       <!-- Conteneur pour le texte et les métadonnées de l'article -->
       <div class="banner-text-container">
-        <!-- Rendu des tags et de la date de publication -->
-        <%= render 'articles/tags', article: @articles.first %>
+  <%= render 'articles/tags', article: @articles.first %>
+  <h5 class="banner-title">
+    <%= link_to @articles.first.title, article_path(@articles.first) %>
+  </h5>
 
-        <!-- Titre de l'article principal -->
-        <h5 class="banner-title">
-          <%= link_to @articles.first.title, article_path(@articles.first) %>
-        </h5>
-      </div>
+<p class="banner-excerpt">
+  <%= link_to truncate(ActionController::Base.helpers.strip_tags(article.content), length: 550), article_path(article) %>
+</p>
+
+</div>
     </div>
   <% end %>
 </div>
-
-<style>
-
-.comment-count-badge {
-  position: absolute;
-  top: 10px; /* Déplace le badge vers le coin supérieur */
-  right: 10px;
-  background-color: #dc3545; /* Fond rouge */
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px 12px;
-  border-radius: 50%; /* Forme circulaire */
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Ombre plus douce et plus large */
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 30px;
-  min-height: 30px;
-  max-width: 30px;
-  max-height: 30px;
-  transition: all 0.3s ease-in-out; /* Transition douce pour les effets */
-  transform: scale(1); /* Taille de base */
-
-  &:hover {
-    background-color: #c82333; /* Changement de couleur au survol */
-    transform: scale(1.1); /* Légère augmentation de la taille au survol */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /* Ombre plus marquée */
-  }
-
-  /* Si le nombre est plus grand, ajuster la taille */
-  &.large-count {
-    font-size: 14px;
-    padding: 10px 15px;
-    min-width: 40px;
-    min-height: 40px;
-  }
-}
-
-</style>

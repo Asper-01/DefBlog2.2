@@ -66,6 +66,9 @@ gem 'rack', '~> 2.2.8'
 gem 'friendly_id', '~> 5.4.0'
 # Mise en page des articles:
 gem 'tinymce-rails'
+# Gestion des cookies:
+gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
+
 
 group :development, :test do
   gem "dotenv-rails"

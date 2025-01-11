@@ -4,4 +4,4 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 import "tinymce"
-
+import "cookies_eu"

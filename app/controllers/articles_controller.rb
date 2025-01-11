@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   # Permet l'accès à index sans être connecté
-  before_action :authenticate_user!, except: [:index, :show ]
+  before_action :authenticate_user!, except: [:index, :show, :search ]
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_article, only: %i[show edit update destroy]
 
@@ -31,7 +31,6 @@ class ArticlesController < ApplicationController
     else
       render :new
     end
-
   end
 
   def show
@@ -44,9 +43,6 @@ class ArticlesController < ApplicationController
     @tags = @article.tags.includes(:category).order('categories.name DESC') # ou 'ASC' selon ton ordre préféré
     @comments = @article.comments.where(parent_id: nil) # Récupérer uniquement les commentaires principaux
     @related_articles = @article.related_articles
-  end
-
-  def edit
   end
 
   def update
