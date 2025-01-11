@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-
+  
+  # Routes pour gérer les cookies
+  get 'accept_cookies', to: 'cookies#accept'
+  get 'decline_cookies', to: 'cookies#decline'
   # Pages statiques pour le footer
   get 'legal', to: 'pages#legal', as: :legal
   get 'sitemap', to: 'pages#sitemap', as: :sitemap

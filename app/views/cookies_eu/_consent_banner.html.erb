@@ -21,13 +21,20 @@
 
 <script>
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   // Vérifier si les cookies ont été acceptés
-//   if (!document.cookie.includes("cookies_accepted=true")) {
-//     // Afficher la modale si les cookies ne sont pas encore acceptés
-//     var cookiesModal = new bootstrap.Modal(document.getElementById('cookies-modal'));
-//     cookiesModal.show();
-//   }
-// });
+document.addEventListener("DOMContentLoaded", function() {
+  // Vérifier si les cookies ont été acceptés
+  if (!document.cookie.includes("cookies_accepted=true")) {
+    // Afficher la modale si les cookies ne sont pas encore acceptés
+    var cookiesModal = new bootstrap.Modal(document.getElementById('cookies-modal'));
+    cookiesModal.show();
+  }
+});
+document.getElementById("accept-cookies-btn").addEventListener("click", function() {
+  // Définir un cookie pour indiquer que les cookies ont été acceptés
+  document.cookie = "cookies_accepted=true; path=/; max-age=" + 60 * 60 * 24 * 30; // 30 jours
+  // Fermer la modale
+  var cookiesModal = bootstrap.Modal.getInstance(document.getElementById('cookies-modal'));
+  cookiesModal.hide();
+});
 
 </script>
