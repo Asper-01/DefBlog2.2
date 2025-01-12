@@ -76,6 +76,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Permettre des paramètres supplémentaires pour la mise à jour de l'utilisateur
   def account_update_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
+    puts params.inspect  # Cela affichera tous les paramètres dans les logs
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :cookies_consent)
   end
 end

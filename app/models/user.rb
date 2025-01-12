@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :articles, foreign_key: :author_id
   has_one_attached :avatar
   has_many :comments, dependent: :destroy
-
+  validates :cookies_consent, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
 
   def admin?
     admin
