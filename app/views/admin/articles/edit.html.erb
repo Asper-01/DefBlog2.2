@@ -1,3 +1,7 @@
+<%= content_for :page_header do %>
+  <%= tinymce_assets %>
+<% end %>
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-12 mb-4">
@@ -27,10 +31,10 @@
               <%= form.text_field :title, class: "form-control" %>
             </div>
 
-            <!-- Champ contenu -->
+            <!-- Champ contenu (TinyMCE) -->
             <div class="form-group mb-3">
               <%= form.label :content, "Contenu", class: "form-label" %>
-              <%= form.text_area :content, class: "form-control", rows: 9 %>
+              <%= form.text_area :content, class: "form-control tinymce", rows: 9 %>
             </div>
 
             <!-- Champ image -->
@@ -75,3 +79,18 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  if (typeof tinymce !== "undefined") {
+    tinymce.init({
+      selector: '.tinymce',
+      plugins: 'image',
+      menubar: false,
+      toolbar: 'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | bullist numlist | outdent indent',
+      height: 400
+    });
+  }
+});
+
+</script>
