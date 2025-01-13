@@ -38,6 +38,7 @@ class Article < ApplicationRecord
           .order("shared_tags_count DESC, created_at DESC") # Trier par nombre de tags communs, puis par date
           .limit(limit) # Limiter à 3 articles
   end
+
   # Réseaux sociaux et partages des articles
   def excerpt
     ActionController::Base.helpers.strip_tags(content.truncate(150))
@@ -48,7 +49,7 @@ class Article < ApplicationRecord
   def store_previous_slug
     self.previous_slug = slug_was
   end
-  # Supprime l'image si l'utilisateur demande sa suppression
+  # Supprimer les images si demandé
   def purge_image_if_requested
     image.purge if ActiveModel::Type::Boolean.new.cast(remove_image)
   end

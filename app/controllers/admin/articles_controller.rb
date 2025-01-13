@@ -20,7 +20,7 @@ module Admin
     end
 
     def show
-      @article = Article.includes(:tags).find(params[:slug])
+      @article = Article.friendly.find(params[:slug])
     end
 
     def new
@@ -40,13 +40,16 @@ module Admin
     end
 
     def edit
-      Article.friendly.find(params[:slug])
+      @article = Article.friendly.find(params[:slug])
+      @categories = Category.all
+      @tags = @article.tags.pluck(:id)
     end
 
     def update
       if params[:article][:remove_image] == "1" && @article.image.attached?
         @article.image.purge
       end
+
       if @article.update(article_params)
         redirect_to admin_articles_path, notice: 'Article mis à jour avec succès.'
       else
