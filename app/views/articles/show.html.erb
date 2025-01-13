@@ -7,7 +7,7 @@
       <div class="card">
         <!-- Affichage de l'image de l'article -->
         <% if @article.image.attached? %>
-          <%= image_tag @article.image, class: "card-img-top custom-rounded-top" %>
+          <%= image_tag @article.optimized_image, class: "card-img-top custom-rounded-top" %>
         <% else %>
           <p class="text-center text-muted mt-3">Aucune image disponible</p>
         <% end %>

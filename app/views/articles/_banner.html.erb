@@ -6,7 +6,7 @@
         <% if @articles.first.image.attached? %>
           <!-- Lien vers l'article principal avec image -->
           <%= link_to article_path(@articles.first) do %>
-            <%= image_tag @articles.first.image, class: 'banner-image' %>
+            <%= image_tag @articles.first.optimized_image, class: 'banner-image' %>
           <% end %>
         <% else %>
           <!-- Message si aucune image n'est attachée -->

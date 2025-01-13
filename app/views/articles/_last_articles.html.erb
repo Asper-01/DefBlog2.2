@@ -13,7 +13,7 @@
             <!-- Conteneur de l'image de l'article -->
             <div class="last-article-image-container" style="position: relative;">
               <%= link_to article_path(article) do %>
-                <%= image_tag article.image, class: 'last-article-image' %>
+                <%= image_tag article.optimized_image, class: 'last-article-image' %>
               <% end %>
 
               <!-- Badge compteur de commentaires -->

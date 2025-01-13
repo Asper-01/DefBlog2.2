@@ -68,6 +68,8 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'tinymce-rails'
 # Gestion des cookies:
 gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
+# Validation active storage
+gem 'active_storage_validations'
 
 
 group :development, :test do

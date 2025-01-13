@@ -20,6 +20,7 @@ class Article < ApplicationRecord
   # Validations
   validates :title, presence: true, length: { maximum: 500 }
   validates :content, presence: true
+  validates :image, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']
 
   # Callbacks
   before_save :purge_image_if_requested
@@ -43,6 +44,12 @@ class Article < ApplicationRecord
   def excerpt
     ActionController::Base.helpers.strip_tags(content.truncate(150))
   end
+
+    # Méthode pour redimensionner les images et les convertir en Webp
+    def optimized_image
+      image.variant(resize_to_limit: [900, 900], format: :webp, saver: { quality: 90 }).processed
+    end
+
 
   private
 
