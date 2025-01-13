@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'cookies/preferences', to: 'cookies#preferences', as: 'cookies_preferences'
   get 'accept_cookies', to: 'cookies#accept'
   get 'decline_cookies', to: 'cookies#decline'
+  post 'cookies/update_consent', to: 'cookies#update_consent', as: 'update_consent_cookies'
   # Pages statiques pour le footer
   get 'legal', to: 'pages#legal', as: :legal
   get 'sitemap', to: 'pages#sitemap', as: :sitemap
