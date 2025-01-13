@@ -42,10 +42,10 @@
       </div>
 
       <!-- Profil utilisateur à droite -->
-      <div class="navbar-nav d-flex flex-row ms-auto py-2"> <!-- Flex direction row pour les éléments sur desktop -->
+      <div class="navbar-nav d-flex flex-row ms-auto py-2  me-3"> <!-- Flex direction row pour les éléments sur desktop -->
         <% if user_signed_in? %>
           <!-- Dropdown pour Profil -->
-          <div class="dropdown">
+          <div class="dropdown  me-3">
             <button class="btn btn-transparent dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="online-status me-2"></span>
               <%= current_user.name %>
@@ -53,6 +53,9 @@
             <div class="dropdown-menu dropdown-menu-center " aria-labelledby="profileDropdown">
               <!-- Lien vers le profil -->
               <%= link_to 'Gestion profil', edit_user_registration_path, class: 'dropdown-item' %>
+            <!-- Lien pour gérer les préférences cookies -->
+
+              <%= link_to 'Gestion cookie', cookies_preferences_path, class: 'dropdown-item' %>
 
               <% if current_user&.admin? %>
                 <!-- Lien vers le Dashboard, visible uniquement pour les admins -->

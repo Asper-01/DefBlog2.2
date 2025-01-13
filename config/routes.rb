@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
-  
+
   # Routes pour gérer les cookies
+  get 'cookies/preferences', to: 'cookies#preferences', as: 'cookies_preferences'
   get 'accept_cookies', to: 'cookies#accept'
   get 'decline_cookies', to: 'cookies#decline'
   # Pages statiques pour le footer
