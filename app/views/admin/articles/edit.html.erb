@@ -1,7 +1,6 @@
 <%= content_for :page_header do %>
   <%= tinymce_assets %>
 <% end %>
-
 <div class="container mt-4">
   <div class="row">
     <div class="col-12 mb-4">
@@ -9,7 +8,6 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Modifier l'article</h5>
-
           <!-- Affichage des erreurs de validation -->
           <% if @article.errors.any? %>
             <div id="error_explanation" class="alert alert-danger">
@@ -55,7 +53,6 @@
                 <p>Aucune image disponible</p>
               <% end %>
             </div>
-
             <!-- Champ tags -->
             <div class="form-group mb-3">
               <%= form.label :tag_ids, "Associer des tags", class: "form-label" %>
@@ -66,13 +63,11 @@
                 </div>
               <% end %>
             </div>
-
             <!-- Boutons -->
             <div class="d-flex justify-content-between">
               <%= link_to "Retour", admin_articles_path, class: "btn btn-secondary" %>
               <%= form.submit "Enregistrer", class: "btn btn-primary" %>
             </div>
-
           <% end %>
         </div>
       </div>
@@ -81,16 +76,16 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-  if (typeof tinymce !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
     tinymce.init({
-      selector: '.tinymce',
-      plugins: 'image',
-      menubar: false,
-      toolbar: 'undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | bullist numlist | outdent indent',
-      height: 400
+      selector: 'textarea.tinymce',
+      plugins: 'link image code',
+      toolbar: 'undo redo | styleselect | bold italic | link image | code', // Barre d'outils (ajuste selon tes besoins)
+      height: 500, // Taille de l'éditeur
+      convert_urls: true,
+      uploadimage: true
     });
-  }
-});
-
+  });
 </script>
+
+  <%= tinymce convert_urls: true, uploadimage: true %>
