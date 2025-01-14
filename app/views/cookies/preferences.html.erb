@@ -2,94 +2,160 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body m-3">
+          <div class="title">
+            <h1>Gestion des cookies</h1>
+          </div>
+          <br>
 
-        <h1>Préférences de cookies</h1>
+          <% if user_signed_in? %>
+            <p>
+              Vous êtes connecté en tant que <strong>
+              <%= link_to current_user.name, edit_user_registration_path, class: 'link-user' %> </strong>
+            </p>
+          <% else %>
+            <h4>Bienvenue,</h4>
+          <% end %>
 
-        <div class="cookies-info mt-4">
-  <h2>Gestion des cookies et respect du RGPD</h2>
-  <p>
-    Conformément aux dispositions du Règlement Général sur la Protection des Données (RGPD), nous veillons à respecter votre vie privée et à protéger vos données personnelles.
-  </p>
-  <p>
-    Vous avez la possibilité de modifier vos préférences de cookies à tout moment. Ces cookies nous permettent de :
-  </p>
-  <ul>
-    <li><strong>Cookies essentiels :</strong> assurer le bon fonctionnement de notre site (non désactivables).</li>
-    <li><strong>Cookies statistiques :</strong> analyser l’utilisation de notre site pour améliorer votre expérience.</li>
+          <div class="cookies-status mt-3">
+            <% if user_signed_in? %>
+              <p>
+                Vos cookies pour Defblog sont actuellement
+                <strong class="<%= current_user.cookies_consent ? 'cookies-activated' : 'cookies-deactivated' %>">
+                  <%= current_user.cookies_consent ? "Activés" : "Désactivés" %>
+                </strong>
+              </p>
+            <% else %>
+              <p>
+                Vous n'êtes pas connecté. L'état actuel de vos préférences de cookies est stocké dans un cookie :
+                <strong>
+                  <%= cookies[:cookies_consent] == "true" ? "Accepté" : "Refusé" %>
+                </strong>
+              </p>
+            <% end %>
+          </div>
 
-  </ul>
-  <p>
-    Vous pouvez choisir d’accepter ou de refuser chaque type de cookies en fonction de vos préférences. Nous vous encourageons à les configurer selon vos besoins.
-  </p>
-</div>
-
-
-        <div class="cookies-status mt-3">
-  <h2>État actuel des préférences de cookies</h2>
-  <% if user_signed_in? %>
-    <p>
-      Vous êtes connecté. L'état actuel de vos préférences de cookies est :
-      <strong>
-        <%= current_user.cookies_consent ? "Accepté" : "Refusé" %>
-      </strong>
-    </p>
-  <% else %>
-    <p>
-      Vous n'êtes pas connecté. L'état actuel de vos préférences de cookies est stocké dans un cookie :
-      <strong>
-        <%= cookies[:cookies_consent] == "true" ? "Accepté" : "Refusé" %>
-      </strong>
-    </p>
-  <% end %>
-</div>
-
-
-<%= form_with url: update_consent_cookies_path, method: :post, local: true do |f| %>
-  <div>
-    <label for="cookies_consent_true">Accepter tous les cookies</label>
-    <%= f.radio_button :cookies_consent, true, checked: @cookies_consent %>
+<%= form_with url: update_consent_cookies_path, method: :post, local: true, id: 'cookies-form' do |f| %>
+  <div class="cookies-toggle">
+    <label class="switch">
+      <%= f.check_box :cookies_consent, { checked: @cookies_consent, id: 'cookies-toggle' } %>
+      <span class="slider"></span>
+    </label>
+    <span class="status-text">
+      <%= @cookies_consent ? "Cookies Activés" : "Cookies Désactivés" %>
+    </span>
   </div>
-
-  <div>
-    <label for="cookies_consent_false">Refuser les cookies</label>
-    <%= f.radio_button :cookies_consent, false, checked: !@cookies_consent %>
-  </div>
-
-
-            <div class="form-actions m-3">
-              <%= f.submit "Mettre à jour", class: "btn btn-primary btn-rounded w-100" %>
-
-            </div>
 <% end %>
 
-
+          <div class="cookies-info mt-4">
+            <h2><strong>Gestion des cookies et respect du RGPD</strong></h2>
+            <p>
+              Conformément aux dispositions du Règlement Général sur la Protection des Données (RGPD), nous veillons à respecter votre vie privée et à protéger vos données personnelles.
+            </p>
+            <p>
+              Vous avez la possibilité de modifier vos préférences de cookies à tout moment. Ces cookies nous permettent de :
+            </p>
+            <ul>
+              <li><strong>Cookies essentiels :</strong> assurer le bon fonctionnement de notre site (non désactivables).</li>
+              <li><strong>Cookies statistiques :</strong> analyser l’utilisation de notre site pour améliorer votre expérience.</li>
+            </ul>
+            <p>
+              Vous pouvez choisir d’accepter ou de refuser chaque type de cookies en fonction de vos préférences. Nous vous encourageons à les configurer selon vos besoins.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('cookies-toggle');
+    const form = document.getElementById('cookies-form');
+
+    toggle.addEventListener('change', () => {
+      form.submit();
+    });
+  });
+</script>
 
 
 <style>
   .cookies-info {
-  background-color: #f9f9f9;
-  padding: 15px;
-
-  font-size: 16px;
-  line-height: 1.5;
-}
-.cookies-info h2 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #333;
-}
-.cookies-info ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-.cookies-info ul li {
-  margin-bottom: 8px;
-}
-
+    background-color: #f9f9f9;
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .cookies-info h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  .cookies-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  .cookies-info ul li {
+    margin-bottom: 8px;
+  }
+  .link-user {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .link-user:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+  .cookies-activated {
+    color: #007bff;
+  }
+  .cookies-deactivated {
+    color: red;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  input:checked + .slider {
+    background-color: #007bff;
+  }
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  .status-text {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>

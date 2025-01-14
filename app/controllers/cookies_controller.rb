@@ -22,26 +22,16 @@ class CookiesController < ApplicationController
   end
 
   def preferences
-    # Si l'utilisateur est connecté, on charge ses préférences de cookies
-    if user_signed_in?
-      @cookies_consent = current_user.cookies_consent
-    else
-      # Pour les utilisateurs non connectés, charger les cookies depuis le cookie de session
-      @cookies_consent = cookies[:cookies_consent] == 'true'
-    end
+    @cookies_consent = user_signed_in? ? current_user.cookies_consent : cookies[:cookies_consent] == 'true'
   end
 
   def update_consent
+    consent = params[:cookies_consent] == '1'
     if user_signed_in?
-      consent_value = params[:cookies_consent] # Récupérer la valeur actuelle du consentement
-      if current_user.update(cookies_consent: consent_value)
-        redirect_back fallback_location: root_path, notice: "Vos préférences de cookies ont été mises à jour."
-      else
-        redirect_back fallback_location: root_path, alert: "Une erreur est survenue lors de la mise à jour de vos préférences."
-      end
+      current_user.update(cookies_consent: consent)
     else
-      cookies[:cookies_consent] = { value: params[:cookies_consent], expires: 1.year.from_now, httponly: true }
-      redirect_back fallback_location: root_path, notice: "Vos préférences de cookies ont été mises à jour."
+      cookies[:cookies_consent] = { value: consent.to_s, expires: 1.year.from_now }
     end
+    redirect_to cookies_preferences_path, notice: 'Vos préférences ont été mises à jour.'
   end
 end

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   # Routes pour gérer les cookies
   get 'cookies/preferences', to: 'cookies#preferences', as: 'cookies_preferences'
+  get 'accept_cookies', to: 'cookies#accept', as: 'accept_cookies'
+  get 'decline_cookies', to: 'cookies#decline', as: 'decline_cookies'
+  post 'cookies/update_consent', to: 'cookies#update_consent', as: 'update_cookies_consent'
+
+
   get 'accept_cookies', to: 'cookies#accept'
   get 'decline_cookies', to: 'cookies#decline'
   post 'cookies/update_consent', to: 'cookies#update_consent', as: 'update_consent_cookies'
