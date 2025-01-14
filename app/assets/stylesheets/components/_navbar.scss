@@ -1,19 +1,19 @@
 .navbar-nav .form-control,
 .navbar-nav .btn {
-  border-radius: 8px; /* Vous pouvez ajuster cette valeur pour obtenir l'effet désiré */
+  border-radius: 8px;
 }
 
-/* Cibler le bouton de recherche */
+/* bouton de recherche */
 .navbar-nav .btn-outline-success {
-  color: #f39c12; /* Couleur du texte */
-  border-color: #f39c12; /* Couleur de la bordure */
+  color: #5e5d5d;
+  border-color: #5e5d5d;
 }
 
-/* Cibler le bouton de recherche au survol pour garder la couleur cohérente */
+/* bouton de recherche au survol  */
 .navbar-nav .btn-outline-success:hover {
-  background-color: #f39c12; /* Couleur de fond au survol */
+  background-color: #242423; /* Couleur de fond au survol */
   color: white; /* Couleur du texte au survol */
-  border-color: #f39c12; /* Bordure au survol */
+  border-color: white; /* Bordure au survol */
 }
 .container {
 background: #f9f9f9;
