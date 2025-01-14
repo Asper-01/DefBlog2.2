@@ -3,11 +3,12 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :comments, dependent: :destroy
   validates :cookies_consent, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
-
+  # MAJ des préfs cookies choisies avant l'inscription
+  after_create :set_default_cookies_consent, if: :new_record?
   def admin?
     admin
   end
-
+  # Se connecter et créer un compte avec Google:
   def self.from_omniauth(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     logger.debug "Utilisateur trouvé : #{@user.inspect}" # Log de l'utilisateur
@@ -23,7 +24,5 @@ class User < ApplicationRecord
     end
     user
   end
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: [:google_oauth2]
 end

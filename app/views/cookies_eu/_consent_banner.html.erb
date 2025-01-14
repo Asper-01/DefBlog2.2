@@ -1,40 +1,81 @@
-<!-- Modale cookies -->
-<div id="cookies-modal" class="modal fade" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="cookies-modal-title" class="text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-bw-primary-500 to-bw-secondary-500">
-          Gestion des cookies
-        </h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Ce site utilise des cookies pour améliorer votre expérience. Acceptez-vous l'utilisation de cookies ?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Refuser</button>
-        <button type="button" class="btn btn-primary" id="accept-cookies-btn">Accepter</button>
+<div data-controller="cookies-consent">
+  <div id="cookies-modal" data-cookies-consent-target="modal" class="modal fade" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="cookies-modal-title" class="text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-bw-primary-500 to-bw-secondary-500">
+            Gestion des cookies
+          </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="cookies-modal-description" class="text-sm text-gray-700 mb-4">
+            Nous utilisons des cookies essentiels (non désactivables) ainsi que des cookies statistiques pour analyser notre site.
+            <a href="/legal">Politique de confidentialité</a>
+          </p>
+        </div>
+        <div class="modal-footer">
+                    <button type="button" data-action="click->cookies-consent#accept" class="btn btn-primary" id="accept-cookies-btn">
+            Accepter
+          </button>
+          <button type="button" data-action="click->cookies-consent#reject" class="btn btn-transparent" id="reject-cookies-btn">
+            Uniquement cookies essentiels
+          </button>
+
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const cookiesModal = new bootstrap.Modal(document.getElementById('cookies-modal'));
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Vérifier si les cookies ont été acceptés
-  if (!document.cookie.includes("cookies_accepted=true")) {
-    // Afficher la modale si les cookies ne sont pas encore acceptés
-    var cookiesModal = new bootstrap.Modal(document.getElementById('cookies-modal'));
-    cookiesModal.show();
-  }
-});
-document.getElementById("accept-cookies-btn").addEventListener("click", function() {
-  // Définir un cookie pour indiquer que les cookies ont été acceptés
-  document.cookie = "cookies_accepted=true; path=/; max-age=" + 60 * 60 * 24 * 30; // 30 jours
-  // Fermer la modale
-  var cookiesModal = bootstrap.Modal.getInstance(document.getElementById('cookies-modal'));
-  cookiesModal.hide();
-});
+    // Afficher la modale si le consentement n'a pas encore été donné
+    if (!document.cookie.includes("cookies_accepted=true")) {
+      cookiesModal.show();
+    }
 
+    // Bouton "Accepter"
+    document.getElementById("accept-cookies-btn").addEventListener("click", function() {
+      // Définir le cookie de consentement
+      document.cookie = "cookies_accepted=true; path=/; max-age=" + 60 * 60 * 24 * 30; // 30 jours
+      cookiesModal.hide(); // Fermer la modale
+    });
+
+    // Bouton "Uniquement cookies essentiels"
+    document.getElementById("reject-cookies-btn").addEventListener("click", function() {
+      // Définir le cookie pour refuser les cookies optionnels
+      document.cookie = "cookies_accepted=false; path=/; max-age=" + 60 * 60 * 24 * 30; // 30 jours
+      cookiesModal.hide(); // Fermer la modale
+    });
+  });
 </script>
+
+<style>
+  /* Enlever la bordure autour de la modale */
+#cookies-modal .modal-content {
+  border: none;
+}
+
+/* Enlever la bordure de la tête de la modale */
+#cookies-modal .modal-header {
+  border-bottom: none;
+}
+
+/* Enlever la bordure de la pied de la modale */
+#cookies-modal .modal-footer {
+  border-top: none;
+}
+
+/* Si des éléments internes ont des bordures, vous pouvez également les supprimer */
+#cookies-modal .modal-body {
+  border: none;
+}
+ li {
+              color: #f39c12;
+            }
+
+
+</style>
