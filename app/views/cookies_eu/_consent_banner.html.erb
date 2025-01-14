@@ -3,25 +3,23 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 id="cookies-modal-title" class="text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-bw-primary-500 to-bw-secondary-500">
+          <h2 id="cookies-modal-title" class="font-bold mb-2" style="font-size: 1.2rem;">
             Gestion des cookies
           </h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p id="cookies-modal-description" class="text-sm text-gray-700 mb-4">
+        <div class="modal-body" style="padding: 0.75rem 1rem;">
+          <p id="cookies-modal-description" class="text-sm text-gray-700 mb-2" style="font-size: 0.875rem;">
             Nous utilisons des cookies essentiels (non désactivables) ainsi que des cookies statistiques pour analyser notre site.
             <a href="/legal">Politique de confidentialité</a>
           </p>
         </div>
-        <div class="modal-footer">
-                    <button type="button" data-action="click->cookies-consent#accept" class="btn btn-primary" id="accept-cookies-btn">
+        <div class="modal-footer" style="padding: 0.75rem 1rem;">
+          <button type="button" data-action="click->cookies-consent#accept" class="btn btn-primary custom" id="accept-cookies-btn" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">
             Accepter
           </button>
-          <button type="button" data-action="click->cookies-consent#reject" class="btn btn-transparent" id="reject-cookies-btn">
-            Uniquement cookies essentiels
+          <button type="button" data-action="click->cookies-consent#reject" class="btn btn-transparent" id="reject-cookies-btn" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">
+            Refuser et poursuivre
           </button>
-
         </div>
       </div>
     </div>
@@ -54,28 +52,58 @@
 </script>
 
 <style>
-  /* Enlever la bordure autour de la modale */
-#cookies-modal .modal-content {
-  border: none;
-}
+  /* Positionner la modale en bas à droite */
+  #cookies-modal .modal-dialog {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    margin: 0;
+    width: 400px;  /* Ajuste la largeur de la modale à son contenu */
+  }
 
-/* Enlever la bordure de la tête de la modale */
-#cookies-modal .modal-header {
-  border-bottom: none;
-}
+  /* Enlever les bordures et lignes */
+  #cookies-modal .modal-content {
+    border: none;
+    border-radius: 8px;
+  }
 
-/* Enlever la bordure de la pied de la modale */
-#cookies-modal .modal-footer {
-  border-top: none;
-}
+  #cookies-modal .modal-header {
+    border-bottom: none;
+    padding: 0.5rem;
+  }
 
-/* Si des éléments internes ont des bordures, vous pouvez également les supprimer */
-#cookies-modal .modal-body {
-  border: none;
-}
- li {
-              color: #f39c12;
-            }
+  #cookies-modal .modal-body {
+    padding: 0.75rem 1rem;
+  }
+
+  #cookies-modal .modal-footer {
+    border-top: none;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: center; /* Centre les boutons horizontalement */
+    gap: 10px; /* Espacement entre les boutons */
+    border-top: none; /* Retire la ligne supérieure */
+  }
+
+  /* Réduire l'espacement des boutons */
+  .btn.custom, .btn-transparent {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 6px;
+  }
+  /* Style du bouton "Uniquement cookies essentiels" */
+  #reject-cookies-btn {
+    background-color: transparent; /* Fond transparent */
+    color: #6c757d; /* Texte gris foncé */
+    border: none; /* Pas de bordure */
+    border-radius: 8px; /* Coins arrondis */
+    transition: color 0.3s; /* Transition douce pour le hover */
+  }
+
+  /* Style au survol */
+  #reject-cookies-btn:hover {
+    color: #000; /* Texte noir au survol */
+  }
 
 
 </style>
