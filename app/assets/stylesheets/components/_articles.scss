@@ -1,40 +1,50 @@
-.banner-container {
-  margin-top: 90px; /* application de la marge */
+/* ===============================
+   Variables globales et paramètres généraux
+================================ */
+:root {
+  --border-radius: 8px;
+  --banner-bg-color: #F8F8F8;
+  --banner-title-color: #000;
+  --banner-text-color: #555;
+  --link-color: #007bff;
+  --link-hover-color: #333;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-.banner-image-container {
-  position: relative;
-}
-
-
-
-
+/* ===============================
+   Styles pour le container de la bannière
+================================ */
 .banner-container {
   margin: 20px auto;
   max-width: 1200px;
 }
+
 .banner-container a {
   text-decoration: none;
   color: inherit;
 }
+
 .banner-container a:hover {
   text-decoration: none;
-  color: #333;
+  color: var(--link-hover-color);
 }
 
+/* ===============================
+   Styles pour la disposition de la bannière
+================================ */
 .banner-row {
   display: flex;
   align-items: stretch; /* Aligne les éléments sur toute la hauteur */
   border: 1px solid #eaeaea;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   height: 400px; /* Hauteur ajustée */
 }
 
 .banner-image-container {
   flex: 4; /* Proportion pour l'image */
+  position: relative;
   overflow: hidden;
 }
 
@@ -49,11 +59,14 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: light-gray;
+  background-color: lightgray;
   color: #999;
   font-style: italic;
 }
 
+/* ===============================
+   Texte de la bannière
+================================ */
 .banner-text-container {
   flex: 2; /* Augmente la largeur du texte */
   padding: 20px;
@@ -61,22 +74,28 @@
   flex-direction: column; /* Empile les éléments verticalement */
   gap: 5px; /* Réduit l'espacement entre les éléments */
   justify-content: flex-start; /* Aligne tout en haut */
-  background-color: #F8F8F8;
+  background-color: var(--banner-bg-color);
 }
 
 .banner-title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #000;
+  color: var(--banner-title-color);
+}
+
+.banner-text {
+  font-size: 1rem;
+  color: var(--banner-text-color);
+  line-height: 1.4;
 }
 
 .banner-tags {
   font-size: 0.85rem;
-  color: #007bff; /* Conserve la couleur des liens */
+  color: var(--link-color);
 }
 
 .tag-link {
-  color: #007bff;
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -84,13 +103,17 @@
   text-decoration: none;
 }
 
-.banner-text {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.4;
+.banner-date,
+.banner-author {
+  color: #333; /* Utilise une couleur sombre pour contraster avec l'arrière-plan */
+  font-size: 14px;
+  margin: 5px 0;
+  display: block; /* Pour s'assurer qu'ils occupent une ligne chacun */
 }
 
-/* Responsivité */
+/* ===============================
+   Responsivité
+================================ */
 @media (max-width: 768px) {
   .banner-row {
     flex-direction: column;
@@ -102,17 +125,10 @@
     padding: 15px;
   }
 }
-.banner-date,
-.banner-author {
-  color: #333; /* Utilise une couleur sombre pour contraster avec l'arrière-plan */
-  font-size: 14px;
-  margin: 5px 0;
-  display: block; /* Pour s'assurer qu'ils occupent une ligne chacun */
-}
 
-
-/* Last articles */
-
+/* ===============================
+   Derniers articles
+================================ */
 .last-article-image-container {
   position: relative;
 }

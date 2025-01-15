@@ -8,15 +8,17 @@
 @import "font-awesome";
 
 // Your CSS partials
-@import "components/comment_count_badge";
+@import 'components/globals.scss';
+@import "components/_new_account.scss";
 @import "components/navbar";
+@import "components/footer";
+@import "components/index";
+@import "components/last_articles";
+@import "components/articles";
+@import "components/comment_count_badge";
 @import "components/btn";
 @import "components/card";
-@import "components/index";
-@import "components/articles";
-@import "components/last_articles";
-@import 'components/globals.scss';
-@import "components/footer";
+
 @import "pages/index";
 @import 'pages/articles';
 @import 'pages/articles_tags.scss';
