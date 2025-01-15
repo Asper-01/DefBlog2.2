@@ -1,33 +1,49 @@
-<% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <%= notice %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
+<% flash.each do |type, message| %>
+  <%# Définir la classe CSS et l'icône en fonction du type %>
+  <% css_class = case type.to_sym
+                when :notice then "alert-info"
+                when :alert then "alert-warning"
+                else "alert-secondary"
+                end %>
+  <% icon = case type.to_sym
+           when :notice
+             '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-check-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zM8 0a8 8 0 1 1 0 16A8 8 0 0 1 0 8a8 8 0 0 1 8-8z"/>
+                <path d="M10.97 5.97a.235.235 0 0 0-.342 0L7.477 9.116 5.384 7.022a.235.235 0 0 0-.342.342l2.5 2.5a.25.25 0 0 0 .342 0l3.5-3.5a.235.235 0 0 0 0-.342z"/>
+              </svg>'
+           when :alert
+             '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zM8 0a8 8 0 1 1 0 16A8 8 0 0 1 0 8a8 8 0 0 1 8-8z"/>
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>'
+           else
+             '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#6c757d" class="bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zM8 0a8 8 0 1 1 0 16A8 8 0 0 1 0 8a8 8 0 0 1 8-8z"/>
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319z"/>
+              </svg>'
+           end %>
+  <div class="alert <%= css_class %> alert-dismissible fade show m-1" role="alert">
+    <div class="d-flex align-items-center">
+      <span class="me-2"><%= icon.html_safe %></span>
+      <span><%= message %></span>
+      <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   </div>
 <% end %>
-<% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <%= alert %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-  </div>
-<% end %>
 
 
 
-<script>  // SCRIPT POUR MASQUER LES ALERTES APRÈS 5 SECONDES
-
+<script>
+// SCRIPT POUR MASQUER LES ALERTES APRÈS 5 SECONDES
   document.addEventListener("DOMContentLoaded", function() {
   // Sélectionner toutes les alertes
   const alertMessages = document.querySelectorAll('.alert');
-
   alertMessages.forEach(function(alert) {
-    // Attendre 5 secondes avant de masquer l'alerte
+    // Attendre 8 secondes avant de masquer l'alerte
     setTimeout(function() {
       alert.classList.remove("show");
       alert.classList.add("fade");
-    }, 5000); // 5000 ms = 5 secondes
+    }, 5000); // 8000 ms = 5 secondes
   });
 });
-
 </script>

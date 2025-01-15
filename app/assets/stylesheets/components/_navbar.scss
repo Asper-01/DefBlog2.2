@@ -1,170 +1,198 @@
+/* ---------------------------------------------------- */
+/*   Styles généraux de la navbar et éléments associés   */
+/* ---------------------------------------------------- */
+
+/* Personnalisation des éléments de la navbar : champs et boutons */
 .navbar-nav .form-control,
 .navbar-nav .btn {
   border-radius: 8px;
 }
 
-/* bouton de recherche */
+/* Bouton de recherche */
 .navbar-nav .btn-outline-success {
   color: #5e5d5d;
   border-color: #5e5d5d;
 }
 
-/* bouton de recherche au survol  */
+/* Effet de survol du bouton de recherche */
 .navbar-nav .btn-outline-success:hover {
-  background-color: #5e5d5d; /* Couleur de fond au survol */
-  color: white; /* Couleur du texte au survol */
+  background-color: #5e5d5d; /* Fond au survol */
+  color: white; /* Texte au survol */
   border-color: white; /* Bordure au survol */
 }
+
+/* ---------------------------------------------------- */
+/*   Container et logo                                 */
+/* ---------------------------------------------------- */
+
+/* Container global */
 .container {
-background: #f9f9f9;
-color: #f9f9f9;
+  background: #f9f9f9;
+  color: #f9f9f9;
 }
 
-/* Le logo est sticky mais ne se déplace pas avec la page */
+/* Container du logo (sticky, reste en haut) */
 .logo-container {
-position: sticky;
-top: 0; /* Colle le logo en haut */
-background-color: #f9f9f9; /* Pour un fond blanc derrière le logo */
-z-index: 999; /* Le logo reste au-dessus de tout */
-padding: 10px 0; /* Un peu de padding pour donner de l'espace autour du logo */
-text-align: center;
+  position: sticky;
+  top: 0; /* Colle le logo en haut */
+  background-color: #f9f9f9; /* Fond blanc derrière le logo */
+  z-index: 999; /* Le logo reste au-dessus de tout */
+  padding: 10px 0; /* Espacement autour du logo */
+  text-align: center;
 }
 
 /* Le logo lui-même */
 .navbar-logo {
-max-width: 200px; /* Ajuste la taille du logo */
-height: auto;
+  max-width: 200px; /* Limite la taille du logo */
+  height: auto;
 }
 
-/* La navbar est sticky, mais commence juste après le logo */
+/* ---------------------------------------------------- */
+/*   Navbar sticky et ses éléments                    */
+/* ---------------------------------------------------- */
+
+/* Navbar sticky */
 .custom-navbar {
-position: sticky;
-top: 60px; /* Décalage en dessous du logo (ajuste cette valeur en fonction de la hauteur de ton logo) */
-background-color: #f9f9f9; /* Fond de la navbar */
-z-index: 998; /* Moins élevé que celui du logo */
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour la navbar */
-padding: 10px 0; /* Un peu de padding pour la navbar */
+  position: sticky;
+  top: 60px; /* Décalage après le logo */
+  background-color: #f9f9f9; /* Fond de la navbar */
+  z-index: 998; /* Moins élevé que le logo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  padding: 10px 0; /* Espacement de la navbar */
 }
 
-/* Espacement sous la navbar */
+/* Navbar classique */
 .navbar {
-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
-width: 100%;
-padding: 0 90px; /* Ajoute du padding à gauche et à droite */
-margin-bottom: 30px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  width: 100%;
+  padding: 0 90px; /* Espacement à gauche et à droite */
+  margin-bottom: 30px;
 }
 
-/* Personnalisation de la navbar */
+/* Liste des éléments de la navbar */
 .navbar-nav {
-list-style: none;
-margin: 0;
-padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* Espacement entre les éléments de la navbar */
 .navbar-nav .nav-item {
-margin-right: 20px;
+  margin-right: 20px;
 }
 
-/* Styles pour les liens NAVLINKS similaires au dropdown */
+/* ---------------------------------------------------- */
+/*   Liens de la navbar et effets de survol            */
+/* ---------------------------------------------------- */
+
+/* Liens de la navbar (custom) */
 .custom-nav-link {
-color: #333;
-padding: 8px 12px;
-border-radius: 6px;
-transition: background-color 0.3s ease, color 0.3s ease;
-text-decoration: none;
-display: inline-block;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
-/* Effet hover pour les liens personnalisés */
+/* Effet de survol pour les liens */
 .custom-nav-link:hover {
-background-color: rgba(0, 0, 0, 0.1);
-color: #007bff;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #007bff;
 }
 
+/* ---------------------------------------------------- */
+/*   Dropdown et Menu de navigation                    */
+/* ---------------------------------------------------- */
 
+/* Menu dropdown */
 .navbar-nav .dropdown-menu {
-min-width: 100px; /* Ajuste la largeur du menu dropdown */
+  min-width: 100px; /* Largeur minimum du menu dropdown */
 }
 
+/* Effet de survol pour les éléments du dropdown */
 .navbar-nav .dropdown-item:hover {
-background-color: #f1f1f1;
+  background-color: #f1f1f1;
+}
+
+/* Comportement et style du dropdown */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8); /* Fond transparent */
+  backdrop-filter: blur(5px); /* Flou en arrière-plan */
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre */
+  padding: 10px;
+}
+
+/* Style des éléments du dropdown */
+.dropdown-item {
+  color: #333;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+/* Effet de survol des éléments du dropdown */
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #007bff;
+}
+
+/* Animation du menu dropdown */
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------- */
+/*   Connexion/Déconnexion et statut                  */
+/* ---------------------------------------------------- */
+
+/* Icône verte d'état en ligne */
+.online-status {
+  width: 10px;
+  height: 10px;
+  background-color: #28a745; /* Vert Bootstrap */
+  border-radius: 50%;
+  display: inline-block;
 }
 
 /* Connexion/Déconnexion */
 .navbar-nav .nav-item .btn-link {
-color: #007bff;
-}
-.nav-item{
-margin-left: 15px;
-margin-right: 15px;
+  color: #007bff;
 }
 
-/* Comportement du dropdown */
-.navbar-nav .dropdown-menu {
-position: absolute;
-top: 100%;
-left: 0;
-z-index: 1000;
-}
-.dropdown-menu {
-background-color: rgba(255, 255, 255, 0.8); /* Transparence du fond */
-backdrop-filter: blur(5px);
-border: none;
-border-radius: 8px;
-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-padding: 10px;
+/* Espacement pour les éléments de navigation */
+.nav-item {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
-/* Style du dropdown */
-.dropdown-item {
-color: #333;
-border-radius: 6px;
-padding: 8px 12px;
-}
-
-.dropdown-item:hover {
-background-color: rgba(0, 0, 0, 0.1);
-color: #007bff;
-}
-
-.dropdown-menu {
-display: none;
-opacity: 0;
-transition: opacity 0.3s ease, transform 0.3s ease;
-transform: translateY(-10px);
-}
-
-.dropdown:hover .dropdown-menu {
-display: block;
-opacity: 1;
-transform: translateY(0);
-}
-
-/* Icône verte d'état en ligne */
-.online-status {
-width: 10px;
-height: 10px;
-background-color: #28a745; /* Vert Bootstrap */
-border-radius: 50%;
-display: inline-block;
-}
-
-.navbar-nav .nav-item .btn-link {
-color: #007bff;
-}
-
-/* Boutton LOG IN si utilisateur déconnecté */
+/* Bouton "Log In" pour utilisateur déconnecté */
 .custom-login-link {
-background-color: transparent; /* Fond vert */
-border: 1px solid #1c8139; /* Bordure verte */
-color:#1c8139; ; /* Texte blanc */
-padding: 8px 12px; /* Espacement interne */
-border-radius: 6px; /* Coins arrondis */
-text-decoration: none; /* Supprime le soulignement */
-transition: background-color 0.3s ease; /* Transition pour un effet hover fluide */
+  background-color: transparent; /* Fond transparent */
+  border: 1px solid #1c8139; /* Bordure verte */
+  color: #1c8139; /* Texte vert */
+  padding: 8px 12px;
+  border-radius: 6px; /* Coins arrondis */
+  text-decoration: none; /* Pas de soulignement */
+  transition: background-color 0.3s ease; /* Transition pour effet hover */
 }
 
+/* Effet de survol pour le bouton "Log In" */
 .custom-login-link:hover {
-background-color: #1c8139; /* Fond vert foncé au survol */
-color: white; /* Texte blanc au survol */
+  background-color: #1c8139; /* Fond vert foncé */
+  color: white; /* Texte blanc au survol */
 }
