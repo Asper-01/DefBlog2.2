@@ -32,3 +32,50 @@
     </div>
   <% end %>
 </div>
+
+<style>
+  p {
+  color: #000000; /* Noir */
+}
+.banner-excerpt {
+  margin: 10px;
+}
+
+.comment-count-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color:rgba(224, 224, 224, 0.81); /* Couleur de fond uniforme */
+  color: #007bff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 11px; /* Coins arrondis pour l'effet neumorphique */
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  min-height: 40px;
+  box-shadow: 1px 1px 2px #bebebe, 0px 0px 1px #ffffff; /* Ombres pour l'effet de relief */
+  transition: all 0.3s ease-in-out;
+}
+
+.comment-count-badge:hover {
+  background-color:rgba(224, 224, 224, 0.92);
+  transform: scale(1.05); /* Légère augmentation de la taille au survol */
+}
+
+
+  /* Si le nombre est plus grand, ajuster la taille */
+  &.large-count {
+    font-size: 14px;
+    padding: 10px 15px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+</style>

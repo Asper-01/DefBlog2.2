@@ -69,7 +69,7 @@ margin-right: 20px;
 .custom-nav-link {
 color: #333;
 padding: 8px 12px;
-border-radius: 5px;
+border-radius: 6px;
 transition: background-color 0.3s ease, color 0.3s ease;
 text-decoration: none;
 display: inline-block;
@@ -118,7 +118,7 @@ padding: 10px;
 /* Style du dropdown */
 .dropdown-item {
 color: #333;
-border-radius: 5px;
+border-radius: 6px;
 padding: 8px 12px;
 }
 
@@ -155,14 +155,16 @@ color: #007bff;
 
 /* Boutton LOG IN si utilisateur déconnecté */
 .custom-login-link {
-background-color: rgb(36, 154, 70); /* Fond vert */
-color: white; /* Texte blanc */
+background-color: transparent; /* Fond vert */
+border: 1px solid #1c8139; /* Bordure verte */
+color:#1c8139; ; /* Texte blanc */
 padding: 8px 12px; /* Espacement interne */
-border-radius: 5px; /* Coins arrondis */
+border-radius: 6px; /* Coins arrondis */
 text-decoration: none; /* Supprime le soulignement */
 transition: background-color 0.3s ease; /* Transition pour un effet hover fluide */
 }
 
 .custom-login-link:hover {
 background-color: #1c8139; /* Fond vert foncé au survol */
+color: white; /* Texte blanc au survol */
 }
