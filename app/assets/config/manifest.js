@@ -10,3 +10,4 @@
 //= link shared/custom_alerts.js
 //= link cookies/cookies_management.js
 //= link cookies/consent_banner.js
+//= link registrations/edit_registrations.js

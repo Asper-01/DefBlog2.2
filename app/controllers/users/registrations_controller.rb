@@ -1,14 +1,30 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
+  # Permettre des paramètres supplémentaires pour l'inscription et la mise à jour de l'utilisateur
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    # Pour la mise à jour, permet aussi les paramètres relatifs au mot de passe
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :name, :email, :remove_avatar, :cookies_consent, :password, :password_confirmation, :current_password])
   end
+
+  private
+
+  # Permettre des paramètres supplémentaires pour la création d'utilisateur
+  def sign_up_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  # Permettre des paramètres supplémentaires pour la mise à jour de l'utilisateur
+  def account_update_params
+    params.require(:user).permit(:name, :email, :avatar, :remove_avatar, :cookies_consent, :password, :password_confirmation, :current_password)
+  end
+
+  # Si vous souhaitez personnaliser la mise à jour, vous pouvez ajuster ici.
+  # Si vous ne voulez pas une logique personnalisée, vous pouvez simplement laisser Devise gérer cette partie.
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -67,16 +83,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  private
 
-  # Permettre des paramètres supplémentaires pour la création d'utilisateur
-  def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  # Permettre des paramètres supplémentaires pour la mise à jour de l'utilisateur
-  def account_update_params
-    puts params.inspect  # Cela affichera tous les paramètres dans les logs
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :cookies_consent)
-  end
 end

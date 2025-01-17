@@ -1,10 +1,13 @@
 class User < ApplicationRecord
   has_many :articles, foreign_key: :author_id
   has_one_attached :avatar
+  attr_accessor :remove_avatar
+  before_save :purge_avatar, if: -> { remove_avatar == 'true' }
   has_many :comments, dependent: :destroy
   validates :cookies_consent, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
   # MAJ des préfs cookies choisies avant l'inscription
   after_create :set_default_cookies_consent, if: :new_record?
+  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 5.megabytes }
   def admin?
     admin
   end
@@ -24,5 +27,12 @@ class User < ApplicationRecord
     end
     user
   end
+
+  private
+
+    def purge_avatar
+      avatar.purge
+    end
+
   devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: [:google_oauth2]
 end
