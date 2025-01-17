@@ -53,30 +53,29 @@
           </div>
 
           <!-- Conteneurs pour les tags liés -->
-<% Category.all.each do |category| %>
-  <div class="form-group mt-3 tags-container" id="tags_for_category_<%= category.id %>" style="display: none;">
-    <label class="form-label">Tags pour <%= category.name %></label>
-    <div class="row">
-      <% category.tags.each_slice((category.tags.size / 2.0).ceil) do |tags_column| %>
-        <div class="col-6">
-          <% tags_column.each do |tag| %>
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="article[tag_ids][]"
-                value="<%= tag.id %>"
-                class="form-check-input"
-                id="tag_<%= tag.id %>"
-                <%= 'checked' if @article.tag_ids.include?(tag.id) %>>
-              <label for="tag_<%= tag.id %>" class="form-check-label ms-2"><%= tag.name %></label>
+          <% Category.all.each do |category| %>
+            <div class="form-group mt-3 tags-container" id="tags_for_category_<%= category.id %>" style="display: none;">
+              <label class="form-label">Tags pour <%= category.name %></label>
+              <div class="row">
+                <% category.tags.each_slice((category.tags.size / 2.0).ceil) do |tags_column| %>
+                  <div class="col-6">
+                    <% tags_column.each do |tag| %>
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          name="article[tag_ids][]"
+                          value="<%= tag.id %>"
+                          class="form-check-input"
+                          id="tag_<%= tag.id %>"
+                          <%= 'checked' if @article.tag_ids.include?(tag.id) %>>
+                        <label for="tag_<%= tag.id %>" class="form-check-label ms-2"><%= tag.name %></label>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
 
           <!-- Bouton de création -->
           <div class="card-body">
@@ -88,30 +87,8 @@
   </div>
 </div>
 
+<!-- Initialisation de TinyMCE -->
 <%= tinymce convert_urls: true, uploadimage: true %>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const categorySelect = document.getElementById("category_select");
-  const tagContainers = document.querySelectorAll(".tags-container");
-
-  const updateTagsVisibility = (categoryId) => {
-    tagContainers.forEach(container => {
-      if (container.id === `tags_for_category_${categoryId}`) {
-        container.style.display = "block";
-      } else {
-        container.style.display = "none";
-      }
-    });
-  };
-
-  // Afficher les tags de la première catégorie sélectionnée si applicable
-  if (categorySelect.value) {
-    updateTagsVisibility(categorySelect.value);
-  }
-
-  categorySelect.addEventListener("change", (event) => {
-    updateTagsVisibility(event.target.value);
-  });
-});
-</script>
+<!-- Inclusion du fichier JavaScript pour la vue edit -->
+<%= javascript_include_tag "articles_new", defer: true %>

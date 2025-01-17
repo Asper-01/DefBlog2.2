@@ -48,7 +48,7 @@
                   <%= image_tag @article.image, class: "img-fluid" %>
                 </div>
                 <div class="form-check mt-3">
-                  <%= form.check_box :remove_image, { class: "form-check-input" }, true, false%>
+                  <%= form.check_box :remove_image, { class: "form-check-input" }, true, false %>
                   <%= form.label :remove_image, "Supprimer l'image actuelle", class: "form-check-label" %>
                 </div>
               <% else %>
@@ -88,7 +88,7 @@
               </div>
             <% end %>
 
-            <!-- Bouton de création -->
+            <!-- Bouton de sauvegarde -->
             <div class="card-body">
               <%= form.submit "Enregistrer", class: "btn btn-primary w-100 mb-3 mt-3 rounded-custom" %>
             </div>
@@ -99,30 +99,8 @@
   </div>
 </div>
 
+<!-- Initialisation de TinyMCE -->
 <%= tinymce convert_urls: true, uploadimage: true %>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const categorySelect = document.getElementById("category_select");
-  const tagContainers = document.querySelectorAll(".tags-container");
-
-  const updateTagsVisibility = (categoryId) => {
-    tagContainers.forEach(container => {
-      if (container.id === `tags_for_category_${categoryId}`) {
-        container.style.display = "block";
-      } else {
-        container.style.display = "none";
-      }
-    });
-  };
-
-  // Afficher les tags de la première catégorie sélectionnée si applicable
-  if (categorySelect.value) {
-    updateTagsVisibility(categorySelect.value);
-  }
-
-  categorySelect.addEventListener("change", (event) => {
-    updateTagsVisibility(event.target.value);
-  });
-});
-</script>
+<!-- Inclusion du fichier JavaScript pour la vue edit -->
+<%= javascript_include_tag "articles_edit", defer: true %>

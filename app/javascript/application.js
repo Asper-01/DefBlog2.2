@@ -5,3 +5,4 @@ import "@popperjs/core"
 import "bootstrap"
 import "tinymce"
 import "cookies_eu"
+import "./articles_new";
