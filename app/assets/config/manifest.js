@@ -7,3 +7,4 @@
 //= link articles/article_new.js
 //= link articles/article_edit.js
 //= link comments/comment_reply_toggle.js
+//= link shared/custom_alerts.js
