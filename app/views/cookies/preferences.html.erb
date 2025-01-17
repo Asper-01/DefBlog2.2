@@ -69,19 +69,13 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('cookies-toggle');
-    const form = document.getElementById('cookies-form');
 
-    toggle.addEventListener('change', () => {
-      form.submit();
-    });
-  });
-</script>
+<!-- Inclusion du fichier JavaScript pour les cookies-->
+<%= javascript_include_tag "cookies/cookies_management.js", defer: true %>
 
 
 <style>
+
   .cookies-info {
     background-color: #f9f9f9;
     padding: 15px;

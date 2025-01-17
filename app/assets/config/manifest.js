@@ -8,3 +8,5 @@
 //= link articles/article_edit.js
 //= link comments/comment_reply_toggle.js
 //= link shared/custom_alerts.js
+//= link cookies/cookies_management.js
+//= link cookies/consent_banner.js
