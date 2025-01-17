@@ -3,26 +3,30 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title text-center">Profil de <%= resource.name %></h1> <!-- Affiche le nom de l'utilisateur -->
+          <h1 class="card-title text-center">Profil de <%= resource.name %></h1>
 
           <!-- Formulaire d'édition -->
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= f.error_notification %>
 
-            <!-- Affichage de l'avatar -->
+            <!-- Affichage de l'avatar et case à cocher sous l'avatar -->
             <div class="text-center mt-4">
               <% if resource.avatar.attached? %>
                 <%= image_tag resource.avatar, class: "img-fluid rounded-circle mb-3", size: "150x150" %>
+                </div>
+                 <div class="text-center mt-4">
                 <div class="form-check mt-3">
                   <%= f.check_box :remove_avatar, { class: "form-check-input" }, true, false %>
-                  <%= f.label :remove_avatar, "Supprimer l'avatar actuel", class: "form-check-label" %>
+
+                  <%= f.label :remove_avatar, "Supprimer avatar", class: "form-check-label" %>
                 </div>
               <% else %>
                 <p>Aucun avatar disponible</p>
               <% end %>
+
             </div>
 
-            <!-- Champ Avatar -->
+            <!-- Champ Avatar pour télécharger un nouvel avatar -->
             <div class="form-group mt-3">
               <%= f.label :avatar, "Télécharger un nouvel avatar" %>
               <%= f.file_field :avatar, class: "form-control rounded-3" %>
@@ -37,7 +41,7 @@
               <% end %>
               <%= f.input :name, required: false, input_html: { class: "form-control rounded-3" }, label_html: { class: "form-label" } %>
             </div>
-
+              <%= f.input :current_password, required: true, input_html: { class: "form-control rounded-3" }, label_html: { class: "form-label" } %>
             <!-- Bouton pour modifier le mot de passe -->
             <div class="text-center mt-3">
               <button type="button" id="show-password-fields" class="btn btn-link">Modifier mon mot de passe</button>
@@ -47,7 +51,7 @@
             <div id="password-fields" class="d-none mt-3">
               <%= f.input :password, required: false, input_html: { class: "form-control rounded-3" }, label_html: { class: "form-label" } %>
               <%= f.input :password_confirmation, required: false, input_html: { class: "form-control rounded-3" }, label_html: { class: "form-label" } %>
-              <%= f.input :current_password, required: true, input_html: { class: "form-control rounded-3" }, label_html: { class: "form-label" } %>
+
             </div>
 
             <!-- Bouton pour soumettre -->
