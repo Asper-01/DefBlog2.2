@@ -1,6 +1,7 @@
 <%= content_for :page_header do %>
   <%= tinymce_assets %>
 <% end %>
+
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="col-8">
     <div class="card">
@@ -44,14 +45,6 @@
             <%= form.file_field :image, class: "form-control" %>
           </div>
 
-          <!-- Conteneur pour les tags sélectionnés -->
-          <div class="form-group mt-3">
-            <%= form.label :selected_tags, "Tags sélectionnés", class: "form-label" %>
-            <div id="selected_tags_container" class="border p-2 rounded bg-light">
-              <p class="text-muted">Aucun tag sélectionné pour le moment.</p>
-            </div>
-          </div>
-
           <!-- Sélection de la catégorie -->
           <div class="form-group">
             <%= form.label :category_id, "Catégorie", class: "form-label" %>
@@ -59,13 +52,31 @@
               class: "form-control", id: "category_select" %>
           </div>
 
-          <!-- Conteneur pour les tags liés -->
-          <div class="form-group mt-3" id="tags_section">
-            <label class="form-label">Associer des tags</label>
-            <div id="tags_container">
-              <p class="text-muted">Veuillez d'abord sélectionner une catégorie.</p>
+          <!-- Conteneurs pour les tags liés -->
+<% Category.all.each do |category| %>
+  <div class="form-group mt-3 tags-container" id="tags_for_category_<%= category.id %>" style="display: none;">
+    <label class="form-label">Tags pour <%= category.name %></label>
+    <div class="row">
+      <% category.tags.each_slice((category.tags.size / 2.0).ceil) do |tags_column| %>
+        <div class="col-6">
+          <% tags_column.each do |tag| %>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="article[tag_ids][]"
+                value="<%= tag.id %>"
+                class="form-check-input"
+                id="tag_<%= tag.id %>"
+                <%= 'checked' if @article.tag_ids.include?(tag.id) %>>
+              <label for="tag_<%= tag.id %>" class="form-check-label ms-2"><%= tag.name %></label>
             </div>
-          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 
           <!-- Bouton de création -->
           <div class="card-body">
@@ -77,142 +88,30 @@
   </div>
 </div>
 
+<%= tinymce convert_urls: true, uploadimage: true %>
 
 <script>
-document.addEventListener("turbo:submit-start", function (event) {
-  if (tinymce) {
-    tinymce.triggerSave();
-  }
-});
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const categorySelect = document.getElementById("category_select");
-  const tagsContainer = document.getElementById("tags_container");
-  const selectedTagsContainer = document.getElementById("selected_tags_container");
+  const tagContainers = document.querySelectorAll(".tags-container");
 
-  const selectedTags = new Map(); // ID et nom des tags sélectionnés
-
-  const updateSelectedTagsDisplay = () => {
-    if (selectedTags.size > 0) {
-      selectedTagsContainer.innerHTML = Array.from(selectedTags.entries())
-        .map(([id, name]) => `
-            <span class="badge bg-primary">
-            ${name}
-            <button type="button" class="btn-close btn-close-white ms-2" aria-label="Supprimer" data-tag-id="${id}"></button>
-          </span>
-        `)
-        .join("");
-
-      selectedTagsContainer.querySelectorAll(".btn-close").forEach(button => {
-        button.addEventListener("click", () => {
-          const tagId = button.getAttribute("data-tag-id");
-          selectedTags.delete(tagId);
-          updateSelectedTagsDisplay();
-
-          const checkbox = document.getElementById(`tag_${tagId}`);
-          if (checkbox) checkbox.checked = false;
-        });
-      });
-    } else {
-      selectedTagsContainer.innerHTML = "<p class='text-muted'>Aucun tag sélectionné pour le moment.</p>";
-    }
-  };
-
-  const loadTags = async (categoryId) => {
-    if (categoryId) {
-      try {
-        const response = await fetch(`/admin/categories/${categoryId}/tags`);
-        const tags = await response.json();
-
-        if (tags.length > 0) {
-          tagsContainer.innerHTML = tags.map(tag => `
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="article[tag_ids][]"
-                value="${tag.id}"
-                class="form-check-input"
-                id="tag_${tag.id}"
-                ${selectedTags.has(String(tag.id)) ? "checked" : ""}>
-              <label for="tag_${tag.id}" class="form-check-label ms-2">${tag.name}</label>
-            </div>
-          `).join("");
-
-          tagsContainer.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
-            checkbox.addEventListener("change", () => {
-              const tagId = checkbox.value;
-              const tagName = checkbox.nextElementSibling.textContent.trim();
-
-              if (checkbox.checked) {
-                selectedTags.set(tagId, tagName);
-              } else {
-                selectedTags.delete(tagId);
-              }
-              updateSelectedTagsDisplay();
-            });
-          });
-        } else {
-          tagsContainer.innerHTML = "<p class='text-muted'>Aucun tag disponible pour cette catégorie.</p>";
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement des tags :", error);
-        tagsContainer.innerHTML = "<p class='text-danger'>Impossible de charger les tags. Réessayez plus tard.</p>";
+  const updateTagsVisibility = (categoryId) => {
+    tagContainers.forEach(container => {
+      if (container.id === `tags_for_category_${categoryId}`) {
+        container.style.display = "block";
+      } else {
+        container.style.display = "none";
       }
-    } else {
-      tagsContainer.innerHTML = "<p class='text-muted'>Veuillez sélectionner une catégorie pour voir les tags disponibles.</p>";
-    }
+    });
   };
 
- // Chercher la première catégorie disponible dans la liste
-  const firstCategoryId = categorySelect?.options[0]?.value;
-
-  // Si la première catégorie existe, la charger
-  if (firstCategoryId) {
-    categorySelect.value = firstCategoryId;
-    loadTags(firstCategoryId);
+  // Afficher les tags de la première catégorie sélectionnée si applicable
+  if (categorySelect.value) {
+    updateTagsVisibility(categorySelect.value);
   }
 
   categorySelect.addEventListener("change", (event) => {
-    const categoryId = event.target.value;
-    loadTags(categoryId);
+    updateTagsVisibility(event.target.value);
   });
 });
-
-
-
-
 </script>
-  <%= tinymce convert_urls: true, uploadimage: true %>
-<style>
-
-#selected_tags_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-height: 50px; /* Pour éviter les sauts */
-  border: 1px solid #ddd;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-}
-
-#selected_tags_container .badge {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.85rem;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-}
-
-#selected_tags_container .btn-close {
-  margin-left: 8px;
-  font-size: 0.7rem;
-  color: #fff;
-}
-
-
-
-</style>
