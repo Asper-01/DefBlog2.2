@@ -56,37 +56,42 @@
               <% end %>
             </div>
 
-            <!-- Tags sélectionnés -->
-            <div class="form-group mt-3">
-              <%= form.label :selected_tags, "Tags sélectionnés", class: "form-label" %>
-              <div id="selected_tags_container" class="border p-2 rounded bg-light">
-                <p class="text-muted">Aucun tag sélectionné pour le moment.</p>
-              </div>
-            </div>
-
             <!-- Sélection de la catégorie -->
-          <div class="form-group">
-            <%= form.label :category_id, "Catégorie", class: "form-label" %>
-            <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, { prompt: "Choisir une catégorie" }),
-              class: "form-control", id: "category_select" %>
-          </div>
+            <div class="form-group">
+              <%= form.label :category_id, "Catégorie", class: "form-label" %>
+              <%= select_tag 'category_id', options_from_collection_for_select(Category.all, :id, :name, { prompt: "Choisir une catégorie" }),
+                class: "form-control", id: "category_select" %>
+            </div>
 
-            <!-- Conteneur pour les tags associés -->
-            <div class="form-group mt-3" id="tags_section">
-              <label class="form-label">Associer des tags</label>
-              <div id="tags_container">
-                <p class="text-muted">Veuillez d'abord sélectionner une catégorie.</p>
+            <!-- Conteneurs pour les tags liés -->
+            <% Category.all.each do |category| %>
+              <div class="form-group mt-3 tags-container" id="tags_for_category_<%= category.id %>" style="display: none;">
+                <label class="form-label">Tags pour <%= category.name %></label>
+                <div class="row">
+                  <% category.tags.each_slice((category.tags.size / 2.0).ceil) do |tags_column| %>
+                    <div class="col-6">
+                      <% tags_column.each do |tag| %>
+                        <div class="form-check">
+                          <input
+                            type="checkbox"
+                            name="article[tag_ids][]"
+                            value="<%= tag.id %>"
+                            class="form-check-input"
+                            id="tag_<%= tag.id %>"
+                            <%= 'checked' if @article.tag_ids.include?(tag.id) %>>
+                          <label for="tag_<%= tag.id %>" class="form-check-label ms-2"><%= tag.name %></label>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
+            <% end %>
+
+            <!-- Bouton de création -->
+            <div class="card-body">
+              <%= form.submit "Enregistrer", class: "btn btn-primary w-100 mb-3 mt-3 rounded-custom" %>
             </div>
-
-
-
-            <!-- Boutons -->
-            <div class="d-flex justify-content-between">
-              <%= link_to "Retour", admin_articles_path, class: "btn btn-secondary" %>
-              <%= form.submit "Enregistrer", class: "btn btn-primary" %>
-            </div>
-
           <% end %>
         </div>
       </div>
@@ -94,116 +99,30 @@
   </div>
 </div>
 
-<script>
-  
-document.addEventListener("DOMContentLoaded", () => {
-  const categorySelect = document.getElementById("category_select");
-  const tagsContainer = document.getElementById("tags_container");
-  const selectedTagsContainer = document.getElementById("selected_tags_container");
-
-  const selectedTags = new Map(); // ID et nom des tags sélectionnés
-  const preSelectedTagIds = <%= @tags.to_json %>; // Les tags déjà associés à l'article
-
-  // Fonction pour mettre à jour l'affichage des tags sélectionnés
-  const updateSelectedTagsDisplay = () => {
-    if (selectedTags.size > 0) {
-      selectedTagsContainer.innerHTML = Array.from(selectedTags.entries())
-        .map(([id, name]) => `
-          <span class="badge bg-primary me-2" data-tag-id="${id}">
-            ${name}
-            <button type="button" class="btn-close btn-close-white ms-2" aria-label="Supprimer"></button>
-          </span>
-        `)
-        .join("");
-
-      // Ajout des événements sur les boutons de suppression
-      selectedTagsContainer.querySelectorAll(".btn-close").forEach(button => {
-        button.addEventListener("click", () => {
-          const tagId = button.closest(".badge").getAttribute("data-tag-id");
-          selectedTags.delete(tagId);
-          updateSelectedTagsDisplay();
-
-          const checkbox = document.getElementById(`tag_${tagId}`);
-          if (checkbox) checkbox.checked = false;
-        });
-      });
-    } else {
-      selectedTagsContainer.innerHTML = "<p class='text-muted'>Aucun tag sélectionné pour le moment.</p>";
-    }
-  };
-
-  // Fonction pour charger les tags associés à une catégorie donnée
-  const loadTags = async (categoryId) => {
-    if (categoryId) {
-      try {
-        const response = await fetch(`/admin/categories/${categoryId}/tags`);
-        const tags = await response.json();
-
-        if (tags.length > 0) {
-          tagsContainer.innerHTML = tags.map(tag => `
-            <div class="form-check">
-              <input
-                type="checkbox"
-                name="article[tag_ids][]"
-                value="${tag.id}"
-                class="form-check-input"
-                id="tag_${tag.id}">
-              <label for="tag_${tag.id}" class="form-check-label ms-2">${tag.name}</label>
-            </div>
-          `).join("");
-
-          // Ajout des événements de changement aux nouvelles checkboxes
-          tagsContainer.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
-            const tagId = checkbox.value;
-            const tagName = checkbox.nextElementSibling.textContent.trim();
-
-            // Pré-sélection des tags déjà associés
-            if (preSelectedTagIds.includes(parseInt(tagId))) {
-              checkbox.checked = true;
-              selectedTags.set(tagId, tagName);
-            }
-
-            checkbox.addEventListener("change", () => {
-              if (checkbox.checked) {
-                selectedTags.set(tagId, tagName);
-              } else {
-                selectedTags.delete(tagId);
-              }
-              updateSelectedTagsDisplay();
-            });
-          });
-
-          // Mise à jour de l'affichage des tags sélectionnés
-          updateSelectedTagsDisplay();
-        } else {
-          tagsContainer.innerHTML = "<p class='text-muted'>Aucun tag disponible pour cette catégorie.</p>";
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement des tags :", error);
-        tagsContainer.innerHTML = "<p class='text-danger'>Impossible de charger les tags. Réessayez plus tard.</p>";
-      }
-    } else {
-      tagsContainer.innerHTML = "<p class='text-muted'>Veuillez sélectionner une catégorie pour voir les tags disponibles.</p>";
-    }
-  };
-
-  // Initialisation : chargement des tags pour la première catégorie sélectionnée
-  const selectedCategories = <%= @article.categories.pluck(:id).to_json %>;
-  categorySelect.value = selectedCategories[0];
-  loadTags(selectedCategories[0]);
-
-  // Mise à jour des tags sélectionnés si la catégorie change
-  categorySelect.addEventListener("change", (event) => {
-    const categoryId = event.target.value;
-    loadTags(categoryId);
-  });
-});
-
-
-</script>
-
 <%= tinymce convert_urls: true, uploadimage: true %>
 
-<style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const categorySelect = document.getElementById("category_select");
+  const tagContainers = document.querySelectorAll(".tags-container");
 
-</style>
+  const updateTagsVisibility = (categoryId) => {
+    tagContainers.forEach(container => {
+      if (container.id === `tags_for_category_${categoryId}`) {
+        container.style.display = "block";
+      } else {
+        container.style.display = "none";
+      }
+    });
+  };
+
+  // Afficher les tags de la première catégorie sélectionnée si applicable
+  if (categorySelect.value) {
+    updateTagsVisibility(categorySelect.value);
+  }
+
+  categorySelect.addEventListener("change", (event) => {
+    updateTagsVisibility(event.target.value);
+  });
+});
+</script>
