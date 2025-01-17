@@ -164,14 +164,5 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll('[data-action="click->toggle-reply#toggleForm"]').forEach(function(button) {
-      button.addEventListener('click', function() {
-        const commentId = this.getAttribute('data-comment-id');
-        const replyForm = document.getElementById('reply-form-' + commentId);
-        replyForm.classList.toggle('d-none');
-      });
-    });
-  });
-</script>
+<!-- Inclusion du fichier JavaScript pour les réponses aux commentaires -->
+<%= javascript_include_tag "comments/comment_reply_toggle", defer: true %>

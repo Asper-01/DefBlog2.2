@@ -1,115 +1,139 @@
-/* Carte spécifique pour les articles */
+/* === Styles généraux pour les cartes d'article === */
+
+/* Carte principale pour les articles */
 .article-card {
-  width: 70%; /* Carte prend 70% de la largeur de l'écran */
-  margin: 0 auto; /* Centrer la carte sur la page */
+  width: 70%; /* La carte prend 70% de la largeur de l'écran */
+  margin: 0 auto; /* Centre la carte horizontalement */
   border-radius: 8px; /* Bords arrondis pour une apparence plus douce */
 
+  /* Style pour l'image en haut de la carte */
   .card-img-top {
-    width: 100%; /* Image prend toute la largeur de la carte */
-    height: 400px; /* Fixer la hauteur de l'image */
-    object-fit: cover; /* L'image couvre la zone sans déformation */
-    border-top-left-radius: 8px; /* Bords arrondis sur le haut de la carte */
-    border-top-right-radius: 8px; /* Bords arrondis sur le haut de la carte */
+    width: 100%; /* L'image occupe toute la largeur de la carte */
+    height: 400px; /* Fixe une hauteur d'image de 400px */
+    object-fit: cover; /* Couvre la zone sans déformer l'image */
+    border-top-left-radius: 8px; /* Bord arrondi à gauche */
+    border-top-right-radius: 8px; /* Bord arrondi à droite */
   }
 
-  /* Styling pour le contenu de la carte */
+  /* Style du contenu de la carte (texte, titre, etc.) */
   .card-body {
     padding: 20px;
-    text-align: justify; /* Justification du texte pour une meilleure lisibilité */
+    text-align: justify; /* Justifie le texte pour une meilleure lisibilité */
 
     .card-title {
-      font-size: 2rem; /* Taille du titre */
-      font-weight: bold;
+      font-size: 2rem; /* Taille du titre de l'article */
+      font-weight: bold; /* Titre en gras */
     }
 
     .card-text {
-      font-size: 1rem; /* Taille de texte standard */
-      color: #6c757d; /* Couleur de texte légèrement plus grise */
+      font-size: 1rem; /* Taille du texte du corps de l'article */
+      color: #6c757d; /* Couleur de texte grise pour une meilleure lisibilité */
     }
   }
 }
 
-/* Pour s'assurer que l'image ne prend pas trop de hauteur */
+/* Image de l'article avec une hauteur maximale pour ne pas déborder */
 .article-card-img {
-  max-height: 400px; /* Limite la hauteur maximale de l'image */
-  object-fit: cover; /* Couvre toute la zone sans déformer l'image */
-  width: 100%; /* Image prend toute la largeur de la carte */
+  max-height: 400px; /* Limite la hauteur de l'image */
+  object-fit: cover; /* Assure que l'image couvre la zone sans déformation */
+  width: 100%; /* L'image occupe toute la largeur */
 }
 
-/* Responsiveness: pour les petits écrans */
+/* === Responsivité : Styles pour les petits écrans === */
 @media (max-width: 768px) {
   .article-card {
-    width: 100%; /* La carte prend 100% de la largeur sur petits écrans */
+    width: 100%; /* Sur les petits écrans, la carte prend toute la largeur */
   }
 }
 
+/* === Styles spécifiques à l'administration === */
 
-/* Carte d'administration avec fond gris foncé */
+/* Carte d'administration pour les articles avec fond gris foncé */
 .card.admin-article-card {
-  background-color: #343a40; /* Gris foncé */
-  color: rgb(21, 19, 19);
+  background-color: #343a40; /* Fond gris foncé */
+  color: rgb(21, 19, 19); /* Texte sombre pour le contraste */
 }
 
-/* Bouton Modifier en bleu */
+/* === Styles des boutons === */
+
+/* Bouton Modifier avec un bleu vif */
 .btn-primary {
   background-color: #007bff; /* Bleu clair */
-  border-color: #007bff;
+  border-color: #007bff; /* Contour bleu clair */
 }
 
-/* Bouton Supprimer en dégradé de rouge */
+/* Bouton Supprimer avec un dégradé de rouge */
 .btn-danger {
   background: linear-gradient(to right, #ff4b2b, #ff416c); /* Dégradé rouge */
-  border-color: #ff416c;
+  border-color: #ff416c; /* Contour rouge */
 }
 
 /* Centrage des boutons */
 .text-center {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: center; /* Centrage horizontal */
+  gap: 10px; /* Espacement entre les boutons */
 }
 
+/* === Styles des boutons avec dégradé === */
 
-
-
+/* Bouton avec dégradé bleu */
 .btn-gradient {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  font-weight: bold;
-  background: linear-gradient(#167FFB, #0F60C4);
-  transition: background 0.3s ease;
-  border: 1px solid #0F60C4;
+  color: white; /* Texte blanc */
+  padding: 8px 24px; /* Espacement autour du texte */
+  border-radius: 4px; /* Coins arrondis */
+  font-weight: bold; /* Texte en gras */
+  background: linear-gradient(#167FFB, #0F60C4); /* Dégradé bleu */
+  transition: background 0.3s ease; /* Transition pour le fond au survol */
+  border: 1px solid #0F60C4; /* Bordure bleu foncé */
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(#147EFF, #0F67DA);
-  color: white;
+  background: linear-gradient(#147EFF, #0F67DA); /* Dégradé au survol */
+  color: white; /* Garde le texte blanc au survol */
 }
 
+/* Bouton avec dégradé rouge */
 .btn-gradient2 {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  font-weight: bold;
-  background: linear-gradient(#fb1640, #c40f0f);
-  transition: background 0.3s ease;
-  border: 1px solid #c40f21;
+  color: white; /* Texte blanc */
+  padding: 8px 24px; /* Espacement autour du texte */
+  border-radius: 4px; /* Coins arrondis */
+  font-weight: bold; /* Texte en gras */
+  background: linear-gradient(#fb1640, #c40f0f); /* Dégradé rouge */
+  transition: background 0.3s ease; /* Transition pour le fond au survol */
+  border: 1px solid #c40f21; /* Bordure rouge foncé */
 }
 
 .btn-gradient2:hover {
-  background: linear-gradient(#ff143f, #da0f19);
-  color: white;
+  background: linear-gradient(#ff143f, #da0f19); /* Dégradé au survol */
+  color: white; /* Texte blanc au survol */
 }
 
-/* Hauteur des images des articles */
+/* === Hauteur et style des images === */
+
+/* Hauteur des images des articles avec coins arrondis */
 .custom-rounded-top {
-  height: 500px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: 500px; /* Hauteur fixe de 500px */
+  border-top-left-radius: 8px; /* Bord arrondi à gauche */
+  border-top-right-radius: 8px; /* Bord arrondi à droite */
 }
 
+/* === Commentaires === */
+
+/* Style du contenu des commentaires */
 .comment-content {
-  color: black;
-  font-size: 1rem;
+  color: black; /* Texte en noir pour les commentaires */
+  font-size: 1rem; /* Taille standard du texte */
+}
+
+/* === Partage sur les réseaux sociaux === */
+
+/* Style des icônes de partage sur les réseaux sociaux */
+.social-share-button i {
+  transition: transform 0.3s ease-in-out; /* Transition douce pour l'agrandissement */
+}
+
+/* Effet de zoom sur les icônes au survol */
+.social-share-button:hover i {
+  transform: scale(1.2); /* Agrandissement de 20% au survol */
 }
