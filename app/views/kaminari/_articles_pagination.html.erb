@@ -1,6 +1,7 @@
 <% if @articles.total_pages > 1 %>
   <nav aria-label="Pagination des articles">
     <ul class="pagination">
+      <!-- Vérification de la page précédente -->
       <% if @articles.prev_page %>
         <li class="page-item">
           <%= link_to 'Précédent', url_for(page: @articles.prev_page), class: 'page-link' %>
@@ -11,12 +12,14 @@
         </li>
       <% end %>
 
+      <!-- Affichage des numéros de page -->
       <% (1..@articles.total_pages).each do |page| %>
         <li class="page-item <%= 'active' if page == @articles.current_page %>">
           <%= link_to page, url_for(page: page), class: 'page-link' %>
         </li>
       <% end %>
 
+      <!-- Vérification de la page suivante -->
       <% if @articles.next_page %>
         <li class="page-item">
           <%= link_to 'Suivant', url_for(page: @articles.next_page), class: 'page-link' %>
@@ -25,7 +28,7 @@
         <li class="page-item disabled">
           <span class="page-link">Suivant</span>
         </li>
-_categories_pagination      <% end %>
+      <% end %>
     </ul>
   </nav>
 <% end %>
