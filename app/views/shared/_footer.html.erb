@@ -1,107 +1,20 @@
 <footer>
+  <!-- Conteneur principal du footer -->
   <div class="footer-container">
 
-    <!-- Informations légales -->
+    <!-- Section des informations légales -->
     <div class="footer-legal">
-
       <h4>Informations</h4>
-        <ul>
-          <li><a href="/sitemap">Sitemap</a></li>
-          <li><a href="/contact">contact</a></li>
-          <li><a href="/legal">Mentions légales et politique de confidentialité</a></li>
-        </ul>
+      <ul>
+        <li><a href="/sitemap">Sitemap</a></li> <!-- Lien vers le sitemap -->
+        <li><a href="/contact">contact</a></li> <!-- Lien vers la page de contact -->
+        <li><a href="/legal">Mentions légales et politique de confidentialité</a></li> <!-- Lien vers les mentions légales -->
+      </ul>
     </div>
 
-
-  <!-- Crédits -->
-  <div class="footer-credits">
-    <p>© 2025 DefBlog.fr Tous droits réservés.</p>
+    <!-- Section des crédits du site -->
+    <div class="footer-credits">
+      <p>© 2025 DefBlog.fr Tous droits réservés.</p> <!-- Crédits de l'auteur du site -->
+    </div>
   </div>
 </footer>
-
-
-<style>
-footer {
-  background-color: #F9F9F9; /* Couleur de fond */
-  color: #000000; /* Texte clair */
-  padding: 20px 0;
-  margin-top: 20px;
-  border-top: 1px solid rgb(230, 230, 230);
-
-  .footer-container {
-    display: flex;
-    flex-direction: column; /* Les éléments s'empilent */
-    align-items: center; /* Centre horizontalement */
-    text-align: center; /* Centre le texte */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-
-    > div {
-      flex: 1 1 auto; /* Ajuste la largeur des blocs pour s'adapter */
-      margin: 10px;
-      max-width: 300px; /* Limite la largeur pour rester lisible */
-
-      h4 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        color: #f39c12;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-
-        li {
-          margin: 5px 0;
-
-          a {
-            color: #000000;
-            text-decoration: none;
-
-            &:hover {
-              color: #f39c12;
-            }
-          }
-        }
-      }
-
-      p, a {
-        font-size: 0.9rem;
-      }
-    }
-  }
-
-  .footer-contact {
-    .social-links {
-      display: flex;
-      justify-content: center; /* Centre horizontalement */
-      gap: 10px;
-      margin-top: 10px;
-
-      li {
-        a {
-          color: #040404;
-          text-decoration: none;
-
-          &:hover {
-            color: #f39c12;
-          }
-        }
-      }
-    }
-  }
-
-  .footer-credits {
-    text-align: center;
-    margin-top: 20px;
-    border-top: 1px solid rgb(230, 230, 230);
-    padding-top: 10px;
-
-    p {
-      font-size: 0.8rem;
-    }
-  }
-}
-
-</style>

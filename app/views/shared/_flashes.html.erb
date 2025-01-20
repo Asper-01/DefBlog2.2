@@ -1,10 +1,13 @@
+<%# Parcourir les messages flash %>
 <% flash.each do |type, message| %>
-  <%# Définir la classe CSS et l'icône en fonction du type %>
+  <%# Définir la classe CSS en fonction du type d'alerte %>
   <% css_class = case type.to_sym
-                when :notice then "alert-info"
-                when :alert then "alert-warning"
-                else "alert-secondary"
+                when :notice then "alert-info" # Succès ou information
+                when :alert then "alert-warning" # Avertissement ou erreur
+                else "alert-secondary" # Type générique
                 end %>
+
+  <%# Définir l'icône en fonction du type d'alerte %>
   <% icon = case type.to_sym
            when :notice
              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-check-circle" viewBox="0 0 16 16">
@@ -19,9 +22,11 @@
            else
              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#6c757d" class="bi bi-info-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zM8 0a8 8 0 1 1 0 16A8 8 0 0 1 0 8a8 8 0 0 1 8-8z"/>
-                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319z"/>
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319.544 0 .876-.252 1.001-.598l.088-.416c.073-.34.287-.375.645-.288l.088.416c.288.896 1.08 1.319 1.808 1.319z"/>
               </svg>'
            end %>
+
+  <%# Affichage de l'alerte %>
   <div class="alert <%= css_class %> alert-dismissible fade show m-1" role="alert">
     <div class="d-flex align-items-center">
       <span class="me-2"><%= icon.html_safe %></span>
@@ -31,53 +36,48 @@
   </div>
 <% end %>
 
-
-<!-- Inclusion du fichier JavaScript pour retirer les alertes apres 8 secondes-->
+<%# Inclusion du fichier JavaScript pour auto-supprimer les alertes après 8 secondes %>
 <%= javascript_include_tag "shared/custom_alerts.js", defer: true %>
 
-
+<%# Styles CSS personnalisés pour les alertes %>
 <style>
-/* Réglages généraux pour l'alerte */
-.alert {
-  background-color:rgb(255, 255, 255); /* Fond blanc pour toutes les alertes */
-  border-radius: 8px; /* Coins arrondis */
-  position: fixed; /* Fixe les alertes à un endroit fixe sur la page */
-  bottom: 16px; /* Positionne l'alerte à 20px du bas */
-  right: 16px; /* Positionne à 20px du côté droit */
-  transform: translateX(-50%); /* Centre l'alerte horizontalement */
-  z-index: 1050; /* S'assure que l'alerte reste au-dessus des autres éléments */
-  max-width: 80%; /* Évite que l'alerte devienne trop large */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
-  animation: slideUp 0.5s ease-in-out; /* Animation d'apparition */
-}
-
-/* Personnalisation des notices (succès, information positive) */
-
-/* Personnalisation des alertes (erreurs ou avertissements) */
-.alert-warning {
-  background-color: white; /* Fond blanc pour l'alerte warning */
-  color: #721c24; /* Texte rouge foncé */
-  border: 1px solid #721c24; /* Bordure rouge */
-}
-
-/* Personnalisation des alertes de type générique */
-.alert-secondary {
-  background-color: white; /* Fond blanc pour l'alerte générique */
-  color: #6c757d; /* Texte gris */
-  border: 1px solid #6c757d; /* Bordure grise */
-}
-
-/* Animation d'apparition des alertes */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px); /* Départ légèrement en bas */
+  /* Style général des alertes */
+  .alert {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    transform: translateX(-50%);
+    z-index: 1050;
+    max-width: 80%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.5s ease-in-out;
   }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0); /* Arrivée à la position finale */
+
+  /* Personnalisation des alertes de type warning */
+  .alert-warning {
+    background-color: white;
+    color: #721c24;
+    border: 1px solid #721c24;
   }
-}
 
+  /* Personnalisation des alertes de type générique */
+  .alert-secondary {
+    background-color: white;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+  }
 
+  /* Animation d'apparition */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
 </style>

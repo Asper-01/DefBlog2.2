@@ -1,76 +1,93 @@
+// Style global du footer
 footer {
-  background-color: #F9F9F9; /* Couleur de fond */
-  color: 000000; /* Texte clair */
-  padding: 20px 0;
+  background-color: #F9F9F9; /* Couleur de fond claire */
+  color: #000000; /* Couleur du texte */
+  padding: 20px 0; /* Espacement interne du footer */
+  margin-top: 20px; /* Marge supérieure pour espacer le footer du reste */
+  border-top: 1px solid rgb(230, 230, 230); /* Bordure supérieure grise */
 
+  // Conteneur principal du footer
   .footer-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
+    flex-direction: column; /* Les éléments s'empilent en colonne */
+    align-items: center; /* Centre les éléments horizontalement */
+    text-align: center; /* Centre le texte des éléments */
+    max-width: 1200px; /* Largeur maximale du container */
+    margin: 0 auto; /* Centrage du container */
+    padding: 0 15px; /* Espacement horizontal pour le container */
 
+    // Styles des div internes (pour chaque section)
     > div {
-      flex: 1 1 200px;
-      margin: 10px;
+      flex: 1 1 auto; /* Ajuste la largeur des div en fonction du contenu */
+      margin: 10px; /* Marge autour de chaque section */
+      max-width: 300px; /* Limite la largeur pour garder le texte lisible */
 
+      // Styles pour les titres des sections
       h4 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        color: #f39c12;
+        font-size: 1.2rem; /* Taille de police du titre */
+        margin-bottom: 10px; /* Marge en bas du titre */
+        color: #f39c12; /* Couleur orange pour les titres */
       }
 
+      // Liste des liens dans chaque section
       ul {
-        list-style: none;
-        padding: 0;
+        list-style: none; /* Retire les puces de la liste */
+        padding: 0; /* Enlève le padding de la liste */
 
         li {
-          margin: 5px 0;
+          margin: 5px 0; /* Marge verticale entre les éléments de la liste */
 
+          // Liens des items
           a {
-            color: #000000;
-            text-decoration: none;
+            color: #000000; /* Couleur des liens en noir */
+            text-decoration: none; /* Enlève le soulignement des liens */
 
+            // Effet au survol des liens
             &:hover {
-              color: #f39c12;
+              color: #f39c12; /* Change la couleur des liens au survol en orange */
             }
           }
         }
       }
 
+      // Style pour les paragraphes et les liens généraux dans cette section
       p, a {
-        font-size: 0.9rem;
+        font-size: 0.9rem; /* Taille de texte réduite */
       }
     }
   }
 
+  // Section contact et liens sociaux
   .footer-contact {
     .social-links {
-      display: flex;
-      gap: 10px;
+      display: flex; /* Utilisation du flexbox pour aligner horizontalement */
+      justify-content: center; /* Centre les éléments horizontalement */
+      gap: 10px; /* Espacement entre les liens sociaux */
+      margin-top: 10px; /* Marge au-dessus des liens sociaux */
 
       li {
         a {
-          color: #040404;
-          text-decoration: none;
+          color: #040404; /* Couleur des icônes sociales en noir */
+          text-decoration: none; /* Enlève le soulignement */
 
+          // Effet au survol des liens sociaux
           &:hover {
-            color: #f39c12;
+            color: #f39c12; /* Change la couleur des liens au survol en orange */
           }
         }
       }
     }
   }
 
+  // Section des crédits en bas du footer
   .footer-credits {
-    text-align: center;
-    margin-top: 20px;
-    border-top: 1px solid #34495e;
-    padding-top: 10px;
+    text-align: center; /* Centre le texte des crédits */
+    margin-top: 20px; /* Marge au-dessus des crédits */
+    border-top: 1px solid rgb(230, 230, 230); /* Bordure supérieure légère pour séparer */
+    padding-top: 10px; /* Espacement interne au-dessus du texte des crédits */
 
     p {
-      font-size: 0.8rem;
+      font-size: 0.8rem; /* Taille du texte des crédits */
     }
   }
 }
