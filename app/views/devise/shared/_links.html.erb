@@ -1,56 +1,60 @@
 <%- if controller_name != 'sessions' %>
+  <!-- Vérification si le contrôleur n'est pas 'sessions', puis affichage du lien de connexion -->
   <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <!-- Vérification si l'enregistrement est autorisé et que l'on n'est pas sur le contrôleur 'registrations', puis affichage du lien d'inscription -->
   <%= link_to "Sign up", new_registration_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <!-- Vérification si la récupération de mot de passe est possible et que l'on n'est pas sur les contrôleurs 'passwords' ou 'registrations', puis affichage du lien de réinitialisation de mot de passe -->
   <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <!-- Vérification si la confirmation est possible et que l'on n'est pas sur le contrôleur 'confirmations', puis affichage du lien pour renvoyer les instructions de confirmation -->
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <!-- Vérification si le verrouillage est activé et si la stratégie de déverrouillage par e-mail est activée, puis affichage du lien pour renvoyer les instructions de déverrouillage -->
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
+  <!-- Vérification si la connexion via un fournisseur OAuth (OmniAuth) est autorisée -->
   <%- resource_class.omniauth_providers.each do |provider| %>
+    <!-- Boucle sur les différents fournisseurs de connexion, ici un exemple pour Google -->
     <%= button_to omniauth_authorize_path(resource_name, provider), method: :post, class: "google-btn" do %>
       <i class="fab fa-google"></i> Sign in with Google
     <% end %>
   <% end %>
 <% end %>
 
-
-
+<!-- Style pour le bouton de connexion avec Google -->
 <style>
-.google-btn {
+  .google-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #4285F4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 
-  display-items: center;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  background-color: #4285F4;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    .fab {
+      margin-right: 8px; /* Espacement entre l'icône et le texte */
+    }
 
-  .fab {
-    margin-right: 8px;
+    &:hover {
+      background-color: #357ae8; /* Changement de couleur au survol */
+    }
   }
-
-  &:hover {
-    background-color: #357ae8;
-  }
-}
-
 </style>
