@@ -1,6 +1,9 @@
 <% if @tags.total_pages > 1 %>
+  <!-- Vérification si la pagination des tags nécessite plusieurs pages -->
   <nav aria-label="Pagination des tags">
     <ul class="pagination">
+
+      <!-- Vérification et lien vers la page précédente -->
       <% if @tags.prev_page %>
         <li class="page-item">
           <%= link_to 'Précédent', url_for(page: @tags.prev_page), class: 'page-link' %>
@@ -11,12 +14,14 @@
         </li>
       <% end %>
 
+      <!-- Affichage des pages numérotées pour la pagination des tags -->
       <% (1..@tags.total_pages).each do |page| %>
         <li class="page-item <%= 'active' if page == @tags.current_page %>">
           <%= link_to page, url_for(page: page), class: 'page-link' %>
         </li>
       <% end %>
 
+      <!-- Vérification et lien vers la page suivante -->
       <% if @tags.next_page %>
         <li class="page-item">
           <%= link_to 'Suivant', url_for(page: @tags.next_page), class: 'page-link' %>
@@ -26,6 +31,7 @@
           <span class="page-link">Suivant</span>
         </li>
       <% end %>
+
     </ul>
   </nav>
 <% end %>
