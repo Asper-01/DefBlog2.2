@@ -1,27 +1,34 @@
-<% if @categories.total_pages > 1 %>
-  <nav aria-label="Pagination des catégories">
-    <ul class="pagination">
-      <% if @categories.prev_page %>
+<% if @categories.total_pages > 1 %> <!-- Vérifie si la pagination est nécessaire (plus d'une page). -->
+  <nav aria-label="Pagination des catégories"> <!-- Fournit une description pour l'accessibilité. -->
+    <ul class="pagination"> <!-- Conteneur de la pagination, probablement stylisé avec Bootstrap. -->
+
+      <% if @categories.prev_page %> <!-- Vérifie s'il existe une page précédente. -->
         <li class="page-item">
+          <!-- Lien vers la page précédente -->
           <%= link_to 'Précédent', url_for(page: @categories.prev_page), class: 'page-link' %>
         </li>
       <% else %>
+        <!-- désactivé si aucune page précédente n'existe -->
         <li class="page-item disabled">
           <span class="page-link">Précédent</span>
         </li>
       <% end %>
 
+      <!-- Génération des liens pour chaque page -->
       <% (1..@categories.total_pages).each do |page| %>
         <li class="page-item <%= 'active' if page == @categories.current_page %>">
+          <!-- Lien pour accéder à une page spécifique -->
           <%= link_to page, url_for(page: page), class: 'page-link' %>
         </li>
       <% end %>
 
-      <% if @categories.next_page %>
+      <% if @categories.next_page %> <!-- Vérifie s'il existe une page suivante. -->
         <li class="page-item">
+          <!-- Lien vers la page suivante -->
           <%= link_to 'Suivant', url_for(page: @categories.next_page), class: 'page-link' %>
         </li>
       <% else %>
+        <!-- État désactivé si aucune page suivante n'existe -->
         <li class="page-item disabled">
           <span class="page-link">Suivant</span>
         </li>
