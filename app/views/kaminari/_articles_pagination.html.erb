@@ -1,30 +1,33 @@
-<% if @articles.total_pages > 1 %>
-  <nav aria-label="Pagination des articles">
-    <ul class="pagination">
-      <!-- Vérification de la page précédente -->
-      <% if @articles.prev_page %>
+<% if @articles.total_pages > 1 %> <!-- Vérifie si la pagination est nécessaire (plus d'une page). -->
+  <nav aria-label="Pagination des articles"> <!-- Fournit une description pour l'accessibilité. -->
+    <ul class="pagination"> <!-- Conteneur principal de la pagination. -->
+
+      <% if @articles.prev_page %> <!-- Vérifie si une page précédente existe. -->
         <li class="page-item">
+          <!-- Lien vers la page précédente -->
           <%= link_to 'Précédent', url_for(page: @articles.prev_page), class: 'page-link' %>
         </li>
       <% else %>
+        <!-- État désactivé si aucune page précédente n'existe -->
         <li class="page-item disabled">
           <span class="page-link">Précédent</span>
         </li>
       <% end %>
 
-      <!-- Affichage des numéros de page -->
-      <% (1..@articles.total_pages).each do |page| %>
+      <% (1..@articles.total_pages).each do |page| %> <!-- Boucle pour générer les liens vers chaque page. -->
         <li class="page-item <%= 'active' if page == @articles.current_page %>">
+          <!-- Lien pour accéder à une page spécifique -->
           <%= link_to page, url_for(page: page), class: 'page-link' %>
         </li>
       <% end %>
 
-      <!-- Vérification de la page suivante -->
-      <% if @articles.next_page %>
+      <% if @articles.next_page %> <!-- Vérifie si une page suivante existe. -->
         <li class="page-item">
+          <!-- Lien vers la page suivante -->
           <%= link_to 'Suivant', url_for(page: @articles.next_page), class: 'page-link' %>
         </li>
       <% else %>
+        <!-- État désactivé si aucune page suivante n'existe -->
         <li class="page-item disabled">
           <span class="page-link">Suivant</span>
         </li>
