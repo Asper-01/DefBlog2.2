@@ -1,0 +1,109 @@
+/* Section principale pour les informations sur les cookies */
+.cookies-info {
+  background-color: #f9f9f9; /* Couleur de fond claire pour contraster avec le texte */
+  padding: 15px; /* Espacement interne pour aérer */
+  font-size: 16px; /* Taille de police lisible */
+  line-height: 1.5; /* Espacement entre les lignes pour améliorer la lisibilité */
+}
+
+.cookies-info h2 {
+  margin-bottom: 10px; /* Espace sous le titre */
+  font-size: 18px; /* Taille légèrement plus grande pour le titre */
+  color: #333; /* Couleur sombre pour un contraste optimal */
+}
+
+.cookies-info ul {
+  list-style-type: disc; /* Puces pour la liste */
+  padding-left: 20px; /* Décalage pour les puces */
+}
+
+.cookies-info ul li {
+  margin-bottom: 8px; /* Espace entre chaque élément de la liste */
+}
+
+/* Liens dans la section des cookies */
+.link-user {
+  color: #007bff; /* Couleur bleue pour les liens */
+  text-decoration: none; /* Pas de soulignement */
+}
+
+.link-user:hover {
+  text-decoration: none; /* Conserve l'absence de soulignement au survol */
+  color: rgb(0, 0, 0); /* Change la couleur en noir au survol */
+}
+
+/* États activés et désactivés des cookies */
+.cookies-activated {
+  color: #007bff; /* Bleu pour indiquer un état activé */
+}
+
+.cookies-deactivated {
+  color: red; /* Rouge pour signaler un état désactivé */
+}
+
+/* Conteneur pour basculer l'état des cookies */
+.cookies-toggle {
+  display: flex; /* Aligne les éléments horizontalement */
+  justify-content: space-between; /* Espace égal entre les éléments */
+  align-items: center; /* Centre verticalement les éléments */
+}
+
+.cookies-toggle .status-text {
+  margin-right: 10px; /* Espace entre le texte et l'interrupteur */
+  font-size: 14px; /* Taille de police réduite */
+  font-weight: bold; /* Texte en gras pour l'accentuation */
+}
+
+/* Style de l'interrupteur pour les cookies */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Largeur de l'interrupteur */
+  height: 28px; /* Hauteur de l'interrupteur */
+}
+
+.switch input {
+  opacity: 0; /* Rend l'élément input invisible */
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Couleur grise par défaut */
+  transition: 0.4s; /* Transition fluide pour les animations */
+  border-radius: 28px; /* Bord arrondi pour un design moderne */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px; /* Diamètre du cercle du bouton */
+  width: 22px; /* Largeur du bouton */
+  border-radius: 50%; /* Cercle parfait */
+  left: 3px; /* Distance depuis le bord gauche */
+  bottom: 3px; /* Distance depuis le bord inférieur */
+  background-color: white; /* Couleur du bouton */
+  transition: 0.4s; /* Transition fluide pour les animations */
+}
+
+/* Lorsque l'interrupteur est activé */
+input:checked + .slider {
+  background-color: #007bff; /* Couleur bleue pour l'état activé */
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px); /* Déplace le bouton vers la droite */
+}
+
+/* Texte d'état à gauche de l'interrupteur */
+.status-text {
+  margin-left: 10px; /* Espace entre le texte et l'élément adjacent */
+  font-size: 16px; /* Taille de police légèrement augmentée */
+  font-weight: bold; /* Texte en gras pour le mettre en valeur */
+}
