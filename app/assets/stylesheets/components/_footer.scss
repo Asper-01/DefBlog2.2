@@ -1,93 +1,104 @@
-// Style global du footer
+/* Style global du footer */
 footer {
-  background-color: #F9F9F9; /* Couleur de fond claire */
+  background-color: #f8f9fa; /* Couleur de fond claire */
   color: #000000; /* Couleur du texte */
   padding: 20px 0; /* Espacement interne du footer */
   margin-top: 20px; /* Marge supérieure pour espacer le footer du reste */
   border-top: 1px solid rgb(230, 230, 230); /* Bordure supérieure grise */
+  text-align: center; /* Centre le texte et les éléments */
+}
 
-  // Conteneur principal du footer
-  .footer-container {
-    display: flex;
-    flex-direction: column; /* Les éléments s'empilent en colonne */
-    align-items: center; /* Centre les éléments horizontalement */
-    text-align: center; /* Centre le texte des éléments */
-    max-width: 1200px; /* Largeur maximale du container */
-    margin: 0 auto; /* Centrage du container */
-    padding: 0 15px; /* Espacement horizontal pour le container */
+/* Conteneur principal du footer */
+.footer-container {
+  display: flex;
+  flex-direction: column; /* Les éléments s'empilent en colonne */
+  align-items: center; /* Centre les éléments horizontalement */
+  text-align: center; /* Centre le texte des éléments */
+  max-width: 1200px; /* Largeur maximale du container */
+  margin: 0 auto; /* Centrage du container */
+  padding: 0 15px; /* Espacement horizontal pour le container */
+  gap: 15px; /* Espace entre les sections */
+}
 
-    // Styles des div internes (pour chaque section)
-    > div {
-      flex: 1 1 auto; /* Ajuste la largeur des div en fonction du contenu */
-      margin: 10px; /* Marge autour de chaque section */
-      max-width: 300px; /* Limite la largeur pour garder le texte lisible */
+/* Section des informations légales */
+.footer-legal ul {
+  list-style: none; /* Supprime les puces de la liste */
+  padding: 0;
+  margin: 0;
+}
 
-      // Styles pour les titres des sections
-      h4 {
-        font-size: 1.2rem; /* Taille de police du titre */
-        margin-bottom: 10px; /* Marge en bas du titre */
-        color: #f39c12; /* Couleur orange pour les titres */
-      }
+.footer-legal ul li {
+  margin: 5px 0; /* Ajoute de l'espace entre les éléments de la liste */
+}
 
-      // Liste des liens dans chaque section
-      ul {
-        list-style: none; /* Retire les puces de la liste */
-        padding: 0; /* Enlève le padding de la liste */
+.footer-legal a {
+  text-decoration: none; /* Supprime le soulignement des liens */
+  color: #007bff; /* Couleur des liens */
+}
 
-        li {
-          margin: 5px 0; /* Marge verticale entre les éléments de la liste */
+.footer-legal a:hover {
+  color: #f39c12; /* Change la couleur des liens au survol en orange */
+}
 
-          // Liens des items
-          a {
-            color: #000000; /* Couleur des liens en noir */
-            text-decoration: none; /* Enlève le soulignement des liens */
+/* Section des crédits du site */
+.footer-credits {
+  font-size: 0.9em; /* Taille de texte plus petite pour les crédits */
+  color: #6c757d; /* Couleur grise pour un contraste doux */
+  margin-top: 20px; /* Marge au-dessus des crédits */
+  border-top: 1px solid rgb(230, 230, 230); /* Bordure supérieure légère pour séparer */
+  padding-top: 10px; /* Espacement interne au-dessus du texte des crédits */
+  text-align: center; /* Centre le texte des crédits */
+}
 
-            // Effet au survol des liens
-            &:hover {
-              color: #f39c12; /* Change la couleur des liens au survol en orange */
-            }
-          }
-        }
-      }
+.footer-credits p {
+  font-size: 0.8rem; /* Taille du texte des crédits */
+}
 
-      // Style pour les paragraphes et les liens généraux dans cette section
-      p, a {
-        font-size: 0.9rem; /* Taille de texte réduite */
-      }
-    }
-  }
+/* Section contact et liens sociaux */
+.footer-contact .social-links {
+  display: flex; /* Utilisation du flexbox pour aligner horizontalement */
+  justify-content: center; /* Centre les éléments horizontalement */
+  gap: 10px; /* Espacement entre les liens sociaux */
+  margin-top: 10px; /* Marge au-dessus des liens sociaux */
+}
 
-  // Section contact et liens sociaux
-  .footer-contact {
-    .social-links {
-      display: flex; /* Utilisation du flexbox pour aligner horizontalement */
-      justify-content: center; /* Centre les éléments horizontalement */
-      gap: 10px; /* Espacement entre les liens sociaux */
-      margin-top: 10px; /* Marge au-dessus des liens sociaux */
+.footer-contact .social-links li a {
+  color: #040404; /* Couleur des icônes sociales en noir */
+  text-decoration: none; /* Enlève le soulignement */
+}
 
-      li {
-        a {
-          color: #040404; /* Couleur des icônes sociales en noir */
-          text-decoration: none; /* Enlève le soulignement */
+.footer-contact .social-links li a:hover {
+  color: #f39c12; /* Change la couleur des liens au survol en orange */
+}
 
-          // Effet au survol des liens sociaux
-          &:hover {
-            color: #f39c12; /* Change la couleur des liens au survol en orange */
-          }
-        }
-      }
-    }
-  }
+/* Styles pour les titres des sections */
+.footer-container > div h4 {
+  font-size: 1.2rem; /* Taille de police du titre */
+  margin-bottom: 10px; /* Marge en bas du titre */
+  color: #f39c12; /* Couleur orange pour les titres */
+}
 
-  // Section des crédits en bas du footer
-  .footer-credits {
-    text-align: center; /* Centre le texte des crédits */
-    margin-top: 20px; /* Marge au-dessus des crédits */
-    border-top: 1px solid rgb(230, 230, 230); /* Bordure supérieure légère pour séparer */
-    padding-top: 10px; /* Espacement interne au-dessus du texte des crédits */
+/* Liste des liens dans chaque section */
+.footer-container > div ul {
+  list-style: none; /* Retire les puces de la liste */
+  padding: 0; /* Enlève le padding de la liste */
+}
 
-    p {
-      font-size: 0.8rem; /* Taille du texte des crédits */
-    }
-  }
+.footer-container > div ul li {
+  margin: 5px 0; /* Marge verticale entre les éléments de la liste */
+}
+
+.footer-container > div ul li a {
+  color: #000000; /* Couleur des liens en noir */
+  text-decoration: none; /* Enlève le soulignement des liens */
+}
+
+.footer-container > div ul li a:hover {
+  color: #f39c12; /* Change la couleur des liens au survol en orange */
+}
+
+/* Paragraphe général */
+.footer-container > div p,
+.footer-container > div a {
+  font-size: 0.9rem; /* Taille de texte réduite */
 }
