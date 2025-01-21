@@ -1,9 +1,18 @@
+<!-- Titre principal de la page -->
 <h1>Modifier l'article</h1>
 
+<!-- Formulaire pour modifier un article existant -->
 <%= form_with model: @article, local: true do |form| %>
+
+  <!-- Section pour afficher les erreurs de validation -->
   <% if @article.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <!-- Titre de la section des erreurs -->
+      <h2>
+        <%= pluralize(@article.errors.count, "error") %>
+        prohibited this article from being saved:
+      </h2>
+      <!-- Liste des messages d'erreurs -->
       <ul>
         <% @article.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -12,16 +21,18 @@
     </div>
   <% end %>
 
+  <!-- Champ pour le titre de l'article -->
   <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
+    <%= form.label :title %> <!-- Label du champ titre -->
+    <%= form.text_field :title, class: "form-control" %> <!-- Champ de texte pour le titre -->
   </div>
 
+  <!-- Champ pour le contenu de l'article -->
   <div class="form-group">
-    <%= form.label :content %>
-    <%= form.text_area :content, class: "form-control" %>
+    <%= form.label :content %> <!-- Label du champ contenu -->
+    <%= form.text_area :content, class: "form-control" %> <!-- Champ de texte pour le contenu -->
   </div>
 
-
+  <!-- Bouton pour soumettre les modifications -->
   <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
 <% end %>
