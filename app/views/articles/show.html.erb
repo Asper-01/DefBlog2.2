@@ -162,6 +162,21 @@
                           </small>
                         </div>
                         <p class="mt-2"><%= reply.content %></p>
+
+
+                                            <% if current_user.admin? %>
+
+
+
+<%= form_with url: article_comment_path(@article, comment), method: :delete, local: true do %>
+  <button type="submit" data-confirm="Êtes-vous sûr ?">Supprimer</button>
+<% end %>
+
+
+
+    <% end %>
+
+
                       </div>
                     <% end %>
                   </div>
