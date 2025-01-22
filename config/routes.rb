@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # Pages publiques
   root 'articles#index'
   resources :articles, only: [:index, :show], param: :slug do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
   resources :tags, only: [:index, :show, :create], param: :slug
 

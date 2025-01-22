@@ -96,6 +96,7 @@
             <% end %>
           </div>
 
+
           <!-- Affichage des commentaires -->
           <% if @comments.any? %>
             <% @comments.each do |comment| %>
@@ -108,7 +109,19 @@
                   </small>
                 </div>
                 <p class="mt-2"><%= comment.content %></p>
+                    <% if current_user.admin? %>
 
+
+
+<%= form_with url: article_comment_path(@article, comment), method: :delete, local: true do %>
+  <button type="submit" data-confirm="Êtes-vous sûr ?">Supprimer</button>
+<% end %>
+
+
+
+
+
+    <% end %>
 
                 <!-- Bouton pour répondre à un commentaire -->
                 <% if comment.parent.nil? %>
@@ -166,3 +179,16 @@
 
 <!-- Inclusion du fichier JavaScript pour les réponses aux commentaires -->
 <%= javascript_include_tag "comments/comment_reply_toggle", defer: true %>
+
+
+<style>
+  .btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  &:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+}
+
+</style>

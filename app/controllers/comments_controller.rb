@@ -1,6 +1,21 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article
+  before_action :admin_only, only: :destroy
+  before_action :set_comment, only: [:destroy]
+
+  def destroy
+    Rails.logger.debug "Comment ID: #{params[:id]}"
+    Rails.logger.debug "Found Comment: #{@comment.inspect}"
+
+    if @comment.destroy
+      flash[:notice] = "Le commentaire a été supprimé avec succès."
+    else
+      flash[:alert] = "Une erreur est survenue lors de la suppression du commentaire."
+    end
+
+    redirect_to article_path(@article)
+  end
 
   def create
     @comment = @article.comments.new(comment_params)
@@ -22,6 +37,15 @@ class CommentsController < ApplicationController
 
   private
 
+  def set_comment
+    @comment = Comment.find_by(id: params[:id])
+    # Vérifier si le commentaire existe
+    unless @comment
+      flash[:alert] = "Commentaire introuvable."
+      redirect_to article_path(@article)
+    end
+  end
+
   def set_article
     @article = Article.find_by!(slug: params[:article_slug])
   end
@@ -29,4 +53,9 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:content, :parent_id)
   end
+
+  def admin_only
+    redirect_to root_path, alert: "Accès refusé." unless current_user.admin?
+  end
+
 end

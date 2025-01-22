@@ -6,6 +6,7 @@
 //= link bootstrap.min.js
 //= link articles/article_new.js
 //= link articles/article_edit.js
+//= link sessions/comment_toggle.js
 //= link comments/comment_reply_toggle.js
 //= link shared/custom_alerts.js
 //= link cookies/cookies_management.js

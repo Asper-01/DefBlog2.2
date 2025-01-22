@@ -10,7 +10,6 @@ class ArticlesController < ApplicationController
     @results = Article.joins(:tags)  # Jointure avec la table tags
                       .where("articles.title ILIKE :query OR articles.content ILIKE :query OR tags.name ILIKE :query", query: "%#{query}%")
                       .distinct  # Assure qu'un article n'apparaisse qu'une seule fois dans les résultats
-
     render :search_results
   end
 
@@ -54,11 +53,18 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path, notice: 'Article supprimé avec succès.'
+    if @comment.destroy
+      redirect_to article_path(@comment.article), notice: "Commentaire supprimé avec succès."
+    else
+      redirect_to article_path(@comment.article), alert: "Une erreur est survenue lors de la suppression."
+    end
   end
 
   private
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:title, :content, :image)
