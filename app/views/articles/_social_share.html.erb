@@ -1,0 +1,19 @@
+<%= link_to "https://x.com/intent/tweet?text=#{article.title}%0A#{article_url(article)}", target: "_blank", rel: "noopener noreferrer", class: "social-share-button" do %>
+  <i class="fab fa-x-twitter" style="font-size: 24px; color: black;"></i>
+<% end %>
+
+<%= link_to "https://www.facebook.com/sharer/sharer.php?u=#{article_url(article)}", target: "_blank", rel: "noopener noreferrer", class: "social-share-button" do %>
+  <i class="fab fa-facebook" style="font-size: 30px; color: #4267B2;"></i>
+<% end %>
+
+<%= link_to "https://wa.me/?text=#{article.title}%0A#{article_url(article)}", target: "_blank", rel: "noopener noreferrer", class: "social-share-button" do %>
+  <i class="fab fa-whatsapp" style="font-size: 30px; color: #25D366;"></i>
+<% end %>
+
+<%= link_to "https://t.me/share/url?url=#{article_url(article)}&text=#{article.title}%0A#{article_url(article)}", target: "_blank", rel: "noopener noreferrer", class: "social-share-button" do %>
+  <i class="fab fa-telegram-plane" style="font-size: 30px; color: #0088cc;"></i>
+<% end %>
+
+<%= link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{article_url(article)}&title=#{article.title}&summary=#{article.content[0..200]}&source=#{article_url(article)}", target: "_blank", rel: "noopener noreferrer", class: "social-share-button" do %>
+  <i class="fab fa-linkedin" style="font-size: 30px; color: #0077b5;"></i>
+<% end %>
