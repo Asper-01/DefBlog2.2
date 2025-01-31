@@ -2,8 +2,6 @@ require_relative "boot"
 require 'friendly_id'
 require "rails/all"
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module DefBlog
@@ -14,25 +12,23 @@ module DefBlog
       generate.helper false
       generate.test_framework :test_unit, fixture: false
     end
-    # Initialize configuration defaults for originally generated Rails version.
+
     config.load_defaults 7.1
 
-    # Please, add to the `ignore` list any other `lib` subdirectories that do
-    # not contain `.rb` files, or that should not be reloaded or eager loaded.
-    # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
     config.action_controller.action_on_unpermitted_parameters = :raise
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
+    # Configurations spécifiques pour Heroku
+    config.serve_static_files = true
+    config.assets.compile = true
+    config.assets.digest = true
+    config.assets.js_compressor = :uglifier
+    config.assets.css_compressor = :scss
+
+    config.cache_classes = true
+    config.eager_load = true
     config.i18n.default_locale = :fr
-
-
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.log_level = :info
   end
 end
