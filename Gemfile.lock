@@ -433,7 +433,8 @@ DEPENDENCIES
   rails_12factor
   rake
   rubocop
-  sassc-rails
+  sassc (~> 2.4)
+  sassc-rails (~> 2.1)
   selenium-webdriver
   simple_form!
   sprockets-rails

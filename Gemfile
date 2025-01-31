@@ -49,7 +49,8 @@ gem 'devise-i18n'
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
-gem "sassc-rails"
+gem 'sassc-rails', '~> 2.1'
+gem 'sassc', '~> 2.4'
 # pagination des articles:
 gem 'kaminari'
 gem 'rubocop'
