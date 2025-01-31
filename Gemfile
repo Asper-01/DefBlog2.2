@@ -68,6 +68,7 @@ gem 'tinymce-rails'
 gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
 # Validation active storage
 gem 'active_storage_validations'
+gem 'rake'
 
 
 group :development, :test do

@@ -425,6 +425,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rack (~> 2.2.8)
   rails (~> 7.1.5, >= 7.1.5.1)
+  rake
   rubocop
   sassc-rails
   selenium-webdriver
