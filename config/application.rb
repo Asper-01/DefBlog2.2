@@ -21,9 +21,9 @@ module DefBlog
 
     # Configurations spécifiques pour Heroku
     config.serve_static_files = true
+    config.assets.initialize_on_precompile = false
     config.assets.compile = true
     config.assets.digest = true
-    config.assets.js_compressor = :uglifier
     config.assets.css_compressor = :scss
 
     config.cache_classes = true
