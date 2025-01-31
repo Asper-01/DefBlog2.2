@@ -55,7 +55,7 @@ gem 'sassc', '~> 2.4'
 gem 'kaminari'
 gem 'rubocop'
 # gestion miniatures img:
-gem 'mini_magick'
+
 gem 'activerecord-session_store'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 1.0'
