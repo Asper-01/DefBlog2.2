@@ -14,8 +14,6 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -70,7 +68,6 @@ gem 'tinymce-rails'
 gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
 # Validation active storage
 gem 'active_storage_validations'
-gem 'sprockets-rails'
 
 
 group :development, :test do

@@ -11,6 +11,7 @@
 //= link shared/custom_alerts.js
 //= link cookies/cookies_management.js
 //= link cookies/consent_banner.js
+//= link cookies_eu.js
 //= link registrations/edit_registrations.js
 //= link registrations/new_registrations.js
 //= link sessions/session_new.js
