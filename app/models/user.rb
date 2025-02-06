@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :cookies_consent, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
   # MAJ des préfs cookies choisies avant l'inscription
   after_create :set_default_cookies_consent, if: :new_record?
-  validates :avatar, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 5.megabytes }
+  validates :avatar, content_type: ['image/png',  'image/jpeg'], size: { less_than: 5.megabytes }
   def admin?
     admin
   end
