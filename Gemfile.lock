@@ -182,6 +182,10 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jquery-rails (4.6.0)
+      rails-dom-testing (>= 1, < 3)
+      railties (>= 4.2.0)
+      thor (>= 0.14, < 2.0)
     js_cookie_rails (2.2.0)
       railties (>= 3.1)
     json (2.9.1)
@@ -407,7 +411,7 @@ GEM
     thor (1.3.2)
     tilt (2.6.0)
     timeout (0.4.3)
-    tinymce-rails (7.6.1)
+    tinymce-rails (4.9.11.1)
       railties (>= 3.1.1)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
@@ -459,6 +463,7 @@ DEPENDENCIES
   friendly_id (~> 5.4.0)
   image_processing (~> 1.13)
   jbuilder
+  jquery-rails
   kaminari
   omniauth (~> 2.0)
   omniauth-google-oauth2 (~> 1.0)
@@ -477,7 +482,7 @@ DEPENDENCIES
   solargraph
   sprockets-rails
   stimulus-rails
-  tinymce-rails
+  tinymce-rails (~> 4.3, >= 4.3.13)
   turbo-rails
   tzinfo-data
   web-console
