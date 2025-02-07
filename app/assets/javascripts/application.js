@@ -1,6 +1,7 @@
-//= require jquery           // Si tu utilises jQuery
-//= require bootstrap        // Si tu utilises Bootstrap
+//= require jquery
+//= require bootstrap
 //= require_self
-//= require_tree .
+//= require_tree
 
-// Ton code JavaScript global peut être ajouté ici.
+
+console.log("Application.js chargé !");
