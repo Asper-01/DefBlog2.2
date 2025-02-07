@@ -50,6 +50,8 @@ gem 'devise', '~> 4.8'
 # Gestion langue FR pour Devise:
 gem 'devise-i18n'
 gem "autoprefixer-rails"
+
+#front:
 gem 'font-awesome-sass', '~> 6.7', '>= 6.7.2'
 gem "simple_form", github: "heartcombo/simple_form"
 gem 'sass-rails', '~> 6.0'
@@ -100,5 +102,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "sassc", "~> 2.4"
