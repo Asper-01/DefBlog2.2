@@ -42,17 +42,19 @@ gem 'solargraph'
 gem 'rufo'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.13'
+gem 'bundler'
 
-gem "bootstrap", "~> 5.2"
+gem "bootstrap", "~> 5.3"
 gem 'devise', '~> 4.8'
 # Gestion langue FR pour Devise:
 gem 'devise-i18n'
 gem "autoprefixer-rails"
-gem "font-awesome-sass", "~> 6.1"
+gem 'font-awesome-sass', '~> 6.7', '>= 6.7.2'
 gem "simple_form", github: "heartcombo/simple_form"
-gem 'sassc-rails', '~> 2.1'
+gem 'sass-rails', '~> 6.0'
 gem 'sassc', '~> 2.4'
+
 # pagination des articles:
 gem 'kaminari'
 gem 'rubocop'
@@ -62,7 +64,7 @@ gem 'activerecord-session_store'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2', '~> 1.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'rack', '~> 2.2.8'
+gem 'rack', '~> 3.1', '>= 3.1.9'
 # Gestion des URL pour le SEO:
 gem 'friendly_id', '~> 5.4.0'
 # Mise en page des articles:
@@ -98,3 +100,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "sassc", "~> 2.4"
