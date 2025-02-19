@@ -25,7 +25,7 @@
   </h5>
 
 <p class="banner-excerpt">
-  <%= link_to truncate(ActionController::Base.helpers.strip_tags(article.content.html_safe), length: 550), article_path(article) %>
+<%= simple_format(article.content) %>
 </p>
 
 </div>
