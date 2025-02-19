@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_19_100630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -43,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
     t.bigint "byte_size", null: false
     t.string "checksum"
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -57,10 +59,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
     t.text "content"
     t.datetime "date"
     t.bigint "author_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "slug"
     t.string "previous_slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
@@ -68,6 +70,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
   create_table "articles_tags", id: false, force: :cascade do |t|
     t.bigint "article_id", null: false
     t.bigint "tag_id", null: false
+    t.index ["article_id", "tag_id"], name: "index_articles_tags_on_article_id_and_tag_id"
+    t.index ["tag_id", "article_id"], name: "index_articles_tags_on_tag_id_and_article_id"
   end
 
   create_table "articletags", force: :cascade do |t|
@@ -89,10 +93,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
     t.bigint "user_id", null: false
     t.bigint "article_id", null: false
     t.text "content"
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "parent_id"
     t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -107,10 +112,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "category_id", default: 1, null: false
     t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_tags_on_category_id"
     t.index ["slug"], name: "index_tags_on_slug", unique: true
   end
@@ -121,24 +126,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_13_195806) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin", default: false, null: false
-    t.string "name"
     t.string "provider"
     t.string "uid"
-    t.boolean "cookies_consent"
-    t.string "avatar"
+    t.boolean "cookies_accepted"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "articletags", "articles"
-  add_foreign_key "articletags", "tags", on_delete: :cascade
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
-  add_foreign_key "tags", "categories", on_delete: :cascade
+  add_foreign_key "tags", "categories"
 end

@@ -26,7 +26,7 @@ module Users
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
       devise_parameter_sanitizer.permit(:account_update, keys: [
-        :avatar, :remove_avatar, :name, :email, :cookies_consent,
+        :avatar, :remove_avatar, :name, :email, :cookies_accepted,
         :password, :password_confirmation, :current_password
       ])
     end
@@ -34,7 +34,7 @@ module Users
     # Autoriser des paramètres pour la mise à jour
     def account_update_params
       params.require(:user).permit(
-        :name, :email, :avatar, :remove_avatar, :cookies_consent,
+        :name, :email, :avatar, :remove_avatar, :cookies_accepted,
         :password, :password_confirmation, :current_password
       )
     end

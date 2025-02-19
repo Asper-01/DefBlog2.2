@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
   has_many :articles, foreign_key: :author_id
@@ -6,9 +10,9 @@ class User < ApplicationRecord
   attr_accessor :remove_avatar
   before_save :purge_avatar, if: -> { remove_avatar == 'true' }
   has_many :comments, dependent: :destroy
-  validates :cookies_consent, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
+  validates :cookies_accepted, inclusion: { in: [true, false], message: "doit être accepté ou refusé" }, allow_nil: true
   # MAJ des préfs cookies choisies avant l'inscription
-  after_create :set_default_cookies_consent, if: :new_record?
+  after_create :set_default_cookies_accepted, if: :new_record?
   validates :avatar, content_type: ['image/png',  'image/jpeg'], size: { less_than: 5.megabytes }
   def admin?
     admin

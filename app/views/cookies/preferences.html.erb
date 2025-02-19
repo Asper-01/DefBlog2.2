@@ -21,15 +21,15 @@
             <% if user_signed_in? %>
               <p>
                 Vos cookies pour Defblog sont actuellement
-                <strong class="<%= current_user.cookies_consent ? 'cookies-activated' : 'cookies-deactivated' %>">
-                  <%= current_user.cookies_consent ? "Activés" : "Désactivés" %>
+                <strong class="<%= current_user.cookies_accepted ? 'cookies-activated' : 'cookies-deactivated' %>">
+                  <%= current_user.cookies_accepted ? "Activés" : "Désactivés" %>
                 </strong>
               </p>
             <% else %>
               <p>
                 Vous n'êtes pas connecté. L'état actuel de vos préférences de cookies est stocké dans un cookie :
                 <strong>
-                  <%= cookies[:cookies_consent] == "true" ? "Accepté" : "Refusé" %>
+                  <%= cookies[:cookies_accepted] == "true" ? "Accepté" : "Refusé" %>
                 </strong>
               </p>
             <% end %>
@@ -38,10 +38,10 @@
 <%= form_with url: update_consent_cookies_path, method: :post, local: true, id: 'cookies-form' do |f| %>
   <div class="cookies-toggle">
   <span class="status-text">
-    <%= @cookies_consent ? "Cookies Activés" : "Cookies Désactivés" %>
+    <%= @cookies_accepted ? "Cookies Activés" : "Cookies Désactivés" %>
   </span>
   <label class="switch">
-    <%= f.check_box :cookies_consent, { checked: @cookies_consent, id: 'cookies-toggle' } %>
+    <%= f.check_box :cookies_accepted, { checked: @cookies_accepted, id: 'cookies-toggle' } %>
     <span class="slider"></span>
   </label>
 </div>
