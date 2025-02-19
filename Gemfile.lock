@@ -482,7 +482,7 @@ DEPENDENCIES
   solargraph
   sprockets-rails
   stimulus-rails
-  tinymce-rails (~> 4.3, >= 4.3.13)
+  tinymce-rails
   turbo-rails
   tzinfo-data
   web-console

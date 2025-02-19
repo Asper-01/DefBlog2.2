@@ -70,7 +70,7 @@ gem 'rack', '~> 3.1', '>= 3.1.9'
 # Gestion des URL pour le SEO:
 gem 'friendly_id', '~> 5.4.0'
 # Mise en page des articles:
-gem 'tinymce-rails', '~> 4.3', '>= 4.3.13'
+gem 'tinymce-rails'
 # Gestion des cookies:
 gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
 # Validation active storage
