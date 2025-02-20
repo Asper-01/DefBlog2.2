@@ -53,3 +53,20 @@
   font-size: 2rem;
   margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+  .banner-excerpt,
+  .banner-image-container,
+  .banner-text-container .tags-container {
+    display: none; /* Masque le texte, l'image et les tags sur mobile */
+  }
+
+  .banner-text-container {
+    text-align: center; /* Centre le titre pour un meilleur rendu */
+  }
+
+  .banner-title {
+    font-size: 18px; /* Ajuste la taille du titre */
+    margin: 10px 0;
+  }
+}
