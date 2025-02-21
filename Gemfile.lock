@@ -484,6 +484,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   kaminari
+  mini_magick
   omniauth (~> 2.0)
   omniauth-google-oauth2 (~> 1.0)
   omniauth-rails_csrf_protection (~> 1.0)
