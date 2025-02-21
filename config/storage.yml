@@ -9,12 +9,12 @@ local:
 
 
 
-production:
+supabase:
   service: S3
   access_key_id: <%= ENV['SUPABASE_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SUPABASE_SECRET_ACCESS_KEY'] %>
   region: "eu-west-3"
-  endpoint: "https://pmkddazusxfrvmsfqlkg.supabase.co/storage/v1/"
+  endpoint: <%= ENV['SUPABASE_STORAGE_ENDPOINT'] %>
   bucket: Defblog
   force_path_style: true
 
