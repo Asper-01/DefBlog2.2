@@ -13,7 +13,7 @@ production:
   region: "eu-west-3"
   endpoint: "https://pmkddazusxfrvmsfqlkg.supabase.co/storage/v1/object/public"
   bucket: "Defblog"
-
+  force_path_style: true
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
