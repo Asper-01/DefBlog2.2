@@ -77,7 +77,8 @@ gem 'cookies_eu', '~> 1.7', '>= 1.7.8'
 gem 'active_storage_validations'
 gem 'rake'
 gem 'jquery-rails'
-
+# stockage des images avec supabase:
+gem 'aws-sdk-s3', require: false
 
 group :development, :test do
   gem "dotenv-rails"

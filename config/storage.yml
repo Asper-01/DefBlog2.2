@@ -37,6 +37,6 @@ supabase:
   service: S3
   access_key_id: <%= ENV['SUPABASE_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SUPABASE_SECRET_ACCESS_KEY'] %>
-  region: "auto"
-  endpoint: 3https://pmkddazusxfrvmsfqlkg.supabase.co"
+  region: "eu-west-3"
+  endpoint: "https://pmkddazusxfrvmsfqlkg.supabase.co/storage/v1/s3"
   bucket: "Defblog"
