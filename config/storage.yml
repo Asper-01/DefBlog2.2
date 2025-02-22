@@ -14,7 +14,7 @@ supabase:
   access_key_id: <%= ENV['SUPABASE_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SUPABASE_SECRET_ACCESS_KEY'] %>
   region: "eu-west-3"
-  endpoint: <%= ENV['SUPABASE_STORAGE_ENDPOINT'] %>
+  endpoint: "https://pmkddazusxfrvmsfqlkg.supabase.co/storage/v1/s3"
   bucket: Defblog
   force_path_style: true
 
