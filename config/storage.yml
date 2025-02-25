@@ -6,17 +6,13 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-
-
-
 supabase:
   service: S3
-  access_key_id: <%= ENV['SUPABASE_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['SUPABASE_SECRET_ACCESS_KEY'] %>
+  access_key_id: <%= ENV['AS3_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AS3_SECRET_ACCESS_KEY'] %>
   region: "eu-west-3"
-  endpoint: "https://pmkddazusxfrvmsfqlkg.supabase.co/storage/v1/public/Defblog"
-  bucket: Defblog-<%= Rails.env %>
-  force_path_style: true
+  bucket: defblog
+
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
